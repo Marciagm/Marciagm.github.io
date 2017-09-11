@@ -1,2 +1,2 @@
-#Welcome to Marcia's Blog.
-hi
+# Welcome to Marcia's Blog.
+* This is a test.
