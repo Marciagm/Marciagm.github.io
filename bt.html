@@ -48,10 +48,14 @@
         let stop = false;
         let timer;
         function move () {
-            console.log('in move');
             timer = setInterval(function () {
                 if (left <= -5138) {
-                    alert('congratulations!');
+                    alert('yyy: congratulations!');
+                    $('#santa').animate({
+                        top: '20%'
+                    })
+                    clearInterval(timer);
+                    return;
                 }
                 left = left - 200;
                 console.log(left);
@@ -65,14 +69,10 @@
                 move();
             })
             $('body').on('touchend', function () {
-                console.log('up');
                 clearInterval(timer);
                 timer = null;
             })
             $('body').on('click', function () {
-                if (left <= -5138) {
-                    alert('congratulations!');
-                }
                 $('#santa').animate({
                     top: '50%'
                 }).animate({
