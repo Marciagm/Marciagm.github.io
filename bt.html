@@ -3,39 +3,90 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=0"" />
     <title>test</title>
+    <script
+  src="js/jquery.js"
+  crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        var window_width = 750;
+        var window_size = 100;
+        (function(){
+            $.fn.autoSize = function(options){
+                options = $.extend({}, $.fn.autoSize.defaults,options || {});
+                autoSet();
+                $(window).resize(function(){
+                    autoSet();
+                });
+                function autoSet()
+                {
+                    var width = $(this).width();
+                    var newsize = $.fn.autoSize.method.getFS(options.designWith,options.designFS,width);
+                    $.fn.autoSize.method.setFS(options.target,newsize);
+                }
+            };
+            $.fn.autoSize.method = {
+                getFS : function(designWith,designFs,winWith){ //鑾峰彇fontsize
+                    return winWith/designWith*100;
+                },
+                setFS : function(target,FS)
+                {
+                    target.style.fontSize = FS + "px";
+                }
+            };
+            $.fn.autoSize.defaults = {
+                designWith : 750,
+                designFS   : 100,
+                target : document.documentElement
+            };
+        })(jQuery);
+        $(window).autoSize({
+            designWidth : window_width,
+            designFS : window_size
+        });
+    </script>
+
     <style>
-        body {
-            width: 100%;
-            /*overflow: hidden;*/
+        @media screen and (min-width: 751px) {
+            html{
+                font-size: 100px !important;
+            }
+            body{
+                width: 750px;
+                margin: 0 auto !important;
+            }
+        }
+        body{
             background: url(images/christamas/bg.png);
-            background-size: 100%;
-            /*width: 100%;*/
+            width: 7.5rem;
+            height: auto;
+            overflow: hidden;
+            box-sizing: border-box;
         }
         .cloud {
-            width: 4348.5px;
+            width: 86.97rem;
             position: absolute;
             top: 0;
             left: 0;
+           /* -webkit-animation: move 40s 1;
+            -webkit-animation-timing-function: linear;*/
         }
         .barrier {
             position: absolute;
             left: 0;
             z-index: 0;
-            width: 5138px;/*
-            height: 445px;*/
-            /*-webkit-animation: move 40s;
+            width: 102.76rem;
+            /*-webkit-animation: move 20s 1;
             -webkit-animation-timing-function: linear;*/
         }
         .santa {
-            width: 103.5px;
+            width: 2.07rem;
             position: absolute;
-            left: 1%;
-            top: 60%;
+            left: 2rem;
+            top: 8.61rem;
             z-index: 1;
         }
         @keyframes move {
             from {left: 0}
-            to {left: -5138px}
+            to {left: -102.76rem}
         }
     </style>
     <script>
@@ -48,74 +99,64 @@
         <img id="barrier" class="barrier" src="images/christamas/barrier.png"/>
         <img id="santa" class="santa" src="images/christamas/santa.gif">    
     </div>
-    <script
-  src="http://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
-    <script>
+    <script type="text/javascript">
+        const data = [
+            
+        ];
+
         let left = 0;
         let cloudLeft = 0;
         let stop = false;
         let timer;
-        function move () {
-            const barrierLeft = $('#barrier').position().left;
-            console.log(barrierLeft);
-            if (barrierLeft <= -5138) {
-                alert('yyy: congratulations!');
-                $('#santa').animate({
-                    top: '20%'
-                })
-                clearInterval(timer);
-                timer = null;
-                return;
-            }
-            clearInterval(timer);
-            timer = null;
-            timer = setInterval(function () {
-                left = left - 200;
-                $('#barrier').animate({
-                    left: left +  'px'
-                }, 'slow')
-                cloudLeft = cloudLeft - 100;
-                $('#cloud').animate({
-                    left: cloudLeft + 'px'
-                }, 'slow')
-            }, 500)
+        let notClick = true;
+        function autoMove () {
+            cloudLeft -= 1.5;
+            $('#barrier').animate({
+                left:  '-102.76rem'
+            }, {
+                duration: 30000,
+                easing: 'linear',
+                step: function (now, tween) {
+                    if (now <= -8.26 && notClick) {
+                        $('#santa').animate({
+                            top: '13rem'
+                        })
+                        notClick = true;
+                        console.log(now);
+                        console.log(tween);
+                        tween.end = now;
+                    }
+                },
+                complete: function () {
+                    console.log('barrier end');
+                    $('#con').hide();
+                }
+            })
+            $('#cloud').animate({
+                left: '-86.97rem'
+            }, 4e4, 'linear', function () {
+                console.log('cloud end');
+                $('#con').hide();
+            })
         }
         $(document).ready(function () {
-            $('body').on('touchstart', function (event) {
-                move();
-            })
-            $('body').on('mousedown', function (event) {
-                move();
-            })
-            $('body').on('touchend', function () {
-                clearInterval(timer);
-                timer = null;
-            })
-            $('body').on('mouseup', function () {
-                clearInterval(timer);
-                timer = null;
-            })
-            $('body').on('touchmove', function () {
-                clearInterval(timer);
-                timer = null;
-            })
+            /*clearInterval(timer);*/
+            /*timer = setInterval(function () {
+                autoMove();
+            }, 500)*/
+            autoMove();
             $('body').on('click', function (event) {
-                event.preventDefault();
+                notClick = false;
+                console.log($('#santa').position());
+                console.log($('#barrier').position());
                 $('#santa').animate({
                     top: '50%'
                 }).animate({
                     top: '60%'
                 })
-                left = left - 150;
-                $('#barrier').animate({
-                    left: left +  'px'
-                }, 'slow')
-                cloudLeft = cloudLeft - 100;
-                $('#cloud').animate({
-                    left: cloudLeft + 'px'
-                }, 'slow')
+            })
+            $('#barrier').on('resize', function (event) {
+                console.log('gogog');
             })
         })
     </script>
