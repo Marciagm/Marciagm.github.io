@@ -15,27 +15,26 @@
             position: absolute;
             left: 0;
             z-index: 0;
-            top: -667px;
-            width: 10276px;/*
+            width: 5138px;/*
             height: 445px;*/
-            -webkit-animation: move 40s;
-            -webkit-animation-timing-function: linear;
+            /*-webkit-animation: move 40s;
+            -webkit-animation-timing-function: linear;*/
         }
         .santa {
-            width: 40%;
+            width: 103.5px;
             position: absolute;
-            left: 10%;
-            top: 40%;
+            left: 1%;
+            top: 60%;
             z-index: 1;
         }
         @keyframes move {
             from {left: 0}
-            to {left: -10276px}
+            to {left: -5138px}
         }
     </style>
 </head>
 <body>
-    <img class="barrier" src="images/christamas/barrier.png"/>
+    <img id="barrier" class="barrier" src="images/christamas/barrier.png"/>
     <img class="santa" src="images/christamas/santa.gif">
     <div id="con">
         
@@ -45,17 +44,27 @@
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
     <script>
-        $('#pp').click(function (event) {
-            /*const left = Math.random() * 240 + 'px';
-            const top = Math.random() * 320 + 'px';
-            const width = (Math.random() * 100 + 100 )+ 'px';
-            console.log(left, top, width);*/
-            $('#pp').animate({
-                top: '100px'
-            }, 'slow', 'swing').animate({
-                top: '130px'
-            }).animate({
-                top: '230px'
+        let left = 0;
+        let stop = false;
+        let timer;
+        function move () {
+            console.log('in move');
+            timer = setInterval(function () {
+                left = left - 100;
+                console.log(left);
+                $('#barrier').animate({
+                    left: left +  'px'
+                })
+            }, 500)
+        }
+        $(document).ready(function () {
+            $('body').mousedown(function () {
+                move();
+            })
+            $('body').mouseup(function () {
+                console.log('up');
+                clearInterval(timer);
+                timer = null;
             })
             
         })
