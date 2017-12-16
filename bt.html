@@ -117,9 +117,9 @@
                 easing: 'linear',
                 step: function (now, tween) {
                     if (now <= -8.26 && notClick) {
-                        $('#santa').animate({
+                        /*$('#santa').animate({
                             top: '13rem'
-                        })
+                        })*/
                         notClick = true;
                         console.log(now);
                         console.log(tween);
@@ -144,7 +144,7 @@
                 autoMove();
             }, 500)*/
             autoMove();
-            $('body').on('touchend  click','.body', function (event) {
+            $('body').on('touchend click','.body', function (event) {
                 notClick = false;
                 console.log($('#santa').position());
                 console.log($('#barrier').position());
