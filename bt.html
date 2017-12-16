@@ -11,6 +11,12 @@
             background-size: 100%;
             /*width: 100%;*/
         }
+        .cloud {
+            width: 4348.5px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
         .barrier {
             position: absolute;
             left: 0;
@@ -34,13 +40,13 @@
     </style>
     <script>
         
-    </script>>
+    </script>
 </head>
 <body>
-    <img id="barrier" class="barrier" src="images/christamas/barrier.png"/>
-    <img id="santa" class="santa" src="images/christamas/santa.gif">
     <div id="con">
-        
+        <img src="images/christamas/cloud.png" class="cloud" id="cloud" />
+        <img id="barrier" class="barrier" src="images/christamas/barrier.png"/>
+        <img id="santa" class="santa" src="images/christamas/santa.gif">    
     </div>
     <script
   src="http://code.jquery.com/jquery-3.2.1.min.js"
@@ -48,13 +54,14 @@
   crossorigin="anonymous"></script>
     <script>
         let left = 0;
+        let cloudLeft = 0;
         let stop = false;
         let timer;
         function move () {
             timer = setInterval(function () {
-                //console.log('left: ' + $('#barrier').position().left);
-
-                if ($('#barrier').position().left <= -5138) {
+                const barrierLeft = $('#barrier').position().left;
+                console.log(barrierLeft);
+                if (barrierLeft <= -5138) {
                     alert('yyy: congratulations!');
                     $('#santa').animate({
                         top: '20%'
@@ -67,17 +74,36 @@
                 $('#barrier').animate({
                     left: left +  'px'
                 }, 'slow')
+                cloudLeft = cloudLeft - 100;
+                $('#cloud').animate({
+                    left: cloudLeft + 'px'
+                }, 'slow')
             }, 500)
         }
         $(document).ready(function () {
-            $('body').on('touchstart', function () {
+            $('body').on('touchstart', function (event) {
+                event.preventDefault();
                 move();
             })
             $('body').on('touchend', function () {
                 clearInterval(timer);
                 timer = null;
             })
-            $('body').on('click', function () {
+            $('body').on('touchmove', function () {
+                clearInterval(timer);
+                timer = null;
+            })
+            $('body').on('click', function (event) {
+                event.preventDefault();
+                if ($('#barrier').position().left <= -5138) {
+                    alert('yyy: congratulations!');
+                    $('#santa').animate({
+                        top: '20%'
+                    })
+                    clearInterval(timer);
+                    timer = null;
+                    return;
+                }
                 $('#santa').animate({
                     top: '50%'
                 }).animate({
@@ -86,6 +112,10 @@
                 left = left - 150;
                 $('#barrier').animate({
                     left: left +  'px'
+                }, 'slow')
+                cloudLeft = cloudLeft - 100;
+                $('#cloud').animate({
+                    left: cloudLeft + 'px'
                 }, 'slow')
             })
         })
