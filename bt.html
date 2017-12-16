@@ -58,18 +58,20 @@
         let stop = false;
         let timer;
         function move () {
+            const barrierLeft = $('#barrier').position().left;
+            console.log(barrierLeft);
+            if (barrierLeft <= -5138) {
+                alert('yyy: congratulations!');
+                $('#santa').animate({
+                    top: '20%'
+                })
+                clearInterval(timer);
+                timer = null;
+                return;
+            }
+            clearInterval(timer);
+            timer = null;
             timer = setInterval(function () {
-                const barrierLeft = $('#barrier').position().left;
-                console.log(barrierLeft);
-                if (barrierLeft <= -5138) {
-                    alert('yyy: congratulations!');
-                    $('#santa').animate({
-                        top: '20%'
-                    })
-                    clearInterval(timer);
-                    timer = null;
-                    return;
-                }
                 left = left - 200;
                 $('#barrier').animate({
                     left: left +  'px'
@@ -82,10 +84,16 @@
         }
         $(document).ready(function () {
             $('body').on('touchstart', function (event) {
-                event.preventDefault();
+                move();
+            })
+            $('body').on('mousedown', function (event) {
                 move();
             })
             $('body').on('touchend', function () {
+                clearInterval(timer);
+                timer = null;
+            })
+            $('body').on('mouseup', function () {
                 clearInterval(timer);
                 timer = null;
             })
@@ -95,15 +103,6 @@
             })
             $('body').on('click', function (event) {
                 event.preventDefault();
-                if ($('#barrier').position().left <= -5138) {
-                    alert('yyy: congratulations!');
-                    $('#santa').animate({
-                        top: '20%'
-                    })
-                    clearInterval(timer);
-                    timer = null;
-                    return;
-                }
                 $('#santa').animate({
                     top: '50%'
                 }).animate({
