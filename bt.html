@@ -32,6 +32,9 @@
             to {left: -5138px}
         }
     </style>
+    <script>
+        
+    </script>>
 </head>
 <body>
     <img id="barrier" class="barrier" src="images/christamas/barrier.png"/>
@@ -49,7 +52,9 @@
         let timer;
         function move () {
             timer = setInterval(function () {
-                if (left <= -5138) {
+                //console.log('left: ' + $('#barrier').position().left);
+
+                if ($('#barrier').position().left <= -5138) {
                     alert('yyy: congratulations!');
                     $('#santa').animate({
                         top: '20%'
@@ -58,7 +63,6 @@
                     return;
                 }
                 left = left - 200;
-                console.log(left);
                 $('#barrier').animate({
                     left: left +  'px'
                 }, 'slow')
