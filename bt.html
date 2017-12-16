@@ -92,7 +92,7 @@
         
     </script>
 </head>
-<body>
+<body class="body1">
     <div id="con">
         <img src="images/christamas/cloud.png" class="cloud" id="cloud" />
         <img id="barrier" class="barrier" src="images/christamas/barrier.png"/>
@@ -144,7 +144,7 @@
                 autoMove();
             }, 500)*/
             autoMove();
-            $('body').on('touchend  click', function (event) {
+            $('body').on('touchend  click','.body', function (event) {
                 notClick = false;
                 console.log($('#santa').position());
                 console.log($('#barrier').position());
