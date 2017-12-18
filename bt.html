@@ -175,6 +175,18 @@
             opacity: 0.7;
             margin-top: 2rem;
         }
+        .next {
+            width: 1rem;
+            position: absolute;
+            bottom: 1.46rem;
+            left: 3.25rem;
+        }
+        .turn {
+            width: 1.98rem;
+            position: absolute;
+            bottom: 1.13rem;
+            left: 2.76rem;
+        }
     </style>
     <script>
         
@@ -183,11 +195,15 @@
 <body>
     <!--loading part-->
     <div id="loading">
-        <div style="position: absolute; left: 0.985rem; top: 4.14rem;overflow: hidden; width: 5.53rem; height:3.61rem; ">
+        <div style="position: absolute; left: 0.985rem; top: 4.14rem;overflow: hidden; width: 5.53rem; height:3.61rem; " id="loading-part">
             <img src="images/christamas/santa.gif" class="loading-santa">            
             <img src="images/christamas/loading-03.png" class="bar">
             <img src="images/christamas/loading-04.png" class="bar-run">
-            <div id="percent">0%</div>
+            <div id="percent">0</div>
+        </div>
+        <div id="next" style="display: none;width: 7.5rem;height: 100%;text-align: center;position: relative;">
+            <img src="images/christamas/turn.png" class="turn">
+            <img src="images/christamas/next.gif" class="next">
         </div>
     </div>
 
@@ -222,9 +238,13 @@
             'images/christamas/barrier.png',
             'images/christamas/santa.gif',
             'images/christamas/cloud.png',
-            'images/christamas/head.gif'
+            'images/christamas/head.gif',
+            'images/christamas/loading.png',
+            'images/christamas/finish.png'
         ];
-        var length = materia.length;
+        
+        $(document).ready(function () {
+            var length = materia.length;
         
 
         var intervalTimer = setInterval(function () {
@@ -235,12 +255,10 @@
                 img.src = url;
                 if (img.complete) {
                     complete ++;
-                    alert('complete: ' + complete);
+                    console.log('complete: ' + complete);
                 }
                 else {
                     img.onload = function () {
-                        //alert('complete: ' + complete);
-                        console.log('complete: ' + complete)
                         complete ++;
                     }    
                 }
@@ -249,15 +267,19 @@
             if (complete === length) {
                 clearInterval(intervalTimer);
                 intervalTimer = null;
-                $('#loading').hide();
-                $('#content').show();
-                video.play();
+                $('#loading-part').hide();
+                $('#next').show();
+                //video.play();
             }
+            const percent = (complete / length).toFixed(2)
             $('.bar-run').css({width: complete / length * 5.53 + 'rem'});
-            $('.loading-santa').css({left: complete / length * 4.16 + 'rem'});
-            $('#percent').html(complete / length * 100);
+            $('.loading-santa').css({left: percent * 4.16 + 'rem'});
+            $('#percent').html(percent * 100);
         }, 300)
-
+        setTimeout(function () {
+            $('#loading-part').hide();
+            $('#next').show();
+        }, 2000);
         //video.play();
         function init() {
 
@@ -310,7 +332,10 @@
                 $('#game').hide();
             })
         }
-        $(document).ready(function () {
+            $('#next').on('touchstart', function (event) {
+                console.log('start');
+            })
+
             // video play
             document.getElementById('video').addEventListener('ended', function () {
                 $('#video').hide();
