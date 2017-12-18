@@ -59,6 +59,9 @@
             height: auto;
             overflow: hidden;
             box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            cursor: pointer;
         }
         .cloud {
             width: 86.97rem;
@@ -87,16 +90,69 @@
             from {left: 0}
             to {left: -102.76rem}
         }
+        .end {
+            width: 7.5rem;
+            z-index: 3; 
+            background: url(images/christamas/first.png);
+            background-size: 100% 100%;
+            box-sizing: border-box;
+
+        }
+        #loading {
+            width: 7.5rem;
+            height: 13.35rem;
+            box-sizing: border-box;
+            background: url(images/christamas/loading.png);
+            background-size: 100% 100%;
+            text-align: center;
+            align-items: center;
+        }
+        .loading-santa {
+            width: 1.37rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .bar {
+            width: 5.53rem;
+            left: 0;
+            position: absolute;
+            top: 1.37rem;
+        }
+        .bar-run {
+            width: 5.53rem;
+            height: 0.24rem;
+            left: -2rem;
+            position: absolute;
+            top: 1.37rem;   
+        }
     </style>
     <script>
         
     </script>
 </head>
-<body class="body1">
-    <div id="con">
-        <img src="images/christamas/cloud.png" class="cloud" id="cloud" />
-        <img id="barrier" class="barrier" src="images/christamas/barrier.png"/>
-        <img id="santa" class="santa" src="images/christamas/santa.gif">    
+<body>
+    <div id="loading" style="display: none">
+        <div style="position: absolute; left: 0.985rem; top: 4.14rem;overflow: hidden; width: 5.53rem; height:1.61rem; ">
+            <img src="images/christamas/santa.gif" class="loading-santa">            
+            <img src="images/christamas/loading-03.png" class="bar">
+            <img src="images/christamas/loading-04.png" class="bar-run">
+        </div>
+    </div>
+    <div id="content" style="">
+        <div id="precon">
+            <video style="width: 7.5rem; height: 100%" autoplay src="materia/A.mp4" controls id="video"></video>
+            <img src="images/christamas/head.gif" id="final" class="end">  
+        </div>
+
+        <div id="con" style="display: none;">
+            <img src="images/christamas/cloud.png" class="cloud" id="cloud" />
+            <img id="barrier" class="barrier" src="images/christamas/barrier.png"/>
+            <img id="santa" class="santa" src="images/christamas/santa.gif">    
+        </div>
+        <div id="ad" style="display: none; color: white; position: relative; left: 2rem; top: 5rem;">
+            广告啦！
+        </div>
     </div>
     <script type="text/javascript">
         const data = [
@@ -129,6 +185,7 @@
                 complete: function () {
                     console.log('barrier end');
                     $('#con').hide();
+                    $('#ad').show();
                 }
             })
             $('#cloud').animate({
@@ -139,12 +196,30 @@
             })
         }
         $(document).ready(function () {
-            /*clearInterval(timer);*/
-            /*timer = setInterval(function () {
-                autoMove();
-            }, 500)*/
-            autoMove();
+            document.getElementById('video').addEventListener('ended', function () {
+                console.log('ended');
+                $('#video').hide();
+                $('#final').show();
+            })
+            //autoMove();
             $('body').on('click', function (event) {
+                if (event.offsetX <= 170 && event.offsetX >= 45 
+                    && event.offsetY >= 470 && event.offsetY <= 515) {
+                    $('#video').attr('src', 'materia/A.mp4'); 
+                    $('#final').hide();
+                    $('#video').show();
+                }
+                if (event.offsetX <= 330 && event.offsetX >= 200 
+                    && event.offsetY >= 470 && event.offsetY <= 515) {
+                    /*$('#video').attr('src', 'materia/A.mp4'); 
+                    $('#final').hide();
+                    $('#video').show();*/
+                    $('#video').attr('src', '');
+                    $('#precon').hide();
+                    $('#con').show();
+                    autoMove();
+                }
+                console.log(event.offsetX, event.offsetY);
                 notClick = false;
                 console.log($('#santa').position());
                 console.log($('#barrier').position());
@@ -154,10 +229,8 @@
                     top: '60%'
                 })
             })
-            $('#barrier').on('resize', function (event) {
-                console.log('gogog');
-            })
         })
+
     </script>
 </body>
 </html>
