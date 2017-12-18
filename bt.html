@@ -213,7 +213,7 @@
         </div>
     </div>
     <script type="text/javascript">
-        let complete = 0;
+        var complete = 0;
         function videoOnload () {
             complete ++;
         }
@@ -224,22 +224,28 @@
             'images/christamas/cloud.png',
             'images/christamas/head.gif'
         ];
-        let length = materia.length;
+        var length = materia.length;
         
 
-        let intervalTimer = setInterval(function () {
-            for (let i = 0; i < materia.length; i++) {
-                const url = materia.shift();
-                let img = new Image();
-                img.src = url;
-                console.log(img.src);
-                img.onload = function () {
-                    console.log('complete: ' + complete)
-                    complete ++;
-                }
-            }
+        var intervalTimer = setInterval(function () {
 
-            console.log(complete, length);
+            for (var i = 0; i < materia.length; i++) {
+                const url = materia.shift();
+                var img = new Image();
+                img.src = url;
+                if (img.complete) {
+                    complete ++;
+                    alert('complete: ' + complete);
+                }
+                else {
+                    img.onload = function () {
+                        //alert('complete: ' + complete);
+                        console.log('complete: ' + complete)
+                        complete ++;
+                    }    
+                }
+                
+            }
             if (complete === length) {
                 clearInterval(intervalTimer);
                 intervalTimer = null;
@@ -268,11 +274,11 @@
             $('#game').show();
             autoMove();
         })
-        let left = 0;
-        let cloudLeft = 0;
-        let stop = false;
-        let timer;
-        let notClick = true;
+        var left = 0;
+        var cloudLeft = 0;
+        var stop = false;
+        var timer;
+        var notClick = true;
         function autoMove () {
             cloudLeft -= 1.5;
             $('#barrier').animate({
