@@ -251,8 +251,8 @@
         function videoOnload () {
             complete ++;
         }
-        const video = document.getElementById('video');
-        const materia = [
+        var video = document.getElementById('video');
+        var materia = [
             'images/christamas/barrier.png',
             'images/christamas/santa.gif',
             'images/christamas/cloud.png',
@@ -263,13 +263,12 @@
         
         $(document).ready(function () {
             try {
-            alert('in ready');
             $('#loading').show();
             var length = materia.length;
             var intervalTimer = setInterval(function () {
 
             for (var i = 0; i < materia.length; i++) {
-                const url = materia.shift();
+                var url = materia.shift();
                 var img = new Image();
                 img.src = url;
                 if (img.complete) {
@@ -290,7 +289,7 @@
                 $('#next').show();
                 //video.play();
             }
-            const percent = (complete / length).toFixed(2)
+            var percent = (complete / length).toFixed(2)
             $('.bar-run').css({width: complete / length * 5.53 + 'rem'});
             $('.loading-santa').css({left: percent * 4.16 + 'rem'});
             $('#percent').html(percent * 100);
