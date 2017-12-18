@@ -53,6 +53,9 @@
                 margin: 0 auto !important;
             }
         }
+        * {
+            cursor: pointer;
+        }
         body{
             background: url(images/christamas/bg.png);
             width: 7.5rem;
@@ -63,21 +66,21 @@
             margin: 0;
             cursor: pointer;
         }
+        #content, #game {
+            cursor: pointer;
+        }
         .cloud {
             width: 86.97rem;
             position: absolute;
             top: 0;
             left: 0;
-           /* -webkit-animation: move 40s 1;
-            -webkit-animation-timing-function: linear;*/
         }
         .barrier {
             position: absolute;
             left: 0;
             z-index: 0;
             width: 102.76rem;
-            /*-webkit-animation: move 20s 1;
-            -webkit-animation-timing-function: linear;*/
+            height: 100%;
         }
         .santa {
             width: 2.07rem;
@@ -86,17 +89,41 @@
             top: 8.61rem;
             z-index: 1;
         }
-        @keyframes move {
-            from {left: 0}
-            to {left: -102.76rem}
-        }
-        .end {
+        #video {
             width: 7.5rem;
-            z-index: 3; 
+            height: 100%;
+        }
+        #post {
+            width: 7.5rem;
+            height: 13.35rem;
             background: url(images/christamas/first.png);
-            background-size: 100% 100%;
-            box-sizing: border-box;
-
+            background-size: 7.5rem;
+            display: none;
+        }
+        #face {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #replay {
+            background-color: red;
+            opacity: 0.2;
+            height: 1.7rem;
+            width: 3.3rem;
+            position: absolute;
+            bottom: 2.8rem;
+            left: 0.4rem;
+        }
+        #moveon {
+            background-color: red;
+            opacity: 0.2;
+            height: 1.7rem;
+            width: 3.3rem;
+            position: absolute;
+            bottom: 2.8rem;
+            right: 0.4rem;   
         }
         #loading {
             width: 7.5rem;
@@ -132,6 +159,7 @@
     </script>
 </head>
 <body>
+    <!--loading part-->
     <div id="loading" style="display: none">
         <div style="position: absolute; left: 0.985rem; top: 4.14rem;overflow: hidden; width: 5.53rem; height:1.61rem; ">
             <img src="images/christamas/santa.gif" class="loading-santa">            
@@ -139,26 +167,44 @@
             <img src="images/christamas/loading-04.png" class="bar-run">
         </div>
     </div>
-    <div id="content" style="">
-        <div id="precon">
-            <video style="width: 7.5rem; height: 100%" autoplay src="materia/A.mp4" controls id="video"></video>
-            <img src="images/christamas/head.gif" id="final" class="end">  
+
+    <!-- main content -->
+    <div id="content">
+        <div id="first">
+            <video id="video" autoplay src="materia/A.mp4" controls></video>
+            <div id="post">
+                <img id="face" src="images/christamas/head.gif">   
+                <div id="replay"></div>
+                <div id="moveon"></div> 
+            </div>
         </div>
 
-        <div id="con" style="display: none;">
+        <div id="game" style="display: none;">
             <img src="images/christamas/cloud.png" class="cloud" id="cloud" />
             <img id="barrier" class="barrier" src="images/christamas/barrier.png"/>
             <img id="santa" class="santa" src="images/christamas/santa.gif">    
         </div>
+        <!-- afer game-->
         <div id="ad" style="display: none; color: white; position: relative; left: 2rem; top: 5rem;">
             广告啦！
         </div>
     </div>
     <script type="text/javascript">
-        const data = [
-            
-        ];
+        function init() {
 
+        }
+        init();
+        $('#replay').on('click', function (event) {
+            $('#video').attr('src', 'materia/A.mp4'); 
+            $('#post').hide();
+            $('#video').show();
+        })
+        $('#moveon').click(function (event) {
+            $('#video').attr('src', '');
+            $('#post').hide();
+            $('#game').show();
+            autoMove();
+        })
         let left = 0;
         let cloudLeft = 0;
         let stop = false;
@@ -184,7 +230,7 @@
                 },
                 complete: function () {
                     console.log('barrier end');
-                    $('#con').hide();
+                    $('#game').hide();
                     $('#ad').show();
                 }
             })
@@ -192,42 +238,34 @@
                 left: '-86.97rem'
             }, 4e4, 'linear', function () {
                 console.log('cloud end');
-                $('#con').hide();
+                $('#game').hide();
             })
         }
         $(document).ready(function () {
+            // video play
             document.getElementById('video').addEventListener('ended', function () {
-                console.log('ended');
                 $('#video').hide();
-                $('#final').show();
+                $('#post').show();
             })
-            //autoMove();
-            $('body').on('click', function (event) {
-                if (event.offsetX <= 170 && event.offsetX >= 45 
-                    && event.offsetY >= 470 && event.offsetY <= 515) {
-                    $('#video').attr('src', 'materia/A.mp4'); 
-                    $('#final').hide();
-                    $('#video').show();
-                }
-                if (event.offsetX <= 330 && event.offsetX >= 200 
-                    && event.offsetY >= 470 && event.offsetY <= 515) {
-                    /*$('#video').attr('src', 'materia/A.mp4'); 
-                    $('#final').hide();
-                    $('#video').show();*/
-                    $('#video').attr('src', '');
-                    $('#precon').hide();
-                    $('#con').show();
-                    autoMove();
-                }
-                console.log(event.offsetX, event.offsetY);
-                notClick = false;
-                console.log($('#santa').position());
-                console.log($('#barrier').position());
+            // cilck watch video or go on game
+            
+            // game
+            $('#game').on('click', function (event) {
                 $('#santa').animate({
                     top: '50%'
                 }).animate({
                     top: '60%'
                 })
+            })
+
+            //autoMove();
+            $('#content').on('click', function (event) {
+                if (event.offsetX <= 330 && event.offsetX >= 200 
+                    && event.offsetY >= 470 && event.offsetY <= 515) {
+                    
+                }
+                notClick = false;
+                
             })
         })
 
