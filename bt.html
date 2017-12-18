@@ -146,10 +146,10 @@
         #moveon {
             background-color: red;
             opacity: 0.2;
-            height: 1.7rem;
+            height: 14.1%;
             width: 3.3rem;
             position: absolute;
-            bottom: 14.6%;
+            bottom: 16.17%;
             right: 0.4rem;   
         }
         #loading {
@@ -208,6 +208,14 @@
             left: 2.76rem;
             display: block;
         }
+        .gift {
+            width: 7.5rem;
+            height: 12.06rem;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -239,8 +247,12 @@
         <div id="game" style="display: none;" class="container">
             <img src="images/christamas/cloud.png" class="cloud" id="cloud" />
             <img id="barrier" class="barrier" src="images/christamas/barrier.png"/>
-            <img id="santa" class="santa" src="images/christamas/santa.gif">    
+            <img id="barrier" class="gift" src="images/christamas/gift.png"/>
+            <img id="santa" class="santa" src="images/christamas/santa.gif">
+            <video src="materia/B.mp4" preload style="display: none; width: 7.5rem; height: 100%;" id="B"></video>
         </div>
+
+        
         <!-- afer game-->
         <div id="ad" class="container">
             广告啦！
@@ -325,9 +337,9 @@
         function autoMove () {
             cloudLeft -= 1.5;
             $('#barrier').animate({
-                left:  '-102.76rem'
+                left:  '-95.26rem'
             }, {
-                duration: 30000,
+                duration: 20000,
                 easing: 'linear',
                 step: function (now, tween) {
                     if (now <= -8.26 && notClick) {
@@ -342,15 +354,23 @@
                 },
                 complete: function () {
                     console.log('barrier end');
-                    $('#game').hide();
-                    $('#ad').show();
+                    //$('#game').hide();
+                    $('.gift').show();
+                    $('#santa').hide();
+                    $('.gift').click(function () {
+                        console.log('gist');
+                        $('#B').show();
+                        document.getElementById('B').play();
+                        $('.gift').hide();
+                    })
+                    //$('#ad').show();
                 }
             })
             $('#cloud').animate({
                 left: '-86.97rem'
-            }, 4e4, 'linear', function () {
+            }, 28000, 'linear', function () {
                 console.log('cloud end');
-                $('#game').hide();
+                //$('#game').hide();
             })
             }
             var startY = 0, endY = 0, moveY = 0;
