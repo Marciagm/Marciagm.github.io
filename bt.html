@@ -162,11 +162,18 @@
             top: 1.37rem;
         }
         .bar-run {
-            width: 5.53rem;
+            width: 0;
             height: 0.24rem;
-            left: -2rem;
+            left: 0rem;
             position: absolute;
             top: 1.37rem;   
+        }
+        #percent {
+            font-size: 40px;
+            font-family: 'chalkBoard';
+            color: red;
+            opacity: 0.7;
+            margin-top: 2rem;
         }
     </style>
     <script>
@@ -175,18 +182,19 @@
 </head>
 <body>
     <!--loading part-->
-    <div id="loading" style="display: none">
-        <div style="position: absolute; left: 0.985rem; top: 4.14rem;overflow: hidden; width: 5.53rem; height:1.61rem; ">
+    <div id="loading">
+        <div style="position: absolute; left: 0.985rem; top: 4.14rem;overflow: hidden; width: 5.53rem; height:3.61rem; ">
             <img src="images/christamas/santa.gif" class="loading-santa">            
             <img src="images/christamas/loading-03.png" class="bar">
             <img src="images/christamas/loading-04.png" class="bar-run">
+            <div id="percent">0%</div>
         </div>
     </div>
 
     <!-- main content -->
     <div id="content">
         <div id="first">
-            <video id="video" autoplay=true src="materia/A.mp4" controls></video>
+            <video id="video" preload src="materia/A.mp4" controls onload="videoOnload"></video>
             <div id="post">
                 <img id="face" src="images/christamas/head.gif">   
                 <div id="replay"></div>
@@ -205,8 +213,46 @@
         </div>
     </div>
     <script type="text/javascript">
+        let complete = 0;
+        function videoOnload () {
+            complete ++;
+        }
         const video = document.getElementById('video');
-        video.play();
+        const materia = [
+            'images/christamas/barrier.png',
+            'images/christamas/santa.gif',
+            'images/christamas/cloud.png',
+            'images/christamas/head.gif'
+        ];
+        let length = materia.length;
+        
+
+        let intervalTimer = setInterval(function () {
+            for (let i = 0; i < materia.length; i++) {
+                const url = materia.shift();
+                let img = new Image();
+                img.src = url;
+                console.log(img.src);
+                img.onload = function () {
+                    console.log('complete: ' + complete)
+                    complete ++;
+                }
+            }
+
+            console.log(complete, length);
+            if (complete === length) {
+                clearInterval(intervalTimer);
+                intervalTimer = null;
+                $('#loading').hide();
+                $('#content').show();
+                video.play();
+            }
+            $('.bar-run').css({width: complete / length * 5.53 + 'rem'});
+            $('.loading-santa').css({left: complete / length * 4.16 + 'rem'});
+            $('#percent').html(complete / length * 100);
+        }, 300)
+
+        //video.play();
         function init() {
 
         }
