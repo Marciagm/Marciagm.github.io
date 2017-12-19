@@ -148,5 +148,11 @@ function init () {
 }
 
 $(document).ready(function () {
-    init();
+    try {
+        init();    
+    }
+    catch (e) {
+        alert(e);
+    }
+    
 })
