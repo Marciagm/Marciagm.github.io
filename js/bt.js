@@ -1,12 +1,12 @@
 var images = [
-    'images/christamas/barrier.png?12',
-    'images/christamas/santa.gif?12',
-    'images/christamas/cloud.png?12',
-    'images/christamas/head.gif?12',
-    'images/christamas/loading.png?12',
+    'images/christamas/barrier.png',
+    'images/christamas/santa.gif',
+    'images/christamas/cloud.png',
+    'images/christamas/head.gif',
+    'images/christamas/loading.png',
     'images/christamas/finish.png'
 ];
-var timer;
+var timer, progress = 0;
 function nextPage (pageId) {
     if (pageId === 'page2') {
         // page2
@@ -55,20 +55,14 @@ function move (percent) {
     $('.loading-santa').animate({
         left: percent * 4.16 + 'rem'
     }, 200, 'linear', function () {
-        $('#percent').html(percent * 100);
+        $('#percent').html(Math.floor(percent * 100));
         if (percent == 1.0) {
             clearInterval(timer);
             timer = null;
             setTimeout(function () {
                 $('#loading').hide();
                 $('#page1').show();
-                try {
-                    beforePlayVideo('video1', 'page2');    
-                }
-                catch (e) {
-                    alert(e);
-                }
-                
+                beforePlayVideo('video1', 'page2');
             }, 200)
         }    
     }) 
@@ -79,9 +73,9 @@ function move (percent) {
  * 
  */
 function loading (images) {
-    var progress = 0;
     var length = images.length;
-    timer = setInterval(function () {
+
+    /*timer = setInterval(function () {
         for (var i = 0; i < images.length; i++) {
             var item = images.shift();
             var img = new Image();
@@ -100,7 +94,21 @@ function loading (images) {
             }
               
         }
-    }, 50)      
+    }, 50) */
+    timer = setInterval(function () {
+        progress += Math.floor(Math.random()*10);
+        var percent = (progress / 100).toFixed(2);
+        console.log(percent);
+        if (percent >= 1) {
+            move(1);
+            clearInterval(timer);
+            timer = null;
+        }
+        else {
+            move(percent);
+        }
+        
+    }, 50)     
 }
 
 function beforePlayVideo (videoId, nextPageId) {
