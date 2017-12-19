@@ -1,9 +1,9 @@
 var images = [
-    'images/christamas/barrier.png',
-    'images/christamas/santa.gif',
-    'images/christamas/cloud.png',
-    'images/christamas/head.gif',
-    'images/christamas/loading.png',
+    'images/christamas/barrier.png?12',
+    'images/christamas/santa.gif?12',
+    'images/christamas/cloud.png?12',
+    'images/christamas/head.gif?12',
+    'images/christamas/loading.png?12',
     'images/christamas/finish.png'
 ];
 var timer;
