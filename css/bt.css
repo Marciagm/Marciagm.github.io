@@ -1,0 +1,111 @@
+@media screen and (min-width: 751px) {
+    html{
+        font-size: 100px !important;
+    }
+    body{
+        width: 750px;
+        margin: 0 auto !important;
+    }
+}
+html {
+    width: 100%;
+    height: 100%;
+}
+* {
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+#wrapper {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+/*loading*/
+#loading {
+    width: 100%;
+    height: 13.35rem;
+    box-sizing: border-box;
+    background: url(../images/christamas/loading.png);
+    background-size: 100% 100%;
+    text-align: center;
+}
+.loading-part {
+    position: absolute; 
+    left: 0.985rem; 
+    top: 4.14rem; 
+    width: 5.53rem; 
+    height:3.61rem;
+}
+.loading-santa {
+    width: 1.37rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.loading-bar {
+    width: 5.53rem;
+    top: 1.34rem;
+    height: 0.22rem;
+    position: absolute;
+    left: 0;
+    border: 0.02rem solid black;
+    background-color: #4a4545;
+    border-radius: 0.25rem;
+}
+.loading-run {
+    position: absolute;
+    left: 0.02rem;
+    width: 0;
+    height: 0.19rem;
+    top: 1.37rem; 
+    border: 0;
+    border-radius: 0.25rem;
+/*    background: repeating-linear-gradient(-40deg,#F8B62D,#F8B62D,8px,#FE3A5F 0,#FE3A5F 16px); 
+*/    background: repeating-linear-gradient(-42deg,#FE3A5F,#FE3A5F,10px,#F8B62D 0,#F8B62D 18px);   
+}
+
+#percent {
+    font-size: 40px;
+    font-family: 'chalkBoard';
+    color: #FE3A5F;
+    margin-top: 2rem;
+}
+
+/*page1*/
+#page1 {
+    width: 100%;
+    height: 13.35rem;
+}
+.video {
+    width: 7.5rem; 
+    height: 100%; 
+    position: absolute; 
+    left: 0; 
+    top: 0;
+    display: none;
+}
+
+/*all*/
+#next {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    height: 3.46rem;
+    width: 100%;
+}
+.next {
+    width: 1rem;
+    position: relative;
+    bottom: 1.46rem;
+    left: 3.25rem;
+    display: block;
+}
+.turn {
+    width: 1.98rem;
+    position: relative;
+    bottom: 1.13rem;
+    left: 2.76rem;
+    display: block;
+}
