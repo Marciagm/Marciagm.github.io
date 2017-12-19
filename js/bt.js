@@ -62,7 +62,13 @@ function move (percent) {
             setTimeout(function () {
                 $('#loading').hide();
                 $('#page1').show();
-                beforePlayVideo('video1', 'page2');
+                try {
+                    beforePlayVideo('video1', 'page2');    
+                }
+                catch (e) {
+                    alert(e);
+                }
+                
             }, 200)
         }    
     }) 
