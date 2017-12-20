@@ -271,7 +271,7 @@
         </div>
 
         <div id="page1">
-            <video id="videoA" width="7.5rem" class="video" poster="images/christamas/loading.png" preload="auto" src="materia/A.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+            <video id="videoA" width="7.5rem" class="video" poster="images/christamas/loading.png" preload="preload" src="materia/A.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
                 <source src="materia/A.mp4" type="video/mp4">
             </video>
             <div id="post">
@@ -288,7 +288,7 @@
         </div>
 
         <div id="page3">
-            <video id="videoB" width="7.5rem" class="video" preload="auto" src="materia/B.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+            <video id="videoB" width="7.5rem" class="video" preload="preload" src="materia/B.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
                 <source src="materia/B.mp4" type="video/mp4">
             </video>
             <div id="gift">
@@ -296,7 +296,11 @@
                 <img src="images/christamas/gift-turn.png" class="turn">
             </div>          
         </div>
-       <!--  <div id="page4"></div> -->
+        <div id="page4">
+            <video id="videoC" width="7.5rem" class="video" preload="preload" src="materia/C.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+                <source src="materia/C.mp4" type="video/mp4">
+            </video>
+        </div>
 
         <div id="next">
             <img src="images/christamas/next.gif" class="next">
@@ -435,12 +439,15 @@
             videoB: {
                 duration: 3, 
                 src: 'materia/B.mp4'
+            },
+            videoC: {
+                duration: 2, 
+                src: 'materia/C.mp4'
             }
         }
         var timer, progress = 0;
         function videoPlay (videoId, nextPageId) {
             var videoItem = document.getElementById(videoId);
-            $('#videoB').trigger('click');
             videoItem.play();
             var videoTimer = setInterval(function () {
                 if (videoId === 'videoB') {
@@ -472,7 +479,7 @@
                         $('#barrier').animate({
                             left: '-91.06rem'
                         }, {
-                            duration: 15000,
+                            duration: 10000,
                             easing: 'linear',
                             step: function (now, tween) {
                                 var offset = 1.08 - now;
@@ -489,14 +496,16 @@
                                 $('#page2').remove()
                                 $('#page3').show();
                                 $('#videoB').show();
-                                videoPlay('videoB', 'page3');
-                                //$('#game').hide();
-                                /*$('.gift').show();
-                                $('#santa').hide();
-                                $('.gift').click(function () {
-                                    
-                                })*/
-                                //$('#ad').show();
+                                $('#gift').show();
+                                setTimeout(function () {
+                                    $('#gift').hide();
+                                    $('#videoB').attr('src', videos.videoB.src);
+                                    document.getElementById('videoB').play();
+                                }, 1000)
+                                $('#gift').click(function () {
+                                    $('#gift').hide();
+                                    videoPlay('videoB', 'page4');
+                                })
                             }
                         })
                         $('#page2').click(function () {
@@ -517,6 +526,9 @@
             }
             else if (nextPageId === 'page3') {
                 $('#gift').show();
+                $('#gift').on('click', function () {
+                    videoPlay('videoC', 'page4');
+                })
                 $('#videoB').hide();
             }
         }
