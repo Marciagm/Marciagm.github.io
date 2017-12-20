@@ -236,7 +236,7 @@
         </div>
 
         <div id="page1">
-            <video id="video1" class="video" poster="images/christamas/loading.png" preload src="materia/A.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true"></video>
+            <video id="video1" class="video" poster="images/christamas/loading.png" preload="auto" src="materia/A.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true"></video>
             <div id="post">
                 <img id="face" src="images/christamas/head.gif">   
                 <div id="replay"></div>
@@ -304,8 +304,7 @@
                 }
                 else {
                     $('#next').hide();
-                    $('#' + videoId).attr('src', 'materia/A.mp4');
-                    $('#' + videoId).click();
+                    alert('before play');
                     videoItem.play();
 
                     var videoTimer = setInterval(function () {
