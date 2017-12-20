@@ -317,14 +317,14 @@
                 $('#post').show();
                 $('#replay').click(function () {
                     $('#post').hide();
-/*                    $('#page1').show();
-*/                    $('#' + videoId).show();
+                    $('#' + videoId).show();
                     $('#' + videoId).attr('src', 'materia/A.mp4');
                     videoPlay(videoId, nextPageId);
                 })
 
-                /*$('#moveon').click(function () {
-                    $('#post').hide();
+                $('#moveon').click(function () {
+                    alert('moveon');
+                    /*$('#post').hide();
                     $('#page2').show();
                     $('#barrier').animate({
                         left: '-95.26rem'
@@ -350,7 +350,7 @@
                             })
                             //$('#ad').show();
                         }
-                    })
+                    })*/
                     $('#page2').click(function () {
                         $('#santa').animate({
                             top: '5.61rem'
@@ -358,7 +358,7 @@
                             top: '8.61rem'
                         })
                     }) 
-                })*/
+                })
 
             }
         }
