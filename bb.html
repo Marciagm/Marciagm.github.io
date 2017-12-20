@@ -323,10 +323,9 @@
                 })
 
                 $('#moveon').click(function () {
-                    alert('moveon');
-                    /*$('#post').hide();
+                    $('#post').hide();
                     $('#page2').show();
-                    $('#barrier').animate({
+                    /*$('#barrier').animate({
                         left: '-95.26rem'
                     }, {
                         duration: 20000,
@@ -350,8 +349,9 @@
                             })
                             //$('#ad').show();
                         }
-                    })*/
-                    /*$('#page2').click(function () {
+                    })
+                    $('#page2').show();
+                    $('#page2').click(function () {
                         $('#santa').animate({
                             top: '5.61rem'
                         }, ).animate({
@@ -374,30 +374,6 @@
                 $('#next').hide();
                 videoPlay(videoId, nextPageId);
             })
-
-            /*$('#next').on('touchmove', function (event) {
-                moveY = event.changedTouches[0].clientY;
-                console.log('moveY: ' + moveY);
-                if ((moveY - startY) < 0) {
-                    $('#next').animate({
-                        bottom: (startY - moveY) / 10 + 'rem'
-                    }, 100, 'linear')
-                }
-            })*/
-            /*$('#next').on('touchend', function (event) {
-                endY = event.changedTouches[0].clientY;
-                if ((startY - endY) < 30) {
-                    $('#next').animate({
-                        bottom: 0
-                    }, 200, 'linear')
-                }
-                else {
-                    alert('move');
-                    $('#next').hide();
-                    document.getElementById('videoA').play();
-                    
-                }
-            })*/
         }
         /**
          * loading images and move
@@ -444,6 +420,9 @@
         }
 
         function init () {
+            $(document).on('touchmove', function(e) {
+                e.preventDefault();
+            });
             $(document).on('WeixinJSBridgeReady',function(){
                 $('#videoA').load();
              });
