@@ -124,6 +124,7 @@
         #page1 {
             width: 100%;
             height: 13.35rem;
+            display: none;
         }
         .video {
             width: 7.5rem; 
@@ -236,7 +237,7 @@
         </div>
 
         <div id="page1">
-            <video id="video1" width="7.5rem" class="video" poster="images/christamas/finish.png" preload="auto" src="materia/A.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+            <video id="video1" width="7.5rem" class="video" poster="images/christamas/loading.png" preload="auto" src="materia/A.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
                 <source src="materia/A.mp4" type="video/mp4">
             </video>
             <div id="post">
@@ -307,8 +308,7 @@
                 else {
                     $('#next').hide();
                     $('#' + videoId).show();
-                    videoItem.play();
-
+                    document.getElementById('video1').play();
                     var videoTimer = setInterval(function () {
                         console.log(videoItem.currentTime);
                         if (videoItem.currentTime >= 15) {
