@@ -206,7 +206,6 @@
             bottom: 0;
             height: 100%;
             width: 7.5rem;
-            background-color: blue;
         }
         .next {
             width: 1rem;
@@ -287,10 +286,23 @@
             $('#next').show();
 
             $('#next').on('touchstart', function (event) {
-                startY = event.touches[0].clientY;
-                $('#next').hide();
-                alert('touch')
-                document.getElementById('video1').play();
+                $('#next').animate({
+                    bottom: '2rem'
+                }, function () {
+                    $('#next').hide();
+                    document.getElementById(videoId).play();
+                    var videoTimer = setInterval(function () {
+                        console.log(videoItem.currentTime);
+                        if (videoItem.currentTime >= 15) {
+                            clearInterval(videoTimer);
+                            $('#' + videoId).hide();
+                            nextPage(videoId, nextPageId);
+                        }
+                    }, 500)
+                    videoItem.addEventListener('ended', function () {
+                        
+                    })    
+                });
             })
 
             /*$('#next').on('touchmove', function (event) {
@@ -313,25 +325,9 @@
                     alert('move');
                     $('#next').hide();
                     document.getElementById('video1').play();
-                    var videoTimer = setInterval(function () {
-                        console.log(videoItem.currentTime);
-                        if (videoItem.currentTime >= 15) {
-                            clearInterval(videoTimer);
-                            $('#' + videoId).hide();
-                            nextPage(videoId, nextPageId);
-                        }
-                    }, 500)
-                    videoItem.addEventListener('ended', function () {
-                        
-                    })
+                    
                 }
             })*/
-
-            $('#next').on('click', function (event) {
-                $('#next').hide();
-                alert('go')
-                document.getElementById('video1').play();
-            })
         }
         /**
          * loading images and move
