@@ -210,7 +210,7 @@
         .santa {
             width: 2.07rem;
             position: absolute;
-            left: 2rem;
+            left: 0.77rem;
             top: 8.61rem;
             z-index: 1;
         }
@@ -222,6 +222,16 @@
             bottom: 0;
             height: 100%;
             width: 7.5rem;
+        }
+        #gift {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 7.5rem;
+            height: 100%;
+            background: url(images/christamas/gift.png);
+            background-size: 7.5rem;
+            display: none;
         }
         .next {
             width: 1rem;
@@ -270,9 +280,16 @@
         </div>
 
         <div id="page3">
-            <!-- <video src="materia/B.mp4" preload style="display: none; width: 7.5rem; height: 100%;" id="B"></video> -->
+            <video id="videoB" width="7.5rem" class="video" poster="images/christamas/loading.png" preload="auto" src="materia/B.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+                <source src="materia/B.mp4" type="video/mp4">
+            </video>
+            <div id="gift">
+                <img src="images/christamas/gift-next.gif" class="next">
+                <img src="images/christamas/gift-turn.png" class="turn">
+            </div>            
         </div>
         <div id="page4"></div>
+
         <div id="next">
             <img src="images/christamas/next.gif" class="next">
             <img src="images/christamas/turn.png" class="turn">
@@ -288,13 +305,127 @@
             'images/christamas/loading.png',
             'images/christamas/finish.png'
         ];
+        var santaTop = 8.61, jump;
+        var gameDics = [
+            {
+                scope: [0, 2.66],
+                top: 8.61
+            },
+            {
+                scope: [2.66, 4.14],
+                jump: 1,
+                top: 8.61
+            },
+            {
+                scope: [4.14, 10.26],
+                top: 8.61
+            },
+            // 203
+            {
+                scope: [10.26, 12.29],
+                jump: 0.5,
+                top: 8.97
+            },
+            // 1295
+            {
+                scope: [12.29, 25.24],
+                top: 8.97
+            },
+            // 168
+            {
+                scope: [25.24, 26.92],
+                jump: 1.25,
+                top: 7.72
+            },
+            // 655
+            {
+                scope: [26.92, 33.47],
+                jump: 1,
+                top: 7.72
+            },
+            // 148
+            {
+                scope: [33.47, 34.95],
+                jump: 1,
+                top: 6.78
+            },
+            // end of 1116
+            {
+                scope: [34.95, 38.08],
+                top: 7.72
+            },
+            // 230
+            {
+                scope: [38.08, 40.31],
+                jump: 0.2,
+                top: 8.94
+            },
+            // 1450
+            {
+                scope: [40.31, 54.81],
+                jump: 0.2,
+                top: 8.94
+            },
+            // triangle start
+            {
+                scope: [40.31, 54.81],
+                jump: 1.3,
+                top: 8.94
+            },
+            // triangle end
+            {
+                scope: [54.81, 57.56],
+                jump: 1.3,
+                top: 8.94
+            },
+            {
+                scope: [57.56, 69.72],
+                jump: 1.3,
+                top: 9.78
+            },
+            {
+                scope: [69.72, 71.57],
+                jump: 1.3,
+                top: 9.78
+            },
+            // pink 346
+            {
+                scope: [71.57, 75.03],
+                top: 7
+            },
+            // 166
+            {
+                scope: [75.03, 76.69],
+                jump: 1.2,
+                top: 7
+            },
+            // 1371-
+            {
+                scope: [76.69, 88.74],
+                jump: 1.3,
+                top: 7
+            },
+            // 224
+            {
+                scope: [88.74, 90.98],
+                jump: 0.1,
+                top: 7.54
+            },
+            {
+                scope: [90.98, 91.06],
+                top: 7.54
+            }
+            
+            
+        ];
+
         var videos = {
             videoA: {
-                duration: 15,
+                duration: 2,
                 src: 'materia/A.mp4'
             },
             videoB: {
-                duration: 2, 
+                duration: 3, 
                 src: 'materia/B.mp4'
             }
         }
@@ -325,37 +456,57 @@
                 $('#moveon').click(function () {
                     $('#post').hide();
                     $('#page2').show();
-                    $('#barrier').animate({
-                        left: '-95.26rem'
-                    }, {
-                        duration: 20000,
-                        easing: 'linear',
-                        step: function (now, tween) {
-                            if (now <= -8.26) {
-                                console.log(now);
-                                console.log(tween);
+                    setTimeout(function () {
+                        $('#barrier').animate({
+                            left: '-91.06rem'
+                        }, {
+                            duration: 25000,
+                            easing: 'linear',
+                            step: function (now, tween) {
+                                var offset = 1.08 - now;
+                                console.log('offset: ' + offset);
+                                for (var i = 0; i < gameDics.length; i++) {
+                                    var step = gameDics[i];
+                                    if (offset <= (step.scope[1] - 0.5) && offset >= (step.scope[0] - 0.5)) {
+                                        santaTop = step.top;
+                                        jump = step.jump || 1;
+                                    }
+                                }
+                            },
+                            complete: function () {
+                                $('#page2').hide();
+
+                                $('#videoB').show();
+                                console.log('barrier end');
+                                videoPlay('videoB', 'page3');
+                                //$('#game').hide();
+                                /*$('.gift').show();
+                                $('#santa').hide();
+                                $('.gift').click(function () {
+                                    
+                                })*/
+                                //$('#ad').show();
                             }
-                        },
-                        complete: function () {
-                            console.log('barrier end');
-                            //$('#game').hide();
-                            $('.gift').show();
-                            $('#santa').hide();
-                            $('.gift').click(function () {
-                                
-                            })
-                            //$('#ad').show();
-                        }
-                    })
-                    $('#page2').click(function () {
-                        $('#santa').animate({
-                            top: '5.61rem'
-                        }).animate({
-                            top: '8.61rem'
                         })
-                    }) 
+                        $('#page2').click(function () {
+                            var sLeft = ($('#santa').css('left').replace('px','') - 0);
+                            var bLeft = $('#barrier').css('left').replace('px','') * 0.77 / sLeft ;
+                            
+                            //var offset = 0 - bLeft + 1.08;
+                            $('#santa').animate({
+                                top: (santaTop - jump) + 'rem',
+                            }).animate({
+                                top: santaTop + 'rem'
+                            })  
+                        })
+                    }, 2000)
+                     
                 })
 
+            }
+            else if (nextPageId === 'page3') {
+                $('#gift').show();
+                $('#videoB').hide();
             }
         }
         function beforePlayVideo (videoId, nextPageId) {
@@ -402,7 +553,7 @@
         function loading (images) {
             var length = images.length;
             timer = setInterval(function () {
-                progress =progress + Math.floor(Math.random()*10);
+                progress =progress + Math.floor(Math.random()*30);
                 var percent = (progress / 100).toFixed(2);
                 
                 if (percent >= 1) {
