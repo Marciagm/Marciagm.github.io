@@ -222,7 +222,12 @@
             bottom: 2.67rem;
             z-index: 1;
         }
-        
+        #page6 {
+            display: none;
+        }
+        #page6 img {
+            width: 7.5rem;
+        }
         /*all*/
         #next {
             display: none;
@@ -231,15 +236,17 @@
             height: 100%;
             width: 7.5rem;
         }
-        #gift {
+        #gift, #gift1, #gift2 {
             position: absolute;
             left: 0;
             top: 0;
             width: 7.5rem;
             height: 100%;
+            display: none;
+        }
+        #gift1 {
             background: url(images/christamas/gift.png);
             background-size: 7.5rem;
-            display: none;
         }
         .next {
             width: 1rem;
@@ -288,20 +295,37 @@
         </div>
 
         <div id="page3">
-            <video id="videoB" width="7.5rem" class="video" preload="preload" src="materia/B.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
-                <source src="materia/B.mp4" type="video/mp4">
-            </video>
             <div id="gift">
                 <img src="images/christamas/gift-next.gif" class="next">
                 <img src="images/christamas/gift-turn.png" class="turn">
-            </div>          
+            </div>
+            <video id="videoB" width="7.5rem" class="video" preload="preload" src="materia/B.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+                <source src="materia/B.mp4" type="video/mp4">
+            </video>       
         </div>
+
         <div id="page4">
+            <div id="gift1">
+                <img src="images/christamas/gift-next.gif" class="next">
+                <img src="images/christamas/gift-turn.png" class="turn">
+            </div>
             <video id="videoC" width="7.5rem" class="video" preload="preload" src="materia/C.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
                 <source src="materia/C.mp4" type="video/mp4">
             </video>
         </div>
-
+        <div id="page5">
+            <div id="gift2">
+                <img src="images/christamas/gift-next.gif" class="next">
+                <img src="images/christamas/gift-turn.png" class="turn">
+            </div>
+            <video id="videoD" width="7.5rem" class="video" preload="preload" src="materia/D.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+                <source src="materia/D.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div id="page6" style="height: 100%">
+            <img src="images/christamas/bt.gif">
+            最后一页！！！
+        </div>
         <div id="next">
             <img src="images/christamas/next.gif" class="next">
             <img src="images/christamas/turn.png" class="turn">
@@ -441,8 +465,12 @@
                 src: 'materia/B.mp4'
             },
             videoC: {
-                duration: 2, 
+                duration: 1.4, 
                 src: 'materia/C.mp4'
+            },
+            videoD: {
+                duration: 2, 
+                src: 'materia/D.mp4'
             }
         }
         var timer, progress = 0;
@@ -450,20 +478,17 @@
             var videoItem = document.getElementById(videoId);
             videoItem.play();
             var videoTimer = setInterval(function () {
-                if (videoId === 'videoB') {
-                    //alert(videoItem.currentTime);
-                }
                 console.log(videoItem.currentTime);
                 if (videoItem.currentTime >= videos[videoId].duration) {
                     videoItem.pause();
                     clearInterval(videoTimer);
-                    $('#' + videoId).hide();
                     nextPage(videoId, nextPageId);
                 }
             }, 500)
         }
         function nextPage (videoId, nextPageId) {
             if (nextPageId == 'page2') {
+                $('#' + videoId).hide();
                 $('#post').show();
                 $('#replay').click(function () {
                     $('#post').hide();
@@ -479,7 +504,7 @@
                         $('#barrier').animate({
                             left: '-91.06rem'
                         }, {
-                            duration: 10000,
+                            duration: 500,
                             easing: 'linear',
                             step: function (now, tween) {
                                 var offset = 1.08 - now;
@@ -493,17 +518,12 @@
                                 }
                             },
                             complete: function () {
-                                $('#page2').remove()
+                                $('#page2').hide()
                                 $('#page3').show();
-                                $('#videoB').show();
                                 $('#gift').show();
-                                setTimeout(function () {
-                                    $('#gift').hide();
-                                    $('#videoB').attr('src', videos.videoB.src);
-                                    videoPlay('videoB', 'page3');
-                                }, 1000)
                                 $('#gift').on('click', function () {
                                     $('#gift').hide();
+                                    $('#videoB').show();
                                     videoPlay('videoB', 'page4');
                                 })
                             }
@@ -525,18 +545,37 @@
 
             }
             else if (nextPageId === 'page3') {
-                $('#gift').show();
+                $('#' + videoId).hide();
+                /*$('#gift').show();
                 $('#gift').on('click', function () {
                     $('#gift').hide();
                     videoPlay('videoC', 'page4');
                 })
-                $('#videoB').hide();
+                $('#videoB').hide();*/
             }
             else if (nextPageId === 'page4') {
-                $('#gift').show();
-                $('#gift').on('click', function () {
-                    videoPlay('videoC', 'page4');
+                $('#' + videoId).hide();
+                $('#page3').hide();
+                $('#gift1').show();
+                console.log('in page4')
+                $('#gift1').on('click', function () {
+                    $('#videoC').show();
+                    videoPlay('videoC', 'page5');
                 })
+            }
+            else if (nextPageId === 'page5') {
+                //$('#page4').hide();
+
+                $('#gift2').show();
+                $('#gift2').on('click', function () {
+                    $('#page4').hide();
+                    $('#videoD').show();
+                    videoPlay('videoD', 'page6');
+                })
+            }
+            else if (nextPageId === 'page6') {
+                $('#page5').fadeOut(1000);
+                $('#page6').fadeIn(1000);
             }
         }
         function beforePlayVideo (videoId, nextPageId) {
