@@ -483,7 +483,7 @@
 
         var videos = {
             videoA: {
-                duration: 16,
+                duration: 15.2,
                 src: 'materia/A.mp4'
             },
             videoB: {
@@ -495,7 +495,7 @@
                 src: 'materia/C.mp4'
             },
             videoD: {
-                duration: 2, 
+                duration: 23.9, 
                 src: 'materia/D.mp4'
             }
         }
@@ -503,19 +503,19 @@
         function videoPlay (videoId, nextPageId) {
             var videoItem = document.getElementById(videoId);
             videoItem.play();
-            /*var videoTimer = setInterval(function () {
+            var videoTimer = setInterval(function () {
                 console.log(videoItem.currentTime);
                 if (videoItem.currentTime >= videos[videoId].duration) {
                     videoItem.pause();
                     clearInterval(videoTimer);
                     nextPage(videoId, nextPageId);
                 }
-            }, 100)*/
-            videoItem.addEventListener('ended', function () {
+            }, 100)
+            /*videoItem.addEventListener('ended', function () {
                 videoItem.pause();
                 //clearInterval(videoTimer);
                 nextPage(videoId, nextPageId);
-            })
+            })*/
         }
         function nextPage (videoId, nextPageId) {
             if (nextPageId == 'page2') {
