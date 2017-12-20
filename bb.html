@@ -275,14 +275,15 @@
         var timer, progress = 0;
 
         function nextPage (videoId, nextPageId) {
-            if (nextPageId === 'page2') {
+            if (nextPageId == 'page2') {
                 $('#post').show();
                 $('#replay').click(function () {
                     $('#post').hide();
                     $('#video1').attr('src', 'materia/A.mp4');
                     document.getElementById(videoId).play();
                 })
-                $('#moveon').click(function () {
+                
+                /*$('#moveon').click(function () {
                     $('#post').hide();
                     $('#page2').show();
                     $('#barrier').animate({
@@ -299,14 +300,14 @@
                         complete: function () {
                             console.log('barrier end');
                             //$('#game').hide();
-                            /*$('.gift').show();
+                            $('.gift').show();
                             $('#santa').hide();
                             $('.gift').click(function () {
                                 console.log('gist');
                                 $('#B').show();
                                 document.getElementById('B').play();
                                 $('.gift').hide();
-                            })*/
+                            })
                             //$('#ad').show();
                         }
                     })
@@ -317,7 +318,7 @@
                             top: '8.61rem'
                         })
                     }) 
-                })
+                })*/
 
             }
         }
