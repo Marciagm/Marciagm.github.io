@@ -307,10 +307,10 @@
                     }, 200, 'linear')
                 }
                 else {
+                    alert('move');
                     $('#next').hide();
-                    $('#video1').show();
                     document.getElementById('video1').play();
-                    var videoTimer = setInterval(function () {
+                    /*var videoTimer = setInterval(function () {
                         console.log(videoItem.currentTime);
                         if (videoItem.currentTime >= 15) {
                             clearInterval(videoTimer);
@@ -320,15 +320,15 @@
                     }, 500)
                     videoItem.addEventListener('ended', function () {
                         
-                    })
+                    })*/
                 }
             })
 
-            /*$('#next').on('click', function (event) {
+            $('#next').on('click', function (event) {
                 $('#next').hide();
                 alert('go')
                 document.getElementById('video1').play();
-            })*/
+            })
         }
         /**
          * loading images and move
