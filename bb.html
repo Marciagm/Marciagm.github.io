@@ -502,7 +502,7 @@
                                     $('#videoB').attr('src', videos.videoB.src);
                                     videoPlay('videoB', 'page3');
                                 }, 1000)
-                                $('#gift').click(function () {
+                                $('#gift').on('click', function () {
                                     $('#gift').hide();
                                     videoPlay('videoB', 'page4');
                                 })
@@ -527,6 +527,7 @@
             else if (nextPageId === 'page3') {
                 $('#gift').show();
                 $('#gift').on('click', function () {
+                    $('#gift').hide();
                     videoPlay('videoC', 'page4');
                 })
                 $('#videoB').hide();
