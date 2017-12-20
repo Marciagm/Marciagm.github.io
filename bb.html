@@ -273,9 +273,53 @@
             'images/christamas/finish.png'
         ];
         var timer, progress = 0;
+
         function nextPage (videoId, nextPageId) {
-            $('#videoId').hide();
-            $('#post').show();
+            if (nextPageId === 'page2') {
+                $('#post').show();
+                $('#replay').click(function () {
+                    $('#post').hide();
+                    $('#video1').attr('src', 'materia/A.mp4');
+                    document.getElementById(videoId).play();
+                })
+                $('#moveon').click(function () {
+                    $('#post').hide();
+                    $('#page2').show();
+                    $('#barrier').animate({
+                        left: '-95.26rem'
+                    }, {
+                        duration: 20000,
+                        easing: 'linear',
+                        step: function (now, tween) {
+                            if (now <= -8.26) {
+                                console.log(now);
+                                console.log(tween);
+                            }
+                        },
+                        complete: function () {
+                            console.log('barrier end');
+                            //$('#game').hide();
+                            /*$('.gift').show();
+                            $('#santa').hide();
+                            $('.gift').click(function () {
+                                console.log('gist');
+                                $('#B').show();
+                                document.getElementById('B').play();
+                                $('.gift').hide();
+                            })*/
+                            //$('#ad').show();
+                        }
+                    })
+                    $('#page2').click(function () {
+                        $('#santa').animate({
+                            top: '5.61rem'
+                        }, ).animate({
+                            top: '8.61rem'
+                        })
+                    }) 
+                })
+
+            }
         }
         function beforePlayVideo (videoId, nextPageId) {
             var startY = 0;
@@ -297,9 +341,6 @@
                         nextPage(videoId, nextPageId);
                     }
                 }, 500)
-                videoItem.addEventListener('ended', function () {
-                  
-                })    
             })
 
             /*$('#next').on('touchmove', function (event) {
