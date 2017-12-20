@@ -238,7 +238,7 @@
         </div>
 
         <div id="page1">
-            <video id="video1" width="7.5rem" class="video" poster="images/christamas/loading.png" preload="auto" src="materia/A.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+            <video id="videoA" width="7.5rem" class="video" poster="images/christamas/loading.png" preload="auto" src="materia/A.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
                 <source src="materia/A.mp4" type="video/mp4">
             </video>
             <div id="post">
@@ -274,14 +274,28 @@
             'images/christamas/finish.png'
         ];
         var videos = {
-            video1: {
+            videoA: {
                 duration: 15,
-                src: 'materia/'
+                src: 'materia/A.mp4'
+            },
+            videoB: {
+                duration: 2, 
+                src: 'materia/B.mp4'
             }
         }
         var timer, progress = 0;
-        function videoPlay (videoId) {
-
+        function videoPlay (videoId, nextPageId) {
+            var videoItem = document.getElementById(videoId);
+            videoItem.play();
+            var videoTimer = setInterval(function () {
+                console.log(videoItem.currentTime);
+                if (videoItem.currentTime >= videos[videoId].duration) {
+                    videoItem.pause();
+                    clearInterval(videoTimer);
+                    $('#' + videoId).hide();
+                    nextPage(videoId, nextPageId);
+                }
+            }, 500)
         }
         function nextPage (videoId, nextPageId) {
             if (nextPageId == 'page2') {
@@ -291,7 +305,7 @@
                     $('#page1').show();
                     $('#' + videoId).show();
                     $('#' + videoId).attr('src', 'materia/A.mp4');
-                    document.getElementById(videoId).play();
+                    videoPlay(videoId, nextPageId);
                 })
 
                 /*$('#moveon').click(function () {
@@ -343,16 +357,7 @@
 
             $('#next').on('touchstart', function (event) {
                 $('#next').hide();
-                document.getElementById(videoId).play();
-                var videoTimer = setInterval(function () {
-                    console.log(videoItem.currentTime);
-                    if (videoItem.currentTime >= 15) {
-                        document.getElementById(videoId).pause();
-                        clearInterval(videoTimer);
-                        $('#' + videoId).hide();
-                        nextPage(videoId, nextPageId);
-                    }
-                }, 500)
+                videoPlay(videoId, nextPageId);
             })
 
             /*$('#next').on('touchmove', function (event) {
@@ -374,7 +379,7 @@
                 else {
                     alert('move');
                     $('#next').hide();
-                    document.getElementById('video1').play();
+                    document.getElementById('videoA').play();
                     
                 }
             })*/
@@ -397,7 +402,7 @@
                     setTimeout(function () {
                         $('#loading').hide();
                         $('#page1').show();
-                        beforePlayVideo('video1', 'page2');
+                        beforePlayVideo('videoA', 'page2');
                     }, 200)
                 }    
             }) 
@@ -425,7 +430,7 @@
 
         function init () {
             $(document).on('WeixinJSBridgeReady',function(){
-                $('#video1').load();
+                $('#videoA').load();
              });
 
             loading(images);
