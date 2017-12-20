@@ -500,7 +500,7 @@
                                 setTimeout(function () {
                                     $('#gift').hide();
                                     $('#videoB').attr('src', videos.videoB.src);
-                                    document.getElementById('videoB').play();
+                                    videoPlay('videoB', 'page3');
                                 }, 1000)
                                 $('#gift').click(function () {
                                     $('#gift').hide();
@@ -530,6 +530,12 @@
                     videoPlay('videoC', 'page4');
                 })
                 $('#videoB').hide();
+            }
+            else if (nextPageId === 'page4') {
+                $('#gift').show();
+                $('#gift').on('click', function () {
+                    videoPlay('videoC', 'page4');
+                })
             }
         }
         function beforePlayVideo (videoId, nextPageId) {
