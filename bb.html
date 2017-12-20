@@ -288,9 +288,12 @@
 
             $('#next').on('touchstart', function (event) {
                 startY = event.touches[0].clientY;
+                $('#next').hide();
+                alert('touch')
+                document.getElementById('video1').play();
             })
 
-            $('#next').on('touchmove', function (event) {
+            /*$('#next').on('touchmove', function (event) {
                 moveY = event.changedTouches[0].clientY;
                 console.log('moveY: ' + moveY);
                 if ((moveY - startY) < 0) {
@@ -298,8 +301,8 @@
                         bottom: (startY - moveY) / 10 + 'rem'
                     }, 100, 'linear')
                 }
-            })
-            $('#next').on('touchend', function (event) {
+            })*/
+            /*$('#next').on('touchend', function (event) {
                 endY = event.changedTouches[0].clientY;
                 if ((startY - endY) < 30) {
                     $('#next').animate({
@@ -310,7 +313,7 @@
                     alert('move');
                     $('#next').hide();
                     document.getElementById('video1').play();
-                    /*var videoTimer = setInterval(function () {
+                    var videoTimer = setInterval(function () {
                         console.log(videoItem.currentTime);
                         if (videoItem.currentTime >= 15) {
                             clearInterval(videoTimer);
@@ -320,9 +323,9 @@
                     }, 500)
                     videoItem.addEventListener('ended', function () {
                         
-                    })*/
+                    })
                 }
-            })
+            })*/
 
             $('#next').on('click', function (event) {
                 $('#next').hide();
