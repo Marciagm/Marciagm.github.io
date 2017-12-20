@@ -240,7 +240,6 @@
          * loading images and move
          */
         function move (percent) {
-            alert('in move');
             $('.loading-run').animate({
                 width: percent * 5.51 + 'rem'
             }, 200, 'linear')
@@ -282,18 +281,11 @@
         }
 
         function init () {
-            alert('in init');
             loading(images);
         }
 
         $(document).ready(function () {
-            try {
-                alert('in reday');
-                init();    
-            }
-            catch (e) {
-                alert(e);
-            }
+            init();    
         })
 
     </script>
