@@ -278,7 +278,7 @@
 
         <div id="page1">
             <video id="videoA" width="7.5rem" class="video" poster="images/christamas/loading.png" preload="preload" src="materia/A.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
-                <source src="materia/A.mp4" type="video/mp4">
+                <!-- <source src="materia/A.mp4" type="video/mp4"> -->
             </video>
             <div id="post">
                 <img id="face" src="images/christamas/head.gif">   
@@ -299,7 +299,7 @@
                 <img src="images/christamas/gift-turn.png" class="turn">
             </div>
             <video id="videoB" width="7.5rem" class="video" preload="preload" src="materia/B.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
-                <source src="materia/B.mp4" type="video/mp4">
+                <!-- <source src="materia/B.mp4" type="video/mp4"> -->
             </video>       
         </div>
 
@@ -309,7 +309,7 @@
                 <img src="images/christamas/gift-turn.png" class="turn">
             </div>
             <video id="videoC" width="7.5rem" class="video" preload="preload" src="materia/C.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
-                <source src="materia/C.mp4" type="video/mp4">
+                <!-- <source src="materia/C.mp4" type="video/mp4"> -->
             </video>
         </div>
         <div id="page5">
@@ -318,7 +318,7 @@
                 <img src="images/christamas/gift-turn.png" class="turn">
             </div>
             <video id="videoD" width="7.5rem" class="video" preload="preload" src="materia/D.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
-                <source src="materia/D.mp4" type="video/mp4">
+                <!-- <source src="materia/D.mp4" type="video/mp4"> -->
             </video>
         </div>
         <div id="page6" style="height: 100%">
@@ -501,6 +501,8 @@
                 })
 
                 $('#moveon').click(function () {
+                    $('#' + videoId).hide();
+                    $('#' + videoId).attr('src', '');
                     $('#post').hide();
                     $('#page2').show();
                     setTimeout(function () {
