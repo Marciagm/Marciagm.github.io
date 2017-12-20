@@ -441,6 +441,8 @@
         function videoPlay (videoId, nextPageId) {
             var videoItem = document.getElementById(videoId);
             videoItem.play();
+            videoItem.pause();
+            videoItem.play();
             var videoTimer = setInterval(function () {
                 if (videoId === 'videoB') {
                     //alert(videoItem.currentTime);
@@ -471,7 +473,7 @@
                         $('#barrier').animate({
                             left: '-91.06rem'
                         }, {
-                            duration: 25000,
+                            duration: 15000,
                             easing: 'linear',
                             step: function (now, tween) {
                                 var offset = 1.08 - now;
@@ -488,16 +490,16 @@
                                 $('#page2').remove()
                                 $('#page3').show();
                                 $('#videoB').show();
-                                $('#gift').show();
-                                $('#gift').on('click', function () {
+                                //$('#gift').show();
+                                /*$('#gift').on('click', function () {
                                     $('#gift').hide();
                                     document.getElementById('videoB').play();
-                                })
+                                })*/
                                 /*setTimeout(function () {
                                     alert('bbbb');
                                     document.getElementById('videoB').play();
                                 }, 500)*/
-                                //videoPlay('videoB', 'page3');
+                                videoPlay('videoB', 'page3');
                                 //$('#game').hide();
                                 /*$('.gift').show();
                                 $('#santa').hide();
@@ -524,8 +526,8 @@
 
             }
             else if (nextPageId === 'page3') {
-                //$('#gift').show();
-                //$('#videoB').hide();
+                $('#gift').show();
+                $('#videoB').hide();
             }
         }
         function beforePlayVideo (videoId, nextPageId) {
