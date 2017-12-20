@@ -280,7 +280,7 @@
         </div>
 
         <div id="page3">
-            <video id="videoB" width="7.5rem" class="video" poster="images/christamas/loading.png" preload="auto" src="materia/B.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+            <video id="videoB" width="7.5rem" class="video" preload="auto" src="materia/B.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
                 <source src="materia/B.mp4" type="video/mp4">
             </video>
             <div id="gift">
@@ -478,7 +478,9 @@
 
                                 $('#videoB').show();
                                 console.log('barrier end');
-                                videoPlay('videoB', 'page3');
+                                alert('before');
+                                document.getElementById('videoB').play();
+                                //videoPlay('videoB', 'page3');
                                 //$('#game').hide();
                                 /*$('.gift').show();
                                 $('#santa').hide();
