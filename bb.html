@@ -205,7 +205,8 @@
             position: absolute;
             bottom: 0;
             height: 100%;
-            width: 100%;
+            width: 7.5rem;
+            background-color: red;
         }
         .next {
             width: 1rem;
@@ -289,7 +290,7 @@
                 startY = event.touches[0].clientY;
             })
 
-            $('#next').on('touchmove', function (event) {
+            /*$('#next').on('touchmove', function (event) {
                 moveY = event.changedTouches[0].clientY;
                 console.log('moveY: ' + moveY);
                 if ((moveY - startY) < 0) {
@@ -307,7 +308,7 @@
                 }
                 else {
                     $('#next').hide();
-                    $('#' + videoId).show();
+                    $('#video1').show();
                     document.getElementById('video1').play();
                     var videoTimer = setInterval(function () {
                         console.log(videoItem.currentTime);
@@ -321,6 +322,12 @@
                         
                     })
                 }
+            })*/
+
+            $('#next').on('click', function (event) {
+                $('#next').hide();
+                alert('go')
+                document.getElementById('video1').play();
             })
         }
         /**
