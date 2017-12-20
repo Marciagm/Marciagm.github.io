@@ -291,11 +291,10 @@
             <video id="videoB" width="7.5rem" class="video" preload="auto" src="materia/B.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
                 <source src="materia/B.mp4" type="video/mp4">
             </video>
-
-            <div id="gift">
+            <!-- <div id="gift">
                 <img src="images/christamas/gift-next.gif" class="next">
                 <img src="images/christamas/gift-turn.png" class="turn">
-            </div>          
+            </div>     -->      
         </div>
        <!--  <div id="page4"></div> -->
 
@@ -444,7 +443,7 @@
             videoItem.play();
             var videoTimer = setInterval(function () {
                 if (videoId === 'videoB') {
-                    alert(videoItem.currentTime);
+                    //alert(videoItem.currentTime);
                 }
                 console.log(videoItem.currentTime);
                 if (videoItem.currentTime >= videos[videoId].duration) {
@@ -516,8 +515,8 @@
 
             }
             else if (nextPageId === 'page3') {
-                $('#gift').show();
-                $('#videoB').hide();
+                //$('#gift').show();
+                //$('#videoB').hide();
             }
         }
         function beforePlayVideo (videoId, nextPageId) {
