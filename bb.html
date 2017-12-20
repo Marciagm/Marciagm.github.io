@@ -288,17 +288,18 @@
             $('#next').on('touchstart', function (event) {
                 $('#next').hide();
                 document.getElementById(videoId).play();
-                /*var videoTimer = setInterval(function () {
+                var videoTimer = setInterval(function () {
                     console.log(videoItem.currentTime);
                     if (videoItem.currentTime >= 15) {
+                        document.getElementById(videoId).pause();
                         clearInterval(videoTimer);
                         $('#' + videoId).hide();
                         nextPage(videoId, nextPageId);
                     }
                 }, 500)
                 videoItem.addEventListener('ended', function () {
-                    
-                })   */ 
+                  
+                })    
             })
 
             /*$('#next').on('touchmove', function (event) {
