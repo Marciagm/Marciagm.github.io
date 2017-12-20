@@ -93,7 +93,7 @@
         }
         .loading-bar {
             width: 5.53rem;
-            top: 1.34rem;
+            top: 1.33rem;
             height: 0.22rem;
             position: absolute;
             left: 0;
@@ -105,7 +105,7 @@
             position: absolute;
             left: 0.02rem;
             width: 0;
-            height: 0.19rem;
+            height: 0.18rem;
             top: 1.37rem; 
             border: 0;
             border-radius: 0.25rem;
@@ -223,7 +223,6 @@
     </div>
 
     <script>
-        alert('hhhh');
         var images = [
             'images/christamas/barrier.png',
             'images/christamas/santa.gif',
@@ -233,7 +232,9 @@
             'images/christamas/finish.png'
         ];
         var timer, progress = 0;
-
+        function nextPage () {
+            alert('next');
+        }
         function beforePlayVideo (videoId, nextPageId) {
             var startY = 0;
             var moveY = 0; 
@@ -264,6 +265,7 @@
                 }
                 else {
                     $('#next').hide();
+                    $('#' + videoId).attr('src', 'materia/A.mp4');
                     videoItem.play();
                     videoItem.addEventListener('ended', function () {
                         $('loading').show();
