@@ -1,228 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=0"" />
-    <title>test</title>
-    
-
-    <style>
-        @media screen and (min-width: 751px) {
-            html{
-                font-size: 100px !important;
-            }
-            body{
-                width: 750px;
-                margin: 0 auto !important;
-            }
-        }
-        * {
-            cursor: pointer;
-            padding: 0;
-            margin: 0;
-        }
-        .container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 7.5rem;
-            height: 100%;
-            display: none;
-        }
-        html {
-            height: 100%;
-        }
-        body{
-            width: 7.5rem;
-            height: 100%;
-            overflow: hidden;
-            box-sizing: border-box;
-            padding: 0;
-            margin: 0;
-            cursor: pointer;
-        }
-        #game {
-            background: url(images/christamas/bg.png);
-        }
-        #content, #game, #first {
-            cursor: pointer;
-            height: 100%;
-        }
-        #ad {
-            position: absolute;
-            color: white;
-            font-size: 60px;
-            width: 7.5rem;
-            height: 100%;
-            top: 0;
-            left: 0;
-            display: none;
-        }
-        .cloud {
-            width: 86.97rem;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-        .barrier {
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            z-index: 0;
-            width: 102.76rem;
-            height: 100%;
-        }
-        .santa {
-            width: 2.07rem;
-            position: absolute;
-            left: 2rem;
-            top: 8.61rem;
-            z-index: 1;
-        }
-        #video {
-            width: 7.5rem;
-            height: 100%;
-        }
-        #post {
-            width: 7.5rem;
-            height: 100%;
-            background: url(images/christamas/finish.png);
-            background-size: 7.5rem;
-            display: none;
-        }
-        #face {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-        #replay {
-            background-color: red;
-            opacity: 0.2;
-            height: 14.1%;
-            width: 3.3rem;
-            position: absolute;
-            bottom: 16.17%;
-            left: 0.4rem;
-        }
-        #moveon {
-            background-color: red;
-            opacity: 0.2;
-            height: 14.1%;
-            width: 3.3rem;
-            position: absolute;
-            bottom: 16.17%;
-            right: 0.4rem;   
-        }
-        #loading {
-            height: 13.35rem;
-            box-sizing: border-box;
-            background: url(images/christamas/loading.png);
-            background-size: 100% 100%;
-            text-align: center;
-            align-items: center;
-        }
-        .loading-santa {
-            width: 1.37rem;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-        .bar {
-            width: 5.53rem;
-            left: 0;
-            position: absolute;
-            top: 1.37rem;
-        }
-        .bar-run {
-            width: 0;
-            height: 0.24rem;
-            left: 0rem;
-            position: absolute;
-            top: 1.37rem;   
-        }
-        #percent {
-            font-size: 40px;
-            font-family: 'chalkBoard';
-            color: red;
-            opacity: 0.7;
-            margin-top: 2rem;
-        }
-        .next {
-            width: 1rem;
-            position: relative;
-            bottom: 1.46rem;
-            left: 3.25rem;
-            display: block;
-        }
-        .turn {
-            width: 1.98rem;
-            position: relative;
-            bottom: 1.13rem;
-            left: 2.76rem;
-            display: block;
-        }
-        .gift {
-            width: 7.5rem;
-            height: 12.06rem;
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            display: none;
-        }
-        .video {
-            width: 7.5rem; 
-            height: 100%; 
-            position: absolute; 
-            left: 0; 
-            top: 0;
-            display: none;
-        }
-    </style>
-</head>
-<body>
-    <!--loading part-->
-    <div id="loading" class="container">
-        <div style="position: absolute; left: 0.985rem; top: 4.14rem;overflow: hidden; width: 5.53rem; height:3.61rem; " id="loading-part">
-            <img src="images/christamas/santa.gif" class="loading-santa">            
-            <img src="images/christamas/loading-03.png" class="bar">
-            <img src="images/christamas/loading-04.png" class="bar-run">
-            <div id="percent">0</div>
-        </div>
-    </div>
-    <video id="video2" class="video" poster="images/christamas/loading.png" preload src="materia/A.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true"></video>
-    
-    <div id="next">
-        <img src="images/christamas/next.gif" class="next">
-        <img src="images/christamas/turn.png" class="turn">
-    </div>
-
-    <!-- main content -->
-    <div id="content" class="container">
-        <div id="first" class="container">
-            <video id="video" poster="images/christamas/loading.png" preload src="materia/A.mp4" controls onload="videoOnload"></video>
-            <div id="post">
-                <img id="face" src="images/christamas/head.gif">   
-                <div id="replay"></div>
-                <div id="moveon"></div> 
-            </div>
-        </div>
-
-        <div id="game" style="display: none;" class="container">
-            <img src="images/christamas/cloud.png" class="cloud" id="cloud" />
-            <img id="barrier" class="barrier" src="images/christamas/barrier.png"/>
-            <img id="barrier" class="gift" src="images/christamas/gift.png"/>
-            <img id="santa" class="santa" src="images/christamas/santa.gif">
-            <video src="materia/B.mp4" preload style="display: none; width: 7.5rem; height: 100%;" id="B"></video>
-        </div>
-
-        
-        <!-- afer game-->
-        <div id="ad" class="container">
-            广告啦！
-        </div>
-    </div>
-    <script src="js/jquery.js?12" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=0"/>
+    <title>大树金融</title>
+    <script src="js/jquery.js"></script>
     <script type="text/javascript">
         var window_width = 750;
         var window_size = 100;
@@ -260,185 +41,203 @@
             designFS : window_size
         });
     </script>
-    <script type="text/javascript">
-        var complete = 0;
-        function videoOnload () {
-            complete ++;
+
+    <style type="text/css">
+        @media screen and (min-width: 751px) {
+            html{
+                font-size: 100px !important;
+            }
+            body{
+                width: 750px;
+                margin: 0 auto !important;
+            }
         }
-        var video = document.getElementById('video');
-        var materia = [
-            'images/christamas/barrier.png',
-            'images/christamas/santa.gif',
-            'images/christamas/cloud.png',
-            'images/christamas/head.gif',
-            'images/christamas/loading.png',
-            'images/christamas/finish.png',
-            'images/christamas/loading-03.png',
-            'images/christamas/loading-04.png'
-        ];
-        
-        $(document).ready(function () {
-            try {
-            $('#loading').show();
-            var length = materia.length;
-            var intervalTimer = setInterval(function () {
-
-            for (var i = 0; i < materia.length; i++) {
-                var url = materia.shift();
-                var img = new Image();
-                img.src = url;
-                if (img.complete) {
-                    complete ++;
-                    console.log('complete: ' + complete);
-                }
-                else {
-                    img.onload = function () {
-                        complete ++;
-                    }    
-                }
-                
-            }
-            var percent = (complete / length).toFixed(2);
-            $('.bar-run').animate({
-                width: complete / length * 5.53 + 'rem'
-            }, 200, 'linear')
-
-            $('.loading-santa').animate({
-                left: percent * 4.16 + 'rem'
-            }, 200, 'linear', function () {
-                $('#percent').html(percent * 100);
-            });
-            
-
-            if (complete === length) {
-                setTimeout(function () {
-                    clearInterval(intervalTimer);
-                    intervalTimer = null;
-                    $('#loading').hide();
-                    $('#video2').show();
-                    $('#next').show(); 
-                }, 800)
-            }
-        }, 300)
-    }catch (e) {
-        alert(e.toString());
-    }
-        //video.play();
-        function init() {
-
+        html {
+            width: 100%;
+            height: 100%;
         }
-        init();
-        $('#video2').click(function () {
-            document.getElementById('video2').play();
-        })
-        $('#replay').on('click', function (event) {
-            $('#video').attr('src', 'materia/A.mp4'); 
-            $('#post').hide();
-            $('#video').show();
-        })
-        $('#moveon').click(function (event) {
-            $('#video').attr('src', '');
-            $('#post').hide();
-            $('#game').show();
-            autoMove();
-        })
-        var left = 0;
-        var cloudLeft = 0;
-        var stop = false;
-        var timer;
-        var notClick = true;
-        function autoMove () {
-            cloudLeft -= 1.5;
-            $('#barrier').animate({
-                left:  '-95.26rem'
-            }, {
-                duration: 20000,
-                easing: 'linear',
-                step: function (now, tween) {
-                    if (now <= -8.26 && notClick) {
-                        /*$('#santa').animate({
-                            top: '13rem'
-                        })*/
-                        notClick = true;
-                        console.log(now);
-                        console.log(tween);
-                        //tween.end = now;
-                    }
-                },
-                complete: function () {
-                    console.log('barrier end');
-                    //$('#game').hide();
-                    $('.gift').show();
-                    $('#santa').hide();
-                    $('.gift').click(function () {
-                        console.log('gist');
-                        $('#B').show();
-                        document.getElementById('B').play();
-                        $('.gift').hide();
-                    })
-                    //$('#ad').show();
-                }
-            })
-            $('#cloud').animate({
-                left: '-86.97rem'
-            }, 28000, 'linear', function () {
-                console.log('cloud end');
-                //$('#game').hide();
-            })
-            }
-            var startY = 0, endY = 0, moveY = 0;
-            /*$('#next').on('touchstart', function (event) {
-                startY = event.touches[0].clientY;
-                console.log('start');
-            })
-            $('#next').on('touchmove', function (event) {
-                if ((moveY - startY) < 0) {
-                    $('#next').animate({
-                        bottom: 10 + 'rem'
-                    }, function () {
-                        $('#loading').hide();
-                        $('#content').show();
-                        $('#first').show();
-                        video.play();
-                    })
-                } 
-            })
-            $('#next').on('touchend', function (event) {
-                endY = event.changedTouches[0].clientY;
-                if ((endY - startY) < -200) {
-                    console.log('up')
-                }
-                else {
-                    console.log('down');
-                }
-            })*/
-            // video play
-            document.getElementById('video').addEventListener('ended', function () {
-                $('#video').hide();
-                $('#post').show();
-            })
-            // cilck watch video or go on game
-            
-            // game
-            $('#game').on('click', function (event) {
-                $('#santa').animate({
-                    top: '50%'
-                }).animate({
-                    top: '60%'
-                })
-            })
+        * {
+            padding: 0;
+            margin: 0;
+            cursor: pointer;
+        }
+        #wrapper {
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            position: absolute;
+            overflow: hidden;
+        }
+        /*loading*/
+        #loading {
+            width: 100%;
+            height: 13.35rem;
+            box-sizing: border-box;
+            background: url(images/christamas/loading.png);
+            background-size: 100% 100%;
+            text-align: center;
+        }
+        .loading-part {
+            position: absolute; 
+            left: 0.985rem; 
+            top: 4.14rem; 
+            width: 5.53rem; 
+            height:3.61rem;
+        }
+        .loading-santa {
+            width: 1.37rem;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .loading-bar {
+            width: 5.53rem;
+            top: 1.33rem;
+            height: 0.22rem;
+            position: absolute;
+            left: 0;
+            border: 0.02rem solid black;
+            background-color: #4a4545;
+            border-radius: 0.25rem;
+        }
+        .loading-run {
+            position: absolute;
+            left: 0.02rem;
+            width: 0;
+            height: 0.18rem;
+            top: 1.37rem; 
+            border: 0;
+            border-radius: 0.25rem;
+        /*    background: repeating-linear-gradient(-40deg,#F8B62D,#F8B62D,8px,#FE3A5F 0,#FE3A5F 16px); 
+        */    background: repeating-linear-gradient(-42deg,#FE3A5F,#FE3A5F,10px,#F8B62D 0,#F8B62D 18px);   
+        }
 
-            //autoMove();
-            $('#content').on('click', function (event) {
-                if (event.offsetX <= 330 && event.offsetX >= 200 
-                    && event.offsetY >= 470 && event.offsetY <= 515) {
-                    
-                }
-                notClick = false;
+        #percent {
+            font-size: 40px;
+            font-family: 'chalkBoard';
+            color: #FE3A5F;
+            margin-top: 2rem;
+        }
+
+        /*page1*/
+        #page1 {
+            width: 100%;
+            height: 13.35rem;
+        }
+        .video {
+            width: 7.5rem; 
+            height: 13.35rem; 
+            position: absolute; 
+            left: 0; 
+            top: 0;
+        }
+
+        /* page2 */
+        #page2 {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: url(images/christamas/bg.png);
+            display: none;
+        }
+
+        .cloud {
+            width: 86.97rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .barrier {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            z-index: 0;
+            width: 102.76rem;
+            height: 100%;
+        }
+        .santa {
+            width: 2.07rem;
+            position: absolute;
+            left: 2rem;
+            top: 8.61rem;
+            z-index: 1;
+        }
+        #post {
+            width: 7.5rem;
+            height: 100%;
+            background: url(images/christamas/finish.png);
+            background-size: 7.5rem;
+            display: none;
+        }
+        #face {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #replay {
+            background-color: red;
+            opacity: 0.2;
+            height: 14.1%;
+            width: 3.3rem;
+            position: absolute;
+            bottom: 16.17%;
+            left: 0.4rem;
+        }
+        #moveon {
+            background-color: red;
+            opacity: 0.2;
+            height: 14.1%;
+            width: 3.3rem;
+            position: absolute;
+            bottom: 16.17%;
+            right: 0.4rem;   
+        }
+        /*all*/
+        #next {
+            display: none;
+            position: absolute;
+            bottom: 0;
+            height: 100%;
+            width: 100%;
+        }
+        .next {
+            width: 1rem;
+            position: absolute;
+            bottom: 1.46rem;
+            left: 3.25rem;
+            display: block;
+        }
+        .turn {
+            width: 1.98rem;
+            position: absolute;
+            bottom: 1.13rem;
+            left: 2.76rem;
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="page1">
+            <video id="video1" width="7.5rem" class="video" poster="images/christamas/finish.png" preload="auto" src="materia/A.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+                <source src="materia/A.mp4" type="video/mp4">
+            </video>
+            <div style="position: absolute;top: 0; left: 0; width: 750px;height: 200px; background-color: red;z-index: 2;" id="button">
                 
-            })
-        })
+            </div>
+        </div>
 
+    <script>
+        document.getElementById('button').addEventListener('click', go)
+        function go () {
+            document.getElementById('video1').play();
+        }
     </script>
 </body>
 </html>
