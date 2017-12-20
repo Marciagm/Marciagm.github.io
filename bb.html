@@ -305,11 +305,19 @@
                 else {
                     $('#next').hide();
                     $('#' + videoId).attr('src', 'materia/A.mp4');
+                    $('#' + videoId).click();
                     videoItem.play();
+
+                    var videoTimer = setInterval(function () {
+                        console.log(videoItem.currentTime);
+                        if (videoItem.currentTime >= 15) {
+                            clearInterval(videoTimer);
+                            $('#' + videoId).hide();
+                            nextPage(videoId, nextPageId);
+                        }
+                    }, 500)
                     videoItem.addEventListener('ended', function () {
-                        $('loading').show();
-                        $('#' + videoId).hide();
-                        nextPage(videoId, nextPageId);
+                        
                     })
                 }
             })
@@ -359,6 +367,10 @@
         }
 
         function init () {
+            $(document).on('WeixinJSBridgeReady',function(){
+                $('#video1').load();
+             });
+
             loading(images);
         }
 
