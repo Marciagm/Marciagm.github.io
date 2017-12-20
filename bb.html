@@ -291,10 +291,10 @@
             <video id="videoB" width="7.5rem" class="video" preload="auto" src="materia/B.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
                 <source src="materia/B.mp4" type="video/mp4">
             </video>
-            <!-- <div id="gift">
+            <div id="gift">
                 <img src="images/christamas/gift-next.gif" class="next">
                 <img src="images/christamas/gift-turn.png" class="turn">
-            </div>     -->      
+            </div>          
         </div>
        <!--  <div id="page4"></div> -->
 
@@ -488,7 +488,16 @@
                                 $('#page2').remove()
                                 $('#page3').show();
                                 $('#videoB').show();
-                                videoPlay('videoB', 'page3');
+                                $('#gift').show();
+                                $('#gift').on('click', function () {
+                                    $('#gift').hide();
+                                    document.getElementById('videoB').play();
+                                })
+                                /*setTimeout(function () {
+                                    alert('bbbb');
+                                    document.getElementById('videoB').play();
+                                }, 500)*/
+                                //videoPlay('videoB', 'page3');
                                 //$('#game').hide();
                                 /*$('.gift').show();
                                 $('#santa').hide();
