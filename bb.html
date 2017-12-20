@@ -286,23 +286,19 @@
             $('#next').show();
 
             $('#next').on('touchstart', function (event) {
-                $('#next').animate({
-                    bottom: '2rem'
-                }, function () {
-                    $('#next').hide();
-                    document.getElementById(videoId).play();
-                    var videoTimer = setInterval(function () {
-                        console.log(videoItem.currentTime);
-                        if (videoItem.currentTime >= 15) {
-                            clearInterval(videoTimer);
-                            $('#' + videoId).hide();
-                            nextPage(videoId, nextPageId);
-                        }
-                    }, 500)
-                    videoItem.addEventListener('ended', function () {
-                        
-                    })    
-                });
+                $('#next').hide();
+                document.getElementById(videoId).play();
+                /*var videoTimer = setInterval(function () {
+                    console.log(videoItem.currentTime);
+                    if (videoItem.currentTime >= 15) {
+                        clearInterval(videoTimer);
+                        $('#' + videoId).hide();
+                        nextPage(videoId, nextPageId);
+                    }
+                }, 500)
+                videoItem.addEventListener('ended', function () {
+                    
+                })   */ 
             })
 
             /*$('#next').on('touchmove', function (event) {
