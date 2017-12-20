@@ -440,8 +440,7 @@
         var timer, progress = 0;
         function videoPlay (videoId, nextPageId) {
             var videoItem = document.getElementById(videoId);
-            videoItem.play();
-            videoItem.pause();
+            $('#videoB').trigger('click');
             videoItem.play();
             var videoTimer = setInterval(function () {
                 if (videoId === 'videoB') {
@@ -490,15 +489,6 @@
                                 $('#page2').remove()
                                 $('#page3').show();
                                 $('#videoB').show();
-                                //$('#gift').show();
-                                /*$('#gift').on('click', function () {
-                                    $('#gift').hide();
-                                    document.getElementById('videoB').play();
-                                })*/
-                                /*setTimeout(function () {
-                                    alert('bbbb');
-                                    document.getElementById('videoB').play();
-                                }, 500)*/
                                 videoPlay('videoB', 'page3');
                                 //$('#game').hide();
                                 /*$('.gift').show();
@@ -594,8 +584,6 @@
             $(document).on('WeixinJSBridgeReady',function(){
                 $('#videoA').load();
                 $('#videoB').load();
-                $('#videoB').play();
-                $('#videoB').puase();
              });
 
             loading(images);
