@@ -308,6 +308,7 @@
                     videoItem.play();
 
                     var videoTimer = setInterval(function () {
+                        alert(videoItem.currentTime);
                         console.log(videoItem.currentTime);
                         if (videoItem.currentTime >= 15) {
                             clearInterval(videoTimer);
