@@ -5,9 +5,11 @@
     <title>大树金融</title>
     <script src="js/jquery.js"></script>
     <script type="text/javascript">
+        alert('11');
         var window_width = 750;
         var window_size = 100;
         (function(){
+            alert('13')
             $.fn.autoSize = function(options){
                 options = $.extend({}, $.fn.autoSize.defaults,options || {});
                 autoSet();
@@ -40,6 +42,7 @@
             designWidth : window_width,
             designFS : window_size
         });
+        alert('12');
     </script>
 
     <style type="text/css">
@@ -222,9 +225,75 @@
         </div>
     </div>
 
-    <script type="text/javascript">
+    <script>
+        alert('in this');
+        var images = [
+            'images/christamas/barrier.png',
+            'images/christamas/santa.gif',
+            'images/christamas/cloud.png',
+            'images/christamas/head.gif',
+            'images/christamas/loading.png',
+            'images/christamas/finish.png'
+        ];
+        var timer, progress = 0;
+        /**
+         * loading images and move
+         */
+        function move (percent) {
+            alert('in move');
+            $('.loading-run').animate({
+                width: percent * 5.51 + 'rem'
+            }, 200, 'linear')
+
+            $('.loading-santa').animate({
+                left: percent * 4.16 + 'rem'
+            }, 200, 'linear', function () {
+                $('#percent').html(Math.floor(percent * 100));
+                if (percent == 1.0) {
+                    clearInterval(timer);
+                    timer = null;
+                    setTimeout(function () {
+                        $('#loading').hide();
+                        $('#page1').show();
+                        //beforePlayVideo('video1', 'page2');
+                    }, 200)
+                }    
+            }) 
+        }
+
+        /**
+         * loading images
+         * 
+         */
+        function loading (images) {
+            var length = images.length;
+            timer = setInterval(function () {
+                progress =progress + Math.floor(Math.random()*10);
+                var percent = (progress / 100).toFixed(2);
+                
+                if (percent >= 1) {
+                    move(1);
+                    clearInterval(timer);
+                }
+                else {
+                    move(percent);
+                }
+            }, 100)     
+        }
+
+        function init () {
+            alert('in init');
+            loading(images);
+        }
+
         $(document).ready(function () {
-            alert('in ready');
+            try {
+                alert('in reday');
+                init();    
+            }
+            catch (e) {
+                alert(e);
+            }
         })
 
     </script>
