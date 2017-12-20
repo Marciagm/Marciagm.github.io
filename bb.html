@@ -442,6 +442,9 @@
             var videoItem = document.getElementById(videoId);
             videoItem.play();
             var videoTimer = setInterval(function () {
+                if (videoId === 'videoB') {
+                    alert(videoItem.currentTime);
+                }
                 console.log(videoItem.currentTime);
                 if (videoItem.currentTime >= videos[videoId].duration) {
                     videoItem.pause();
@@ -483,12 +486,7 @@
                             },
                             complete: function () {
                                 $('#page2').hide();
-                                $('#page3').show();
-                                $('#videoB').show();
-                                console.log('barrier end');
-                                alert(document.getElementById('videoB'));
-                                document.getElementById('videoB').play();
-                                //videoPlay('videoB', 'page3');
+                                videoPlay('videoB', 'page3');
                                 //$('#game').hide();
                                 /*$('.gift').show();
                                 $('#santa').hide();
