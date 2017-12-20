@@ -73,7 +73,7 @@
             width: 100%;
             height: 13.35rem;
             box-sizing: border-box;
-            background: url(../images/christamas/loading.png);
+            background: url(images/christamas/loading.png);
             background-size: 100% 100%;
             text-align: center;
         }
@@ -140,7 +140,7 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background: url(../images/christamas/bg.png);
+            background: url(images/christamas/bg.png);
             display: none;
         }
 
@@ -231,6 +231,10 @@
             'images/christamas/finish.png'
         ];
         var timer, progress = 0;
+
+        /**
+         * jump to the next page
+         */
         function nextPage (pageId) {
             if (pageId === 'page2') {
                 // page2
@@ -269,13 +273,16 @@
                 }) 
             }
         }
+
         /**
          * loading images and move
          */
         function move (percent) {
+            alert('in move');
             $('.loading-run').animate({
                 width: percent * 5.51 + 'rem'
             }, 200, 'linear')
+
             $('.loading-santa').animate({
                 left: percent * 4.16 + 'rem'
             }, 200, 'linear', function () {
@@ -320,19 +327,17 @@
                 }
             }, 50) */
             timer = setInterval(function () {
-                progress += Math.floor(Math.random()*10);
+                progress =progress + Math.floor(Math.random()*10);
                 var percent = (progress / 100).toFixed(2);
-                console.log(percent);
+                
                 if (percent >= 1) {
                     move(1);
                     clearInterval(timer);
-                    timer = null;
                 }
                 else {
                     move(percent);
                 }
-                
-            }, 50)     
+            }, 100)     
         }
 
         function beforePlayVideo (videoId, nextPageId) {
@@ -382,17 +387,18 @@
          * 
          */
         function init () {
+            alert('in init');
             loading(images);
         }
 
         $(document).ready(function () {
             try {
+                alert('in reday');
                 init();    
             }
             catch (e) {
                 alert(e);
             }
-            
         })
 
     </script>
