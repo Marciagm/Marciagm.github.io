@@ -236,7 +236,7 @@
         </div>
 
         <div id="page1">
-            <video id="video1" class="video" poster="images/christamas/loading.png" preload="auto" src="materia/A.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true"></video>
+            <video id="video1" class="video" poster="images/christamas/finish.png" preload="auto" src="materia/A.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true"></video>
             <div id="post">
                 <img id="face" src="images/christamas/head.gif">   
                 <div id="replay"></div>
@@ -304,12 +304,10 @@
                 }
                 else {
                     $('#next').hide();
-                    alert(videoItem);
                     $('#' + videoId).show();
                     videoItem.play();
 
                     var videoTimer = setInterval(function () {
-                        alert(videoItem.currentTime);
                         console.log(videoItem.currentTime);
                         if (videoItem.currentTime >= 15) {
                             clearInterval(videoTimer);
