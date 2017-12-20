@@ -291,12 +291,13 @@
             <video id="videoB" width="7.5rem" class="video" preload="auto" src="materia/B.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
                 <source src="materia/B.mp4" type="video/mp4">
             </video>
+
             <div id="gift">
                 <img src="images/christamas/gift-next.gif" class="next">
                 <img src="images/christamas/gift-turn.png" class="turn">
-            </div>            
+            </div>          
         </div>
-        <div id="page4"></div>
+       <!--  <div id="page4"></div> -->
 
         <div id="next">
             <img src="images/christamas/next.gif" class="next">
@@ -486,6 +487,8 @@
                             },
                             complete: function () {
                                 $('#page2').hide();
+                                $('#page3').show();
+                                $('#videoB').show();
                                 videoPlay('videoB', 'page3');
                                 //$('#game').hide();
                                 /*$('.gift').show();
@@ -580,6 +583,7 @@
             });
             $(document).on('WeixinJSBridgeReady',function(){
                 $('#videoA').load();
+                $('#videoB').load();
              });
 
             loading(images);
