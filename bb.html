@@ -279,10 +279,12 @@
                 $('#post').show();
                 $('#replay').click(function () {
                     $('#post').hide();
-                    $('#video1').attr('src', 'materia/A.mp4');
+                    $('#page1').show();
+                    $('#' + videoId).show();
+                    $('#' + videoId).attr('src', 'materia/A.mp4');
                     document.getElementById(videoId).play();
                 })
-                
+
                 /*$('#moveon').click(function () {
                     $('#post').hide();
                     $('#page2').show();
