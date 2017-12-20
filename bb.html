@@ -153,8 +153,8 @@
             top: 0;
             width: 7.5rem;
             height: 100%;
-            background: url(images/christamas/finish.png);
-            background-size: 7.5rem;
+            /*background: url(images/christamas/finish.png);
+            background-size: 7.5rem;*/
             display: none;
         }
         #face {
@@ -245,7 +245,6 @@
             display: none;
         }
         #gift1 {
-            background: url(images/christamas/gift.png);
             background-size: 7.5rem;
         }
         .next {
@@ -457,15 +456,15 @@
 
         var videos = {
             videoA: {
-                duration: 2,
+                duration: 16,
                 src: 'materia/A.mp4'
             },
             videoB: {
-                duration: 3, 
+                duration: 3.9, 
                 src: 'materia/B.mp4'
             },
             videoC: {
-                duration: 1.4, 
+                duration: 1.9, 
                 src: 'materia/C.mp4'
             },
             videoD: {
@@ -477,22 +476,26 @@
         function videoPlay (videoId, nextPageId) {
             var videoItem = document.getElementById(videoId);
             videoItem.play();
-            var videoTimer = setInterval(function () {
+            /*var videoTimer = setInterval(function () {
                 console.log(videoItem.currentTime);
                 if (videoItem.currentTime >= videos[videoId].duration) {
                     videoItem.pause();
                     clearInterval(videoTimer);
                     nextPage(videoId, nextPageId);
                 }
-            }, 500)
+            }, 100)*/
+            videoItem.addEventListener('ended', function () {
+                videoItem.pause();
+                //clearInterval(videoTimer);
+                nextPage(videoId, nextPageId);
+            })
         }
         function nextPage (videoId, nextPageId) {
             if (nextPageId == 'page2') {
-                $('#' + videoId).hide();
                 $('#post').show();
                 $('#replay').click(function () {
                     $('#post').hide();
-                    $('#' + videoId).show();
+                    /*$('#' + videoId).show();*/
                     $('#' + videoId).attr('src', 'materia/A.mp4');
                     videoPlay(videoId, nextPageId);
                 })
@@ -554,11 +557,10 @@
                 $('#videoB').hide();*/
             }
             else if (nextPageId === 'page4') {
-                $('#' + videoId).hide();
-                $('#page3').hide();
                 $('#gift1').show();
                 console.log('in page4')
-                $('#gift1').on('click', function () {
+                $('#gift1').on('touchstart', function () {
+                    $('#page3').hide();
                     $('#videoC').show();
                     videoPlay('videoC', 'page5');
                 })
@@ -567,7 +569,7 @@
                 //$('#page4').hide();
 
                 $('#gift2').show();
-                $('#gift2').on('click', function () {
+                $('#gift2').on('touchstart', function () {
                     $('#page4').hide();
                     $('#videoD').show();
                     videoPlay('videoD', 'page6');
@@ -642,6 +644,8 @@
             $(document).on('WeixinJSBridgeReady',function(){
                 $('#videoA').load();
                 $('#videoB').load();
+                $('#videoC').load();
+                $('#videoD').load();
              });
 
             loading(images);
