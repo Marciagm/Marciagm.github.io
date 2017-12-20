@@ -98,7 +98,6 @@ function loading (images) {
     timer = setInterval(function () {
         progress += Math.floor(Math.random()*10);
         var percent = (progress / 100).toFixed(2);
-        console.log(percent);
         if (percent >= 1) {
             move(1);
             clearInterval(timer);
@@ -162,11 +161,12 @@ function init () {
 }
 
 $(document).ready(function () {
+    alert('hi');
     try {
         init();    
     }
     catch (e) {
         alert(e);
     }
-    
+    alert('end');
 })
