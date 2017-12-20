@@ -207,6 +207,12 @@
             top: 0;
             left: 0;
         }
+        #tip {
+            position: absolute;
+            top: 2.8rem;
+            left: 2.65rem;
+            width: 2.2rem;
+        }
         .barrier {
             position: absolute;
             left: 0;
@@ -224,10 +230,29 @@
         }
         #page6 {
             display: none;
-        }
-        #page6 img {
             width: 7.5rem;
+            background: url(images/christamas/lastbg.png);
+            background-size: 100% 100%;
         }
+        #bt {
+            width: 7.5rem;
+            position: absolute;
+            top: -0.35rem;
+            left: 0;
+        }
+        #bigpart {
+            width: 7.5rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #qrcode {
+            width: 2.2rem;
+            position: absolute;
+            bottom: 0.8rem;
+            left: 0.71rem;   
+        }
+
         /*all*/
         #next {
             display: none;
@@ -288,6 +313,7 @@
         </div>
 
         <div id="page2">
+            <img src="images/christamas/tip.png" id="tip" />
             <img src="images/christamas/cloud.png" class="cloud" id="cloud" />
             <img id="barrier" class="barrier" src="images/christamas/barrier.png"/>
             <img id="santa" class="santa" src="images/christamas/santa.gif">
@@ -315,15 +341,16 @@
         <div id="page5">
             <div id="gift2">
                 <img src="images/christamas/gift-next.gif" class="next">
-                <img src="images/christamas/gift-turn.png" class="turn">
+                <img src="images/christamas/open-turn.png" class="turn">
             </div>
             <video id="videoD" width="7.5rem" class="video" preload="preload" src="materia/D.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
                 <!-- <source src="materia/D.mp4" type="video/mp4"> -->
             </video>
         </div>
         <div id="page6" style="height: 100%">
-            <img src="images/christamas/bt.gif">
-            最后一页！！！
+            <img id="bt" src="images/christamas/bt.gif">
+            <img id="qrcode" src="images/christamas/qrcode.gif">
+            <img id="bigpart" src="images/christamas/bigpart.png">
         </div>
         <div id="next">
             <img src="images/christamas/next.gif" class="next">
@@ -340,7 +367,7 @@
             'images/christamas/loading.png',
             'images/christamas/finish.png'
         ];
-        var santaBottom = 2.67, jump;
+        var santaBottom = 2.67, jump, clickNum = 0;
         var gameDics = [
             {
                 scope: [0, 2.66],
@@ -505,11 +532,12 @@
                     $('#' + videoId).attr('src', '');
                     $('#post').hide();
                     $('#page2').show();
+
                     setTimeout(function () {
                         $('#barrier').animate({
                             left: '-91.06rem'
                         }, {
-                            duration: 500,
+                            duration: 15000,
                             easing: 'linear',
                             step: function (now, tween) {
                                 var offset = 1.08 - now;
@@ -534,6 +562,10 @@
                             }
                         })
                         $('#page2').click(function () {
+                            clickNum ++;
+                            if (clickNum >= 2) {
+                                $('#tip').fadeOut(1000);
+                            }
                             var sLeft = ($('#santa').css('left').replace('px','') - 0);
                             var bLeft = $('#barrier').css('left').replace('px','') * 0.77 / sLeft ;
                             
