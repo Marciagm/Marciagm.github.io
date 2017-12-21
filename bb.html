@@ -527,7 +527,8 @@
         }
         function nextPage (videoId, nextPageId) {
             if (nextPageId == 'page2') {
-                $('#' + videoId).hide();
+                //$('#' + videoId).hide();
+                $('#' + videoId).remove();
                 $('#post').show();
                 $('#replay').click(function () {
                     $('#post').hide();
