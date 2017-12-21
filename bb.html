@@ -443,7 +443,10 @@
             'images/christamas/cloud.png',
             'images/christamas/head.gif',
             'images/christamas/loading.png',
-            'images/christamas/finish.png'
+            'images/christamas/finish.png',
+            'images/christamas/qrcode.gif',
+            'images/christamas/share.png',
+            'images/christamas/turn.png'  
         ];
         var gameDics = [
             /* step1 */
@@ -757,7 +760,7 @@
             var imgLength = images.length;
             var videoLength = 4;
             var total = imgLength + 4;
-
+            
             /*for (var videoId in videos) {
                 videoArray.push()
             }*/
@@ -798,6 +801,11 @@
             
 
             timer = setInterval(function () {
+                for (var i = 0; i < images.length; i++) {
+                    var imgItem = images.shift();
+                    var img = new Image();
+                    img.src = imgItem;
+                }
                 progress =progress + Math.floor(Math.random()*25);
                 var percent = (progress / 100).toFixed(2);
                 
