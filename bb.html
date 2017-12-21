@@ -268,6 +268,7 @@
             width: 7.5rem;
             height: 100%;
             display: none;
+            z-index: 10;
         }
         #gift1 {
             background-size: 7.5rem;
@@ -483,7 +484,7 @@
 
         var videos = {
             videoA: {
-                duration: 15.2,
+                duration: 15.5,
                 src: 'materia/A.mp4'
             },
             videoB: {
@@ -530,7 +531,9 @@
                 $('#moveon').click(function () {
                     $('#' + videoId).hide();
                     $('#' + videoId).attr('src', '');
+                    $('#face').hide();
                     $('#post').hide();
+
                     $('#page2').show();
 
                     setTimeout(function () {
