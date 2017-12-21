@@ -311,6 +311,8 @@
         }
         #gift1 {
             background-size: 7.5rem;
+            background: url(images/christamas/gift.png);
+            background-size: 100% 100%;
         }
         .next {
             width: 0.37rem;
@@ -588,20 +590,20 @@
             console.log('in videoPlay');
             var videoItem = document.getElementById(videoId);
             videoItem.play();
-            var videoTimer = setInterval(function () {
+            /*var videoTimer = setInterval(function () {
                 console.log(videoItem.currentTime);
                 if (videoItem.currentTime >= videos[videoId].duration) {
                     videoItem.pause();
                     clearInterval(videoTimer);
                     nextPage(videoId, nextPageId);
                 }
-            }, 50)
-            /*videoItem.addEventListener('ended', function () {
+            }, 50)*/
+            videoItem.addEventListener('ended', function () {
                 //videoItem.pause();
                 //alert('ended');
                 //clearInterval(videoTimer);
                 nextPage(videoId, nextPageId);
-            })*/
+            })
         }
         function nextPage (videoId, nextPageId) {
             if (nextPageId == 'page2') {
@@ -625,6 +627,9 @@
                     $('#page2').show();
 
                     setTimeout(function () {
+                        $('#cloud').animate({
+                            left: '-79.47rem'
+                        }, 15000)
                         $('#barrier').animate({
                             left: '-91.06rem'
                         }, {
