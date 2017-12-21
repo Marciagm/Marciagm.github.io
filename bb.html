@@ -98,7 +98,7 @@
         .loading-santa {
             width: 1.37rem;
             position: absolute;
-            left: 0;
+            left: -1rem;
             top: 0;
         }
         .loading-bar {
@@ -153,8 +153,8 @@
             top: 0;
             width: 7.5rem;
             height: 100%;
-            /*background: url(images/christamas/finish.png);
-            background-size: 7.5rem;*/
+            background: url(images/christamas/finish.png);
+            background-size: 7.5rem;
             display: none;
         }
         #face {
@@ -279,6 +279,7 @@
             bottom: 1.46rem;
             left: 3.25rem;
             display: block;
+
         }
         .turn {
             width: 1.98rem;
@@ -368,115 +369,121 @@
             'images/christamas/loading.png',
             'images/christamas/finish.png'
         ];
-        var santaBottom = 2.67, jump, clickNum = 0;
+        var santaBottom = 20, jump, offset, clickNum = 0;
         var gameDics = [
+            /* step1 */
             {
                 scope: [0, 2.66],
-                bottom: 2.67
+                bottom: 20
             },
             {
                 scope: [2.66, 4.14],
                 jump: 1,
-                bottom: 2.67
+                bottom: 20
             },
             {
                 scope: [4.14, 10.26],
-                bottom: 2.67
+                bottom: 20
             },
             // 203
             {
                 scope: [10.26, 12.29],
                 jump: 0.5,
-                bottom: 2.31
+                bottom: 17.3
             },
+
+            /* step2 */
             // 1295
             {
                 scope: [12.29, 25.24],
-                bottom: 2.31
+                bottom: 17.3
             },
+
+            /* step3 */
             // 168
             {
                 scope: [25.24, 26.92],
                 jump: 1.25,
-                bottom: 3.56
+                bottom: 26.7
             },
             // 655
             {
                 scope: [26.92, 33.47],
                 jump: 1,
-                bottom: 3.56
+                bottom: 26.7
             },
             // 148
             {
                 scope: [33.47, 34.95],
                 jump: 1,
-                bottom: 6.78
+                bottom: 26.7
             },
             // end of 1116
             {
                 scope: [34.95, 38.08],
-                bottom: 3.56
+                bottom: 26.7
             },
             // 230
             {
                 scope: [38.08, 40.31],
                 jump: 0.2,
-                bottom: 2.34
+                bottom: 17.5
             },
             // 1450
             {
                 scope: [40.31, 54.81],
                 jump: 0.2,
-                bottom: 2.34
+                bottom: 17.5
             },
             // triangle start
             {
-                scope: [40.31, 54.81],
+                scope: [54.81, 57.56],
                 jump: 1.3,
-                bottom: 2.34
+                bottom: 26.2
             },
             // triangle end
             {
-                scope: [54.81, 57.56],
+                scope: [57.56, 60.31],
                 jump: 0.1,
-                bottom: 1.49
+                bottom: 11
+            },
+            /* step6 */
+            {
+                scope: [60.31, 72.47],
+                jump: 1.3,
+                bottom: 11
             },
             {
-                scope: [57.56, 69.72],
+                scope: [72.47, 74.32],
                 jump: 1.3,
-                bottom: 1.49
-            },
-            {
-                scope: [69.72, 71.57],
-                jump: 1.3,
-                bottom: 1.49
+                bottom: 11
             },
             // pink 346
             {
-                scope: [71.57, 75.03],
-                bottom: 4.28
+                scope: [74.32, 77.78],
+                bottom: 32.06
             },
             // 166
             {
-                scope: [75.03, 76.69],
+                scope: [77.78, 79.44],
                 jump: 1.2,
-                bottom: 4.28
+                bottom: 32.06
             },
             // 1371-
             {
-                scope: [76.69, 88.74],
+                scope: [76.69, 88.03],
                 jump: 1.3,
-                bottom: 4.28
+                bottom: 32.06
             },
             // 224
             {
-                scope: [88.74, 90.98],
+                scope: [88.03, 90.27],
                 jump: 0.1,
-                bottom: 3.74
+                bottom: 28.02
             },
             {
-                scope: [90.98, 91.06],
-                bottom: 3.74
+                scope: [90.27, 91.06],
+                bottom: 28.02
             }
             
             
@@ -484,7 +491,7 @@
 
         var videos = {
             videoA: {
-                duration: 15.5,
+                duration: 1,
                 src: 'materia/A.mp4'
             },
             videoB: {
@@ -540,14 +547,14 @@
                         $('#barrier').animate({
                             left: '-91.06rem'
                         }, {
-                            duration: 15000,
+                            duration: 20000,
                             easing: 'linear',
                             step: function (now, tween) {
-                                var offset = 1.08 - now;
-                                console.log('offset: ' + offset);
+                                offset = 1.08 - now;
+                                //console.log('offset: ' + offset);
                                 for (var i = 0; i < gameDics.length; i++) {
                                     var step = gameDics[i];
-                                    if (offset <= (step.scope[1] - 0.5) && offset >= (step.scope[0] - 0.5)) {
+                                    if (offset < (step.scope[1] - 1.5) && offset >= step.scope[0]) {
                                         santaBottom = step.bottom;
                                         jump = step.jump || 1;
                                     }
@@ -571,12 +578,14 @@
                             }
                             var sLeft = ($('#santa').css('left').replace('px','') - 0);
                             var bLeft = $('#barrier').css('left').replace('px','') * 0.77 / sLeft ;
+                            console.log('santaBottom: ' + santaBottom);
+                            console.log('offset: ' + offset);
                             
                             //var offset = 0 - bLeft + 1.08;
                             $('#santa').animate({
-                                bottom: (santaBottom + jump) + 'rem',
-                            }).animate({
-                                bottom: santaBottom + 'rem'
+                                bottom: (santaBottom + 10) + '%',
+                            }).animate({ 
+                                bottom: santaBottom + '%'
                             })  
                         })
                     }, 2000)
@@ -597,6 +606,7 @@
                 $('#gift1').show();
                 console.log('in page4')
                 $('#gift1').on('touchstart', function () {
+                    $('#gift1').hide();
                     $('#page3').hide();
                     $('#videoC').show();
                     videoPlay('videoC', 'page5');
@@ -607,6 +617,7 @@
 
                 $('#gift2').show();
                 $('#gift2').on('touchstart', function () {
+                    $('#gift2').hide();
                     $('#page4').hide();
                     $('#videoD').show();
                     videoPlay('videoD', 'page6');
@@ -639,7 +650,7 @@
             }, 200, 'linear')
 
             $('.loading-santa').animate({
-                left: percent * 4.16 + 'rem'
+                left: (percent * 5.51 - 1) + 'rem'
             }, 200, 'linear', function () {
                 $('#percent').html(Math.floor(percent * 100));
                 if (percent == 1.0) {
@@ -661,7 +672,7 @@
         function loading (images) {
             var length = images.length;
             timer = setInterval(function () {
-                progress =progress + Math.floor(Math.random()*30);
+                progress =progress + Math.floor(Math.random()*10);
                 var percent = (progress / 100).toFixed(2);
                 
                 if (percent >= 1) {
