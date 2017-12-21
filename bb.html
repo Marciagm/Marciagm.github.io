@@ -529,8 +529,9 @@
         }
         function nextPage (videoId, nextPageId) {
             if (nextPageId == 'page2') {
-                //$('#' + videoId).hide();
-                $('#' + videoId).remove();
+                $('#' + videoId).css('z-index', -1);
+                $('#' + videoId).hide();
+                //$('#' + videoId).remove();
                 $('#post').show();
                 $('#replay').click(function () {
                     $('#post').hide();
@@ -551,7 +552,7 @@
                         $('#barrier').animate({
                             left: '-91.06rem'
                         }, {
-                            duration: 20000,
+                            duration: 22000,
                             easing: 'linear',
                             step: function (now, tween) {
                                 // 2.84+1.5
@@ -692,7 +693,7 @@
                     }
                 })
             }
-            timer = setInterval(function () {
+            /*timer = setInterval(function () {
                 for (var i = 0; i < images.length; i++) {
                     var imgItem = images.shift();
                     var img = new Image();
@@ -714,11 +715,11 @@
                 }
                 // video
                 
-            }, 100)
+            }, 100)*/
             
 
-            /*timer = setInterval(function () {
-                progress =progress + Math.floor(Math.random()*10);
+            timer = setInterval(function () {
+                progress =progress + Math.floor(Math.random()*5);
                 var percent = (progress / 100).toFixed(2);
                 
                 if (percent >= 1) {
@@ -728,7 +729,7 @@
                 else {
                     move(percent);
                 }
-            }, 100)   */  
+            }, 100)     
         }
 
         function init () {
