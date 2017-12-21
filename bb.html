@@ -551,11 +551,12 @@
                             duration: 20000,
                             easing: 'linear',
                             step: function (now, tween) {
-                                offset = 1.08 - now;
+                                // 2.84+1.5
+                                offset = 2.84 - now;
                                 //console.log('offset: ' + offset);
                                 for (var i = 0; i < gameDics.length; i++) {
                                     var step = gameDics[i];
-                                    if (offset < (step.scope[1] - 1.5) && offset >= step.scope[0]) {
+                                    if (offset < step.scope[1] && offset >= step.scope[0]) {
                                         santaBottom = step.bottom;
                                         jump = step.jump || 1;
                                     }
