@@ -511,19 +511,20 @@
         function videoPlay (videoId, nextPageId) {
             var videoItem = document.getElementById(videoId);
             videoItem.play();
-            var videoTimer = setInterval(function () {
+            /*var videoTimer = setInterval(function () {
                 console.log(videoItem.currentTime);
                 if (videoItem.currentTime >= videos[videoId].duration) {
                     videoItem.pause();
                     clearInterval(videoTimer);
                     nextPage(videoId, nextPageId);
                 }
-            }, 100)
-            /*videoItem.addEventListener('ended', function () {
-                videoItem.pause();
+            }, 100)*/
+            videoItem.addEventListener('ended', function () {
+                //videoItem.pause();
+                alert('ended');
                 //clearInterval(videoTimer);
                 nextPage(videoId, nextPageId);
-            })*/
+            })
         }
         function nextPage (videoId, nextPageId) {
             if (nextPageId == 'page2') {
@@ -552,7 +553,7 @@
                             easing: 'linear',
                             step: function (now, tween) {
                                 // 2.84+1.5
-                                offset = 2.84 - now;
+                                offset = 4.34 - now;
                                 //console.log('offset: ' + offset);
                                 for (var i = 0; i < gameDics.length; i++) {
                                     var step = gameDics[i];
@@ -616,7 +617,6 @@
             }
             else if (nextPageId === 'page5') {
                 //$('#page4').hide();
-
                 $('#gift2').show();
                 $('#gift2').on('touchstart', function () {
                     $('#gift2').hide();
