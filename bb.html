@@ -361,6 +361,7 @@
     </div>
 
     <script>
+        var santaBottom = 20, jump, offset, clickNum = 0;
         var images = [
             'images/christamas/barrier.png',
             'images/christamas/santa.gif',
@@ -369,7 +370,6 @@
             'images/christamas/loading.png',
             'images/christamas/finish.png'
         ];
-        var santaBottom = 20, jump, offset, clickNum = 0;
         var gameDics = [
             /* step1 */
             {
@@ -485,46 +485,45 @@
                 scope: [90.27, 91.06],
                 bottom: 28.02
             }
-            
-            
         ];
 
         var videos = {
-            videoA: {
-                duration: 1,
+            'videoA': {
+                duration: 15,
                 src: 'materia/A.mp4'
             },
-            videoB: {
+            'videoB': {
                 duration: 3.9, 
                 src: 'materia/B.mp4'
             },
-            videoC: {
+            'videoC': {
                 duration: 1.9, 
                 src: 'materia/C.mp4'
             },
-            videoD: {
+            'videoD': {
                 duration: 23.9, 
                 src: 'materia/D.mp4'
             }
         }
         var timer, progress = 0;
         function videoPlay (videoId, nextPageId) {
+            console.log('in videoPlay');
             var videoItem = document.getElementById(videoId);
             videoItem.play();
-            /*var videoTimer = setInterval(function () {
+            var videoTimer = setInterval(function () {
                 console.log(videoItem.currentTime);
                 if (videoItem.currentTime >= videos[videoId].duration) {
                     videoItem.pause();
                     clearInterval(videoTimer);
                     nextPage(videoId, nextPageId);
                 }
-            }, 100)*/
-            videoItem.addEventListener('ended', function () {
+            }, 50)
+            /*videoItem.addEventListener('ended', function () {
                 //videoItem.pause();
-                alert('ended');
+                //alert('ended');
                 //clearInterval(videoTimer);
                 nextPage(videoId, nextPageId);
-            })
+            })*/
         }
         function nextPage (videoId, nextPageId) {
             if (nextPageId == 'page2') {
@@ -671,9 +670,51 @@
          * loading images
          * 
          */
-        function loading (images) {
-            var length = images.length;
+        function loading (images, videos) {
+            var imgLength = images.length;
+            var videoLength = 4;
+            var total = imgLength + 4;
+
+            /*for (var videoId in videos) {
+                videoArray.push()
+            }*/
+            for (var videoId in videos) {
+                document.getElementById(videoId).addEventListener('canplaythrough', function ()
+                {
+                    progress ++;
+                    console.log(progress);
+                    move(progress / total);
+                    if (progress === total) {
+                        clearInterval(timer);
+                    }
+                })
+            }
             timer = setInterval(function () {
+                for (var i = 0; i < images.length; i++) {
+                    var imgItem = images.shift();
+                    var img = new Image();
+                    img.src = imgItem;
+                    if (img.complete) {
+                        progress ++;
+                        move(progress / total);
+                        if (progress === total) {
+                            clearInterval(timer)
+                        }
+                    }
+                    else {
+                        img.onload = function () {
+                            progress ++;
+                            move(progress / total);
+                            clearInterval(timer);
+                        }
+                    }
+                }
+                // video
+                
+            }, 100)
+            
+
+            /*timer = setInterval(function () {
                 progress =progress + Math.floor(Math.random()*10);
                 var percent = (progress / 100).toFixed(2);
                 
@@ -684,10 +725,22 @@
                 else {
                     move(percent);
                 }
-            }, 100)     
+            }, 100)   */  
         }
 
         function init () {
+            document.getElementById('videoA').addEventListener("canplaythrough", function(){
+                //console.log('videoA canplaythrough');
+            });
+            document.getElementById('videoA').addEventListener("canplaythrough", function(){
+                //console.log('videoB canplaythrough');
+            });
+            document.getElementById('videoA').addEventListener("canplaythrough", function(){
+                //console.log('videoC canplaythrough');
+            });
+            document.getElementById('videoA').addEventListener("canplaythrough", function(){
+                //console.log('videoD canplaythrough');
+            });
             $(document).on('touchmove', function(e) {
                 e.preventDefault();
             });
@@ -698,7 +751,7 @@
                 $('#videoD').load();
              });
 
-            loading(images);
+            loading(images, videos);
         }
 
         $(document).ready(function () {
