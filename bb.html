@@ -446,7 +446,8 @@
             <img src="images/christamas/turn.png" class="turn">
         </div>
     </div>
-
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script type="text/javascript" th:src="js/weshare.js"></script>
     <script>
         var santaBottom = 30, jump, offset, clickNum = 0, alreadyclick;
         var images = [
@@ -885,7 +886,28 @@
                 $('#videoD').load();
             });
             // wechat init part
-
+            var url = location.href.split('#')[0];
+            try {
+                $.ajax({
+                    type : "GET",
+                    url : "/share",
+                    data : {
+                        url : url
+                    },
+                    success : function(data) {
+                        console.info(data);
+                        var timestamp = data.timestamp;
+                        var noncestr = data.noncestr;
+                        var signature = data.signature;
+                        var appId = data.appid;
+                        wxShare(true, appId, timestamp, noncestr, signature);
+                    }
+                });    
+            }
+            catch (e) {
+                
+            }
+            
             loading(images, videos);
         }
 
