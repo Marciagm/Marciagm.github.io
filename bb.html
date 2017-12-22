@@ -232,7 +232,7 @@
             width: 2.07rem;
             position: absolute;
             left: 0.77rem;
-            bottom: 2.67rem;
+            bottom: 20%;
             z-index: 1;
         }
         .right-arrow {
@@ -452,7 +452,7 @@
     </div>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script>
-        var santaBottom = 30, jump, offset, clickNum = 0, alreadyclick;
+        var santaBottom = 20, jump, offset, clickNum = 0, alreadyclick;
         var images = [
             'images/christamas/loading.png',
             'images/christamas/barrier.png',
@@ -703,7 +703,7 @@
                             console.log('santaBottom: ' + santaBottom);
                             console.log('offset: ' + offset);
                             $('#santa').animate({
-                                bottom: (santaBottom + 12) + '%',
+                                bottom: (santaBottom + 15) + '%',
                             }).animate({ 
                                 bottom: santaBottom + '%'
                             })
