@@ -608,7 +608,12 @@
         function videoPlay (videoId, nextPageId) {
             console.log('in videoPlay');
             var videoItem = document.getElementById(videoId);
+            alert(videoItem);
+            $('#' + videoId).click(function () {
+                videoItem.play();    
+            })
             videoItem.play();
+
            /* var videoTimer = setInterval(function () {
                 console.log(videoItem.currentTime);
                 if (videoItem.currentTime >= videos[videoId].duration) {
@@ -757,6 +762,7 @@
 
             $('#next').on('touchstart', function (event) {
                 $('#next').hide();
+                console.log('in touchstart');
                 videoPlay(videoId, nextPageId);
             })
         }
