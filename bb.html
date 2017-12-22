@@ -52,6 +52,11 @@
                 margin: 0 auto !important;
             }
         }
+        @font-face {
+            font-family: chalkboard;
+            src: url('font/font.tff');
+        }
+
         @media screen and (min-height: 10.31rem){
           .video{
             height: 100%;
@@ -125,7 +130,7 @@
 
         #percent {
             font-size: 40px;
-            font-family: 'chalkBoard';
+            font-family: 'chalkboard';
             color: #FE3A5F;
             margin-top: 2rem;
         }
@@ -438,7 +443,7 @@
     </div>
 
     <script>
-        var santaBottom = 30, jump, offset, clickNum = 0;
+        var santaBottom = 30, jump, offset, clickNum = 0, alreadyclick;
         var images = [
             'images/christamas/barrier.png',
             'images/christamas/santa.gif',
@@ -518,7 +523,7 @@
             // triangle start
             {
                 scope: [54.81, 57.56],
-                jump: 1.3,
+                jump: 13,
                 bottom: 26.2
             },
             // triangle end
@@ -643,7 +648,18 @@
                                     var step = gameDics[i];
                                     if (offset < step.scope[1] && offset >= step.scope[0]) {
                                         santaBottom = step.bottom;
-                                        jump = step.jump || 1;
+                                        jump = step.jump || 10;
+                                        /*if (step.jump && !alreadyclick) {
+                                            $('#santa').animate({
+                                                bottom: 0
+                                            }, 10)
+                                            $('#barrier').stop();
+                                            $('#cloud').stop();
+                                            /*setTimeout(function () {
+                                                nextPage('videoA', 'page2');
+                                            }, 1000)
+                                        }*/
+                                        alreadyclick = 0;
                                     }
                                 }
                             },
@@ -658,22 +674,36 @@
                                 })
                             }
                         })
+                        var outTimer = setTimeout(function () {
+                            $('#tip').fadeOut(1000).fadeIn(1000).fadeOut(1000);
+                        }, 1000)
                         $('#page2').click(function () {
+                            alreadyclick = 1;
                             clickNum ++;
                             if (clickNum >= 2) {
                                 $('#tip').fadeOut(1000);
+                                clearTimeout(outTimer);
                             }
                             var sLeft = ($('#santa').css('left').replace('px','') - 0);
                             var bLeft = $('#barrier').css('left').replace('px','') * 0.77 / sLeft ;
                             console.log('santaBottom: ' + santaBottom);
                             console.log('offset: ' + offset);
-                            
+                            if (jump != 10) {
+                                $('#santa').animate({
+                                    bottom: (santaBottom + jump - 0) + '%',
+                                }).animate({ 
+                                    bottom: santaBottom + '%'
+                                })      
+                            }
+                            else {
+                                $('#santa').animate({
+                                    bottom: (santaBottom + 10 - 0) + '%',
+                                }).animate({ 
+                                    bottom: santaBottom + '%'
+                                })  
+                            }
                             //var offset = 0 - bLeft + 1.08;
-                            $('#santa').animate({
-                                bottom: (santaBottom + 10) + '%',
-                            }).animate({ 
-                                bottom: santaBottom + '%'
-                            })  
+                            
                         })
                     }, 1000)
                      
