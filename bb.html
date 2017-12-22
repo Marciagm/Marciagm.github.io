@@ -129,7 +129,7 @@
         }
 
         #percent {
-            font-size: 40px;
+            font-size: 0.4rem;
             font-family: 'chalkboard';
             color: #FE3A5F;
             margin-top: 2rem;
@@ -575,18 +575,22 @@
         var videos = {
             'videoA': {
                 duration: 15.5,
+                id: 'videoA',
                 src: 'materia/A.mp4'
             },
             'videoB': {
                 duration: 3.9, 
+                id: 'videoB',
                 src: 'materia/B.mp4'
             },
             'videoC': {
                 duration: 2.2, 
+                id: 'videoC',
                 src: 'materia/C.mp4'
             },
             'videoD': {
                 duration: 23.9, 
+                id: 'videoD',
                 src: 'materia/D.mp4'
             }
         }
@@ -638,7 +642,7 @@
                         $('#barrier').animate({
                             left: '-91.06rem'
                         }, {
-                            duration: 12000,
+                            duration: 13000,
                             easing: 'linear',
                             step: function (now, tween) {
                                 // 2.84+2
@@ -795,12 +799,14 @@
         function loading (images, videos) {
             var imgLength = images.length;
             var videoLength = 4;
-            var total = imgLength + 4;
             
-            /*for (var videoId in videos) {
-                videoArray.push()
-            }*/
-            /*for (var videoId in videos) {
+            var videoArray = [];
+            // backup
+            for (var videoId in videos) {
+                videoArray.push(videos[videoId]);
+            }
+            var total = imgLength + videoArray.length;
+            for (var videoId in videos) {
                 document.getElementById(videoId).addEventListener('canplaythrough', function ()
                 {
                     progress ++;
@@ -810,8 +816,8 @@
                         clearInterval(timer);
                     }
                 })
-            }*/
-            /*timer = setInterval(function () {
+            }
+            timer = setInterval(function () {
                 for (var i = 0; i < images.length; i++) {
                     var imgItem = images.shift();
                     var img = new Image();
@@ -832,17 +838,29 @@
                     }
                 }
                 // video
-                
-            }, 100)*/
+                for (var j = 0; j < videoArray.length; j++) {
+                    var videoItem = videoArray.shift();
+                        document.getElementById(videoItem.id).addEventListener('canplaythrough', function ()
+                    {
+                        progress ++;
+                        console.log(progress);
+                        console.log('add');
+                        move(progress / total);
+                        if (progress === total) {
+                            clearInterval(timer);
+                        }
+                    })
+                }
+            }, 100)
             
 
-            timer = setInterval(function () {
+            /*timer = setInterval(function () {
                 for (var i = 0; i < images.length; i++) {
                     var imgItem = images.shift();
                     var img = new Image();
                     img.src = imgItem;
                 }
-                progress =progress + Math.floor(Math.random()*25);
+                progress =progress + Math.floor(Math.random() * 5);
                 var percent = (progress / 100).toFixed(2);
                 
                 if (percent >= 1) {
@@ -852,7 +870,7 @@
                 else {
                     move(percent);
                 }
-            }, 100)     
+            }, 100)*/     
         }
 
         function init () {
