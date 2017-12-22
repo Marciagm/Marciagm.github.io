@@ -420,7 +420,7 @@
                 <img src="images/christamas/arrow.png" class="next">
                 <img src="images/christamas/gift-turn.png" class="turn">
             </div>
-            <video id="videoC" width="7.5rem" class="video" preload="auto" src="materia/C.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+            <video id="videoC" width="7.5rem" class="video" poster="images/christamas/gift.png" preload="auto" src="materia/C.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
             </video>
             <audio id="three" src="materia/three.mp3" preload="auto"></audio>  
         </div>
@@ -429,7 +429,7 @@
                 <img src="images/christamas/arrow.png" class="next">
                 <img src="images/christamas/open-turn.png" class="turn">
             </div>
-            <video id="videoD" width="7.5rem" class="video" preload="auto" src="materia/D.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+            <video id="videoD" width="7.5rem" poster="images/christamas/open.png" class="video" preload="auto" src="materia/D.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
             </video>
         </div>
         <div id="page6" style="height: 100%">
@@ -645,7 +645,7 @@
                     setTimeout(function () {
                         $('#cloud').animate({
                             left: '-79.47rem'
-                        }, 15000)
+                        }, 20000)
                         $('#barrier').animate({
                             left: '-91.06rem'
                         }, {
@@ -677,8 +677,8 @@
                             complete: function () {
                                 $('#gift').show();
                                 $('#gift').on('touchstart', function () {
-                                    $('#page2').hide();
-                                    $('#page3').show();
+                                    $('#page2').fadeOut(500);
+                                    $('#page3').fadeIn(500);
                                     $('#gift').hide();
                                     $('#videoB').show();
                                     videoPlay('videoB', 'page4');
@@ -743,7 +743,6 @@
                     $('#gift1').hide();
                     $('#page3').hide();
                     $('#videoC').show();
-                    document.getElementById('three').play();
                     videoPlay('videoC', 'page5');
                 })
             }
@@ -754,6 +753,7 @@
                     $('#gift2').hide();
                     $('#page4').hide();
                     $('#videoD').show();
+                    document.getElementById('three').play();
                     videoPlay('videoD', 'page6');
                 })
             }
