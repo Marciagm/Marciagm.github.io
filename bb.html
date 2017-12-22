@@ -454,8 +454,10 @@
     </div>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script>
-        var santaBottom = 20, jump, offset, clickNum = 0, alreadyclick, animateBinded = 0;
-        var specialBottom = 0;
+        var santaBottom = 20, jump = 0, offset, clickNum = 0, alreadyclick, animateBinded = 0;
+        var shouldBottom = 0;
+        var step;
+        var height = $(document).height();
         var images = [
             'images/loading.png',
             'images/santa.gif',
@@ -478,6 +480,7 @@
             {
                 scope: [2.66, 4.14],
                 jump: 1,
+                click: 0,
                 bottom: 20
             },
             {
@@ -618,21 +621,31 @@
             $('#barrier').animate({
                 left: '-91.06rem'
             }, {
-                duration: 15000,
+                duration: 18000,
                 easing: 'linear',
                 step: function (now, tween) {
                     // 2.84+2
                     offset = 4.84 - now;
+                    //offset = 1.805 - now;
                     //console.log('offset: ' + offset);
                     for (var i = 0; i < gameDics.length; i++) {
-                        var step = gameDics[i];
+                        step = gameDics[i];
+                        jump = step.jump || 0;
                         if (offset < step.scope[1] && offset >= step.scope[0]) {
-                            santaBottom = step.bottom; 
-                            /*if (step.jump) {
-                                santaBottom = 0;
+                            santaBottom = step.bottom;
+                            if ($('#santa').css('bottom').indexOf('px') >= 0) {
+                                var bottom = $('#santa').css('bottom').replace('px', '') * 100 / height;
                             }
                             else {
-                                   
+                                var bottom = $('#santa').css('bottom');
+                            }
+                            /*if (step.jump && (bottom <= step.bottom)) {
+                                //console.log('bottom: ' + bottom);
+                                $('#santa').animate({
+                                    bottom: 0
+                                }, 50);
+                                $('#barrier').stop();
+                                $('#cloud').stop();
                             }*/
                         }
                     }
@@ -696,21 +709,21 @@
                     }, 1000)
 
                     $('#page2').click(function () {
-
                         if (!animateBinded) {
                             gameInit();
                             animateBinded = 1;  
                         }
-                        alreadyclick = 1;
                         clickNum ++;
                         if (clickNum >= 2) {
                             $('#tip').fadeOut(1000);
                             clearTimeout(outTimer);
                         }
+                        //santaBottom = shouldBottom;
                         var sLeft = ($('#santa').css('left').replace('px','') - 0);
                         var bLeft = $('#barrier').css('left').replace('px','') * 0.77 / sLeft ;
+                        console.log('in click: ' + santaBottom);
                         $('#santa').animate({
-                            bottom: (santaBottom + 15) + '%',
+                            bottom: (santaBottom + 18) + '%',
                         }, 300).animate({ 
                             bottom: santaBottom + '%'
                         }, 300)
