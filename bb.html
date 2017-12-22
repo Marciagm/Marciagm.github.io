@@ -260,6 +260,9 @@
             background: url(images/christamas/lastbg.png);
             background-size: 100% 100%;
         }
+        #page6 img {
+            display: none;
+        }
         #bt {
             width: 7.5rem;
             position: absolute;
@@ -760,7 +763,12 @@
             else if (nextPageId === 'page6') {
                 setTimeout(function () {
                     $('#page5').fadeOut(1000);
+
                     $('#page6').fadeIn(1000);
+                    $('#bt').fadeIn(1000);
+                    $('#qrcode').fadeIn(1000);
+                    $('#bigpart').fadeIn(1000);
+                    $('#goshare').fadeIn(1000);
                 }, 500)
                 $('#goshare').click(function () {
                     $('#share').show();
