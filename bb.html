@@ -412,7 +412,7 @@
 
         <div id="page3">
             <video id="videoB" width="7.5rem" class="video" preload="auto" src="materia/B.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
-            </video>       
+            </video>
         </div>
 
         <div id="page4">
@@ -422,6 +422,7 @@
             </div>
             <video id="videoC" width="7.5rem" class="video" preload="auto" src="materia/C.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
             </video>
+            <audio id="three" src="materia/three.mp3" preload="auto"></audio>  
         </div>
         <div id="page5">
             <div id="gift2">
@@ -742,6 +743,7 @@
                     $('#gift1').hide();
                     $('#page3').hide();
                     $('#videoC').show();
+                    document.getElementById('three').play();
                     videoPlay('videoC', 'page5');
                 })
             }
@@ -905,7 +907,7 @@
                 });    
             }
             catch (e) {
-                
+
             }
             
             loading(images, videos);
