@@ -805,7 +805,7 @@
          */
         function loading (images, videos) {
             var imgLength = images.length;
-            var videoLength = 4;
+            var videoLength = 1;
             
             var videoArray = [];
             // backup
@@ -813,18 +813,7 @@
                 videoArray.push(videos[videoId]);
             }
             var total = imgLength + videoArray.length;
-            for (var videoId in videos) {
-                document.getElementById(videoId).addEventListener('canplaythrough', function ()
-                {
-                    progress ++;
-                    console.log(progress);
-                    move(progress / total);
-                    if (progress === total) {
-                        clearInterval(timer);
-                    }
-                })
-            }
-            timer = setInterval(function () {
+            /*timer = setInterval(function () {
                 for (var i = 0; i < images.length; i++) {
                     var imgItem = images.shift();
                     var img = new Image();
@@ -845,7 +834,7 @@
                     }
                 }
                 // video
-                for (var j = 0; j < videoArray.length; j++) {
+                for (var j = 0; j < videoArray.length - 3; j++) {
                     var videoItem = videoArray.shift();
                         document.getElementById(videoItem.id).addEventListener('canplaythrough', function ()
                     {
@@ -858,10 +847,10 @@
                         }
                     })
                 }
-            }, 100)
+            }, 100)*/
             
 
-            /*timer = setInterval(function () {
+            timer = setInterval(function () {
                 for (var i = 0; i < images.length; i++) {
                     var imgItem = images.shift();
                     var img = new Image();
@@ -877,7 +866,7 @@
                 else {
                     move(percent);
                 }
-            }, 100)*/     
+            }, 100)     
         }
 
         function init () {
