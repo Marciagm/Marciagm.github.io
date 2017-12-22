@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        * {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div style="background-color: pink; width: 100%;height: 50px; font-size: 40px;">A</div>
+
+    <video id="videoA" width="750px; height: 1335px;" class="video" poster="images/loading.png" preload="auto" src="materia/A.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+    </video>
+    <div style="background-color: pink; width: 100%;height: 50px; font-size: 40px;">B</div>
+    <video id="videoB" width="750px; height: 1335px;" class="video" poster="images/loading.png" preload="auto" src="materia/B.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+    </video>
+    <div style="background-color: pink; width: 100%;height: 50px; font-size: 40px;">C</div>
+    <video id="videoC" width="750px; height: 1335px;" class="video" poster="images/loading.png" preload="auto" src="materia/C.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+        <source src="materia/C.mp4" type="video/mp4">>
+    </video>
+    
+    <script src="js/jquery.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#videoA').click(function () {
+                document.getElementById('videoA').play();
+            })
+            $('#videoB').on('touchstart', function () {
+                document.getElementById('videoB').play();  
+            })
+            $('#videoC').on('touchstart', function () {
+                document.getElementById('videoC').play();  
+            })
+            
+        })
+    </script>
+</body>
+</html>
