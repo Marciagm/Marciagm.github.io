@@ -455,9 +455,9 @@
         var images = [
             'images/christamas/loading.png',
             'images/christamas/santa.gif',
+            'images/christamas/head.gif',
             'images/christamas/barrier.png',
             'images/christamas/cloud.png',
-            'images/christamas/head.gif',
             'images/christamas/finish.png',
             'images/christamas/bigpart.png',
             'images/christamas/qrcode.gif',
@@ -609,28 +609,22 @@
             console.log('in videoPlay');
             var videoItem = document.getElementById(videoId);
             videoItem.play();
-            var videoTimer = setInterval(function () {
+           /* var videoTimer = setInterval(function () {
                 console.log(videoItem.currentTime);
                 if (videoItem.currentTime >= videos[videoId].duration) {
                     videoItem.pause();
                     clearInterval(videoTimer);
                     nextPage(videoId, nextPageId);
                 }
-            }, 50)
-            //videoItem.addEventListener('ended', function () {
-                //videoItem.pause();
-                //alert('ended');
-                //clearInterval(videoTimer);
-                //nextPage(videoId, nextPageId);
-            //})
+            }, 50)*/
+            videoItem.addEventListener('ended', function () {
+                clearInterval(videoTimer);
+                nextPage(videoId, nextPageId);
+            })
         }
         function nextPage (videoId, nextPageId) {
             $('#' + videoId).fadeOut(1000);
             if (nextPageId == 'page2') {
-                //$('#' + videoId).css('z-index', -1);
-                //$('#' + videoId).hide();
-                
-                //$('#' + videoId).remove();
                 $('#post').fadeIn(500);
                 $('#replay').click(function () {
                     $('#post').hide();
@@ -691,7 +685,12 @@
                             }
                         })
                         var outTimer = setTimeout(function () {
-                            $('#tip').fadeOut(1000).fadeIn(1000).fadeOut(1000);
+                            $('#tip').fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000);
+                            $('#santa').animate({
+                                bottom: (santaBottom + 20) + '%',
+                            }).animate({ 
+                                bottom: santaBottom + '%'
+                            })
                         }, 1000)
                         $('#page2').click(function () {
                             alreadyclick = 1;
@@ -702,29 +701,11 @@
                             }
                             var sLeft = ($('#santa').css('left').replace('px','') - 0);
                             var bLeft = $('#barrier').css('left').replace('px','') * 0.77 / sLeft ;
-                            console.log('santaBottom: ' + santaBottom);
-                            console.log('offset: ' + offset);
                             $('#santa').animate({
-                                bottom: (santaBottom + 15) + '%',
+                                bottom: (santaBottom + 20) + '%',
                             }).animate({ 
                                 bottom: santaBottom + '%'
                             })
-                            /*if (jump != 10) {
-                                $('#santa').animate({
-                                    bottom: (santaBottom + jump - 0) + '%',
-                                }).animate({ 
-                                    bottom: santaBottom + '%'
-                                })      
-                            }
-                            else {
-                                $('#santa').animate({
-                                    bottom: (santaBottom + 10 - 0) + '%',
-                                }).animate({ 
-                                    bottom: santaBottom + '%'
-                                })  
-                            }*/
-                            //var offset = 0 - bLeft + 1.08;
-                            
                         })
                     //}, 1000)
                      
@@ -733,17 +714,10 @@
             }
             else if (nextPageId === 'page3') {
                 $('#' + videoId).hide();
-                /*$('#gift').show();
-                $('#gift').on('click', function () {
-                    $('#gift').hide();
-                    videoPlay('videoC', 'page4');
-                })
-                $('#videoB').hide();*/
             }
             else if (nextPageId === 'page4') {
                 $('#' + videoId).hide();
                 $('#gift1').show();
-                console.log('in page4')
                 $('#gift1').on('touchstart', function () {
                     $('#gift1').hide();
                     $('#page3').hide();
@@ -752,7 +726,6 @@
                 })
             }
             else if (nextPageId === 'page5') {
-                //$('#page4').hide();
                 $('#gift2').show();
                 $('#gift2').on('touchstart', function () {
                     $('#gift2').hide();
@@ -765,7 +738,6 @@
             else if (nextPageId === 'page6') {
                 setTimeout(function () {
                     $('#page5').fadeOut(1000);
-
                     $('#page6').show();
                 }, 500)
                 $('#goshare').click(function () {
@@ -806,7 +778,6 @@
                     timer = null;
                     setTimeout(function () {
                         $('#loading').hide();
-                        /*$('#page1').show();*/
                         beforePlayVideo('videoA', 'page2');
                     }, 200)
                 }    
@@ -862,15 +833,13 @@
                     })
                 }
             }, 100)*/
-            
-
             timer = setInterval(function () {
                 for (var i = 0; i < images.length; i++) {
                     var imgItem = images.shift();
                     var img = new Image();
                     img.src = imgItem;
                 }
-                progress =progress + Math.floor(Math.random() * 45);
+                progress =progress + Math.floor(Math.random() * 5);
                 var percent = (progress / 100).toFixed(2);
                 
                 if (percent >= 1) {
@@ -917,7 +886,6 @@
             });
 
             // ------------"分享到朋友圈"
-
             wx.onMenuShareTimeline({
                 title : "测试分享到朋友圈", // 分享标题
                 desc : "只是一个测试", // 分享描述
@@ -932,24 +900,6 @@
                     alert("分享失败，请联系管理员");
                 }
             });
-            // ------------"分享到朋友圈"
-            /*
-             * wx.onMenuShareTimeline({ title : title, // 分享标题 desc : discuss, // 分享描述
-             * link : url, // 分享链接 imgUrl : shareImgUrl, // 分享图标 type : '', //
-             * 分享类型,music、video或link，不填默认为link dataUrl : '', //
-             * 如果type是music或video，则要提供数据链接，默认为空 success : function() { //
-             * 用户确认分享后执行的回调函数、 }, cancel : function() { // 用户取消分享后执行的回调函数 } }); //
-             * -------------分享到QQ wx.onMenuShareQQ({ title : title, // 分享标题 desc :
-             * discuss, // 分享描述 link : url, // 分享链接 imgUrl : shareImgUrl, // 分享图标 type :
-             * '', // 分享类型,music、video或link，不填默认为link dataUrl : '', //
-             * 如果type是music或video，则要提供数据链接，默认为空 success : function() { //
-             * 用户确认分享后执行的回调函数、 }, cancel : function() { // 用户取消分享后执行的回调函数 } }); //
-             * -------------分享到QQ空间 wx.onMenuShareQZone({ title : title, // 分享标题 desc :
-             * discuss, // 分享描述 link : url, // 分享链接 imgUrl : shareImgUrl, // 分享图标 type :
-             * '', // 分享类型,music、video或link，不填默认为link dataUrl : '', //
-             * 如果type是music或video，则要提供数据链接，默认为空 success : function() { //
-             * 用户确认分享后执行的回调函数、 }, cancel : function() { // 用户取消分享后执行的回调函数 } });
-             */
         });
         wx.error(function(res) {
             // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
@@ -977,7 +927,6 @@
                         url : url
                     },
                     success : function(data) {
-                        console.info(data);
                         var timestamp = data.timestamp;
                         var noncestr = data.noncestr;
                         var signature = data.signature;
@@ -987,16 +936,13 @@
                 });    
             }
             catch (e) {
-
             }
-            
             loading(images, videos);
         }
 
         $(document).ready(function () {
             init(); 
         })
-
     </script>
 </body>
 </html>
