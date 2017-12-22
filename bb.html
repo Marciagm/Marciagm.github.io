@@ -394,6 +394,7 @@
         <div id="page1">
             <video id="videoA" width="7.5rem" class="video" poster="images/loading.png" preload="auto" src="materia/A.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
             </video>
+            <audio id="one" src="materia/one.mp3" preload="auto" loop="loop"></audio>  
             <div id="post">
                 <img id="face" src="images/head.gif">   
                 <div id="replay"></div>
@@ -410,11 +411,13 @@
                 <img src="images/arrow.png" class="right-arrow">
                 <img src="images/right-turn.png" class="right-turn">
             </div>
+            <audio id="game" src="materia/game.mp3" preload="auto" loop="loop"></audio>  
         </div>
 
         <div id="page3">
             <video id="videoB" width="7.5rem" class="video" preload="auto" src="materia/B.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
             </video>
+            <audio id="two" src="materia/two.mp3" preload="auto" loop="loop"></audio>
         </div>
 
         <div id="page4">
@@ -451,7 +454,8 @@
     </div>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script>
-        var santaBottom = 20, jump, offset, clickNum = 0, alreadyclick;
+        var santaBottom = 20, jump, offset, clickNum = 0, alreadyclick, animateBinded = 0;
+        var specialBottom = 0;
         var images = [
             'images/loading.png',
             'images/santa.gif',
@@ -605,10 +609,52 @@
             }
         }
         var timer, progress = 0;
+        
+        function gameInit () {
+            $('#cloud').animate({
+                left: '-79.47rem'
+            }, 20000)
+
+            $('#barrier').animate({
+                left: '-91.06rem'
+            }, {
+                duration: 15000,
+                easing: 'linear',
+                step: function (now, tween) {
+                    // 2.84+2
+                    offset = 4.84 - now;
+                    //console.log('offset: ' + offset);
+                    for (var i = 0; i < gameDics.length; i++) {
+                        var step = gameDics[i];
+                        if (offset < step.scope[1] && offset >= step.scope[0]) {
+                            santaBottom = step.bottom; 
+                            /*if (step.jump) {
+                                santaBottom = 0;
+                            }
+                            else {
+                                   
+                            }*/
+                        }
+                    }
+                },
+                complete: function () {
+                    $('#gift').show();
+                    $('#gift').on('touchstart', function () {
+                        $('#page2').fadeOut(500);
+                        $('#page3').fadeIn(500);
+                        $('#gift').hide();
+                        $('#videoB').fadeIn(500);
+                        document.getElementById('game').pause();
+                        document.getElementById('two').play();
+                        videoPlay('videoB', 'page4');
+                    })
+                }
+            })
+        }
+
         function videoPlay (videoId, nextPageId) {
             console.log('in videoPlay');
             var videoItem = document.getElementById(videoId);
-            alert(videoItem);
             $('#' + videoId).click(function () {
                 videoItem.play();    
             })
@@ -642,77 +688,33 @@
                     $('#' + videoId).attr('src', '');
                     $('#face').hide();
                     $('#post').hide();
-
                     $('#page2').show();
+                    document.getElementById('one').pause();
+                    document.getElementById('game').play();
+                    var outTimer = setTimeout(function () {
+                        $('#tip').fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000);
+                    }, 1000)
 
-                    //setTimeout(function () {
-                        $('#cloud').animate({
-                            left: '-79.47rem'
-                        }, 20000)
-                        $('#barrier').animate({
-                            left: '-91.06rem'
-                        }, {
-                            duration: 15000,
-                            easing: 'linear',
-                            step: function (now, tween) {
-                                // 2.84+2
-                                offset = 4.84 - now;
-                                //console.log('offset: ' + offset);
-                                for (var i = 0; i < gameDics.length; i++) {
-                                    var step = gameDics[i];
-                                    if (offset < step.scope[1] && offset >= step.scope[0]) {
-                                        santaBottom = step.bottom;
-                                        jump = step.jump || 10;
-                                        /*if (step.jump && !alreadyclick) {
-                                            $('#santa').animate({
-                                                bottom: 0
-                                            }, 10)
-                                            $('#barrier').stop();
-                                            $('#cloud').stop();
-                                            /*setTimeout(function () {
-                                                nextPage('videoA', 'page2');
-                                            }, 1000)
-                                        }*/
-                                        alreadyclick = 0;
-                                    }
-                                }
-                            },
-                            complete: function () {
-                                $('#gift').show();
-                                $('#gift').on('touchstart', function () {
-                                    $('#page2').fadeOut(500);
-                                    $('#page3').fadeIn(500);
-                                    $('#gift').hide();
-                                    $('#videoB').fadeIn(500);
-                                    videoPlay('videoB', 'page4');
-                                })
-                            }
-                        })
-                        var outTimer = setTimeout(function () {
-                            $('#tip').fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000);
-                            $('#santa').animate({
-                                bottom: (santaBottom + 20) + '%',
-                            }).animate({ 
-                                bottom: santaBottom + '%'
-                            })
-                        }, 1000)
-                        $('#page2').click(function () {
-                            alreadyclick = 1;
-                            clickNum ++;
-                            if (clickNum >= 2) {
-                                $('#tip').fadeOut(1000);
-                                clearTimeout(outTimer);
-                            }
-                            var sLeft = ($('#santa').css('left').replace('px','') - 0);
-                            var bLeft = $('#barrier').css('left').replace('px','') * 0.77 / sLeft ;
-                            $('#santa').animate({
-                                bottom: (santaBottom + 20) + '%',
-                            }).animate({ 
-                                bottom: santaBottom + '%'
-                            })
-                        })
-                    //}, 1000)
-                     
+                    $('#page2').click(function () {
+
+                        if (!animateBinded) {
+                            gameInit();
+                            animateBinded = 1;  
+                        }
+                        alreadyclick = 1;
+                        clickNum ++;
+                        if (clickNum >= 2) {
+                            $('#tip').fadeOut(1000);
+                            clearTimeout(outTimer);
+                        }
+                        var sLeft = ($('#santa').css('left').replace('px','') - 0);
+                        var bLeft = $('#barrier').css('left').replace('px','') * 0.77 / sLeft ;
+                        $('#santa').animate({
+                            bottom: (santaBottom + 15) + '%',
+                        }, 300).animate({ 
+                            bottom: santaBottom + '%'
+                        }, 300)
+                    })
                 })
 
             }
@@ -735,6 +737,7 @@
                     $('#gift2').hide();
                     $('#page4').hide();
                     $('#videoD').show();
+                    document.getElementById('two').pause();
                     document.getElementById('three').play();
                     videoPlay('videoD', 'page6');
                 })
@@ -763,6 +766,7 @@
             $('#next').on('touchstart', function (event) {
                 $('#next').hide();
                 console.log('in touchstart');
+                document.getElementById('one').play();
                 videoPlay(videoId, nextPageId);
             })
         }
