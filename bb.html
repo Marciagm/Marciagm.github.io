@@ -701,7 +701,12 @@
                             var bLeft = $('#barrier').css('left').replace('px','') * 0.77 / sLeft ;
                             console.log('santaBottom: ' + santaBottom);
                             console.log('offset: ' + offset);
-                            if (jump != 10) {
+                            $('#santa').animate({
+                                bottom: (santaBottom + 12) + '%',
+                            }).animate({ 
+                                bottom: santaBottom + '%'
+                            })
+                            /*if (jump != 10) {
                                 $('#santa').animate({
                                     bottom: (santaBottom + jump - 0) + '%',
                                 }).animate({ 
@@ -714,7 +719,7 @@
                                 }).animate({ 
                                     bottom: santaBottom + '%'
                                 })  
-                            }
+                            }*/
                             //var offset = 0 - bLeft + 1.08;
                             
                         })
@@ -754,10 +759,10 @@
                 })
             }
             else if (nextPageId === 'page6') {
-                setTimeout(function () {
+                /*setTimeout(function () {
                     $('#page5').fadeOut(1000);
                     $('#page6').fadeIn(1000);
-                }, 500)
+                }, 500)*/
                 $('#goshare').click(function () {
                     $('#share').show();
                     $('#share').click(function () {
