@@ -580,22 +580,22 @@
 
         var videos = {
             'videoA': {
-                duration: 15.5,
+                duration: 1,
                 id: 'videoA',
                 src: 'materia/A.mp4'
             },
             'videoB': {
-                duration: 3.9, 
+                duration: 1, 
                 id: 'videoB',
                 src: 'materia/B.mp4'
             },
             'videoC': {
-                duration: 2.2, 
+                duration: 1, 
                 id: 'videoC',
                 src: 'materia/C.mp4'
             },
             'videoD': {
-                duration: 23.9, 
+                duration: 1, 
                 id: 'videoD',
                 src: 'materia/D.mp4'
             }
@@ -605,20 +605,20 @@
             console.log('in videoPlay');
             var videoItem = document.getElementById(videoId);
             videoItem.play();
-            /*var videoTimer = setInterval(function () {
+            var videoTimer = setInterval(function () {
                 console.log(videoItem.currentTime);
                 if (videoItem.currentTime >= videos[videoId].duration) {
                     videoItem.pause();
                     clearInterval(videoTimer);
                     nextPage(videoId, nextPageId);
                 }
-            }, 50)*/
-            videoItem.addEventListener('ended', function () {
+            }, 50)
+            //videoItem.addEventListener('ended', function () {
                 //videoItem.pause();
                 //alert('ended');
                 //clearInterval(videoTimer);
-                nextPage(videoId, nextPageId);
-            })
+                //nextPage(videoId, nextPageId);
+            //})
         }
         function nextPage (videoId, nextPageId) {
             if (nextPageId == 'page2') {
@@ -649,7 +649,7 @@
                         $('#barrier').animate({
                             left: '-91.06rem'
                         }, {
-                            duration: 15000,
+                            duration: 500,
                             easing: 'linear',
                             step: function (now, tween) {
                                 // 2.84+2
@@ -865,7 +865,7 @@
                     var img = new Image();
                     img.src = imgItem;
                 }
-                progress =progress + Math.floor(Math.random() * 5);
+                progress =progress + Math.floor(Math.random() * 45);
                 var percent = (progress / 100).toFixed(2);
                 
                 if (percent >= 1) {
