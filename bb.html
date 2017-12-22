@@ -623,12 +623,13 @@
             //})
         }
         function nextPage (videoId, nextPageId) {
+            $('#' + videoId).fadeOut(1000);
             if (nextPageId == 'page2') {
                 //$('#' + videoId).css('z-index', -1);
                 //$('#' + videoId).hide();
-                $('#' + videoId).fadeOut(1000);
+                
                 //$('#' + videoId).remove();
-                $('#post').fadeIn(1000);
+                $('#post').fadeIn(500);
                 $('#replay').click(function () {
                     $('#post').hide();
                     $('#' + videoId).show();
