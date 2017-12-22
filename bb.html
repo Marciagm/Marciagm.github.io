@@ -625,10 +625,11 @@
         }
         function nextPage (videoId, nextPageId) {
             if (nextPageId == 'page2') {
-                $('#' + videoId).css('z-index', -1);
-                $('#' + videoId).hide();
+                //$('#' + videoId).css('z-index', -1);
+                //$('#' + videoId).hide();
+                $('#' + videoId).fadeOut(1000);
                 //$('#' + videoId).remove();
-                $('#post').show();
+                $('#post').fadeIn(1000);
                 $('#replay').click(function () {
                     $('#post').hide();
                     $('#' + videoId).show();
