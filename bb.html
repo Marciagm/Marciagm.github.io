@@ -173,9 +173,7 @@
             top: 0;
             left: 0;
         }
-        #replay {
-            background-color: red;
-            opacity: 0.2;
+        #replay {            
             height: 14.1%;
             width: 3.3rem;
             position: absolute;
@@ -183,8 +181,6 @@
             left: 0.4rem;
         }
         #moveon {
-            background-color: red;
-            opacity: 0.2;
             height: 14.1%;
             width: 3.3rem;
             position: absolute;
@@ -286,8 +282,6 @@
             width: 2.5rem; 
             bottom: 0.6rem; 
             right: 0.71rem;
-            opacity: 0.4; 
-            background-color: red;
         }
 
         /*all*/
@@ -392,7 +386,7 @@
         </div>
 
         <div id="page1">
-            <video id="videoA" width="7.5rem" class="video" poster="images/loading.png" preload="auto" src="http://p1cu43xpb.bkt.clouddn.com/weixin/A.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+            <video id="videoA" width="7.5rem" class="video" poster="images/loading.png" preload="auto" x5-video-player-type="h5" x5-video-player-fullscreen="true" src="http://p1cu43xpb.bkt.clouddn.com/weixin/A.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
             </video>
             <audio id="one" src="http://p1cu43xpb.bkt.clouddn.com/weixin/one.mp3" preload="auto" loop="loop"></audio>  
             <div id="post">
@@ -487,7 +481,7 @@
             // up
             {
                 scope: [2.66, 4.14],
-                //isChimney: 1,
+                isChimney: 1,
                 shouldBottom: 27,
                 bottom: 20
             },
@@ -499,7 +493,7 @@
             // 203
             {
                 scope: [10.26, 12.29],
-                //isHole: 1,
+                isHole: 1,
                 shouldBottom: 20,
                 bottom: 17.3
             },
@@ -556,7 +550,7 @@
                 scope: [54.81, 57.56],
                 isHole: 1,
                 shouldBottom: 17.5,
-                bottom: 26.2
+                bottom: 20
             },
             // triangle end
             {
@@ -722,7 +716,9 @@
             })
         }
         function nextPage (videoId, nextPageId) {
+            $('#' + videoId).css('width', 0);
             $('#' + videoId).fadeOut(1000);
+
             if (nextPageId == 'page2') {
                 $('#post').fadeIn(500);
                 $('#replay').click(function () {
