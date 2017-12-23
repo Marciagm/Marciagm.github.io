@@ -703,22 +703,22 @@
             })
             videoItem.play();
 
-            var videoTimer = setInterval(function () {
+            /*var videoTimer = setInterval(function () {
                 console.log(videoItem.currentTime);
                 if (videoItem.currentTime >= videos[videoId].duration) {
                     videoItem.pause();
                     clearInterval(videoTimer);
                     nextPage(videoId, nextPageId);
                 }
-            }, 50)
-            /*videoItem.addEventListener('ended', function () {
+            }, 50)*/
+            videoItem.addEventListener('ended', function () {
                 nextPage(videoId, nextPageId);
-            })*/
+            })
         }
         function nextPage (videoId, nextPageId) {
             $('#' + videoId).css('width', 0);
-            $('#' + videoId).fadeOut(1000);
-
+            //$('#' + videoId).fadeOut(1000);
+            $('#' + videoId).hide();
             if (nextPageId == 'page2') {
                 $('#post').fadeIn(500);
                 $('#replay').click(function () {
