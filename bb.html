@@ -370,7 +370,25 @@
             from {bottom: 1.46rem;}
             to {bottom: 2.46rem;}
         }
-
+        .lie {
+            animation:liedown 0.5s;
+            -webkit-animation:liedown 0.5s;
+        }
+        @keyframes liedown
+        {
+            0% {transform: rotate(0);}
+            30% {transform: rotate(-30deg)}
+            60% {transform: rotate(-60deg)}
+            100% {transform: rotate(-90deg)}
+        }
+        @-webkit-keyframes liedown
+        {
+            0% {-webkit-transform: rotate(0);}
+            30% {-webkit-transform: rotate(-30deg);}
+            60% {-webkit-transform: rotate(-60deg);}
+            100% {-webkit-transform: rotate(-90deg);}
+        }
+        
     </style>
 </head>
 <body>
@@ -565,22 +583,22 @@
                 isHole: 1,
                 bottom: 20
             },
+
             {
                 scope: [56.39, 59.745],
-                isHole: 1,
-                bottom: 11
+                bottom: 11.2
             },
             {
                 scope: [59.745, 61.59],
                 isHole: 1,
                 jump: 0.1,
-                bottom: 11
+                bottom: 11.2
             },
             /* step6 */
             {
                 scope: [61.59, 73.75],
                 jump: 3,
-                bottom: 11
+                bottom: 11.2
             },
             // 185
             {
@@ -709,25 +727,28 @@
                                     animateBinded = 0;                                        
                                 //}
                             }
+                            
+                            break;
+                        }
+                    }
+                    for (var i = 0; i < gameDics.length; i++) {
+                        step = gameDics[i];
+                        jump = step.jump || 0;
+                        var min = step.scope[0];
+                        var max = step.scope[1];
 
-                            else if (step.isChimney && !isSafety && !(gameDics[i-1].click || gameDics[i].click)) {
-                                //console.log('step.isChimney', offset);
-                                //if (bottom < Math.min(start, end)) {
+                        if (isBetween((offset+2.07), min, max)) {
+                            if (step.isChimney && !isSafety && !(gameDics[i-1].click || gameDics[i].click)) {
                                     console.log(bottom, start, end, offset);
-                                    console.log('wrong: ' + i);
-                                    /*$('#santa').animate({
-                                        bottom: 0
-                                    }, 50);*/
-                                    $('#santa').css('transform', 'rotate(30deg)')
+                                    console.log('wrong: ' + i);             
+                                    $('#santa').css('transform', 'rotate(-90deg)')
                                     $('#barrier').stop();
                                     $('#cloud').stop();
                                     $('#tip').fadeOut(1000).fadeIn(1000);
                                     cloudTime = ratio * 17000;
                                     barrierTime = ratio * 19000;
                                     animateBinded = 0;                                        
-                               // }
                             }
-                            break;
                         }
                     }
 
@@ -811,7 +832,7 @@
                                 santaBottom = gameDics[j+1].bottom;
                             }
                         }
-                        if (isBetween(bLeft, 53, 60)) {
+                        if (isBetween(bLeft, 53, 56.39)) {
                             $('#santa').animate({
                                 bottom: (santaBottom + 20) + '%',
                             }, 500).animate({ 
