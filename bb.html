@@ -392,9 +392,9 @@
         </div>
 
         <div id="page1">
-            <video id="videoA" width="7.5rem" class="video" poster="images/loading.png" preload="auto" src="materia/A.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+            <video id="videoA" width="7.5rem" class="video" poster="images/loading.png" preload="auto" src="http://p1cu43xpb.bkt.clouddn.com/weixin/A.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
             </video>
-            <audio id="one" src="materia/one.mp3" preload="auto" loop="loop"></audio>  
+            <audio id="one" src="http://p1cu43xpb.bkt.clouddn.com/weixin/one.mp3" preload="auto" loop="loop"></audio>  
             <div id="post">
                 <img id="face" src="images/head.gif">   
                 <div id="replay"></div>
@@ -411,13 +411,13 @@
                 <img src="images/arrow.png" class="right-arrow">
                 <img src="images/right-turn.png" class="right-turn">
             </div>
-            <audio id="game" src="materia/game.mp3" preload="auto" loop="loop"></audio>  
+            <audio id="game" src="http://p1cu43xpb.bkt.clouddn.com/weixin/game.mp3" preload="auto" loop="loop"></audio>  
         </div>
 
         <div id="page3">
-            <video id="videoB" width="7.5rem" class="video" preload="auto" src="materia/B.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+            <video id="videoB" width="7.5rem" class="video" preload="auto" src="http://p1cu43xpb.bkt.clouddn.com/weixin/B.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
             </video>
-            <audio id="two" src="materia/two.mp3" preload="auto" loop="loop"></audio>
+            <audio id="two" src="http://p1cu43xpb.bkt.clouddn.com/weixin/two.mp3" preload="auto" loop="loop"></audio>
         </div>
 
         <div id="page4">
@@ -425,16 +425,16 @@
                 <img src="images/arrow.png" class="next">
                 <img src="images/gift-turn.png" class="turn">
             </div>
-            <video id="videoC" width="7.5rem" class="video" poster="images/gift.png" preload="auto" src="materia/C.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+            <video id="videoC" width="7.5rem" class="video" poster="images/gift.png" preload="auto" src="http://p1cu43xpb.bkt.clouddn.com/weixin/C.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
             </video>
-            <audio id="three" src="materia/three.mp3" preload="auto"></audio>  
+            <audio id="three" src="http://p1cu43xpb.bkt.clouddn.com/weixin/three.mp3" preload="auto"></audio>  
         </div>
         <div id="page5">
             <div id="gift2">
                 <img src="images/arrow.png" class="next">
                 <img src="images/open-turn.png" class="turn">
             </div>
-            <video id="videoD" width="7.5rem" poster="images/open.png" class="video" preload="auto" src="materia/D.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+            <video id="videoD" width="7.5rem" poster="images/open.png" class="video" preload="auto" src="http://p1cu43xpb.bkt.clouddn.com/weixin/D.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
             </video>
         </div>
         <div id="page6" style="height: 100%">
@@ -484,20 +484,20 @@
                 bottom: 20
             },
             {
-                scope: [4.14, 10.26],
+                scope: [4.14, 11.275],
                 bottom: 20
             },
             // 203
-            {
-                scope: [10.26, 12.29],
+            /*{
+                scope: [11.275, 12.29],
                 jump: 0.5,
                 bottom: 17.3
-            },
+            },*/
 
             /* step2 */
             // 1295
             {
-                scope: [12.29, 25.24],
+                scope: [11.275, 25.24],
                 bottom: 17.3
             },
 
@@ -593,22 +593,22 @@
             'videoA': {
                 duration: 1,
                 id: 'videoA',
-                src: 'materia/A.mp4'
+                src: 'http://p1cu43xpb.bkt.clouddn.com/weixin/A.mp4'
             },
             'videoB': {
                 duration: 1, 
                 id: 'videoB',
-                src: 'materia/B.mp4'
+                src: 'http://p1cu43xpb.bkt.clouddn.com/weixin/B.mp4'
             },
             'videoC': {
                 duration: 1, 
                 id: 'videoC',
-                src: 'materia/C.mp4'
+                src: 'http://p1cu43xpb.bkt.clouddn.com/weixin/C.mp4'
             },
             'videoD': {
                 duration: 1, 
                 id: 'videoD',
-                src: 'materia/D.mp4'
+                src: 'http://p1cu43xpb.bkt.clouddn.com/weixin/D.mp4'
             }
         }
         var timer, progress = 0;
@@ -692,7 +692,7 @@
                 $('#replay').click(function () {
                     $('#post').hide();
                     $('#' + videoId).show();
-                    $('#' + videoId).attr('src', 'materia/A.mp4');
+                    $('#' + videoId).attr('src', 'http://p1cu43xpb.bkt.clouddn.com/weixin/A.mp4');
                     videoPlay(videoId, nextPageId);
                 })
 
@@ -725,7 +725,7 @@
                         $('#santa').animate({
                             bottom: (santaBottom + 18) + '%',
                         }, 300).animate({ 
-                            bottom: santaBottom + '%'
+                            bottom: (santaBottom-1) + '%'
                         }, 300)
                     })
                 })
