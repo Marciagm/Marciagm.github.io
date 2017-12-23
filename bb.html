@@ -815,6 +815,9 @@
                     document.getElementById('game').play();
 
                     $('#page2').click(function () {
+                        $('#page2').css("box-shadow","none");
+                        $('#page2').css("-webkit-box-shadow","none");
+                        
                         console.log('santaBottom: ' + santaBottom);
                         var bLeft = 0.77 - $('#barrier').css('left').replace('px','') * 0.77 / sLeft ;
                         if (!animateBinded) {
