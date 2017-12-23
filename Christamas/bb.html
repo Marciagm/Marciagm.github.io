@@ -392,8 +392,9 @@
         </div>
 
         <div id="page1">
-            <video id="videoA" width="7.5rem" class="video" poster="images/loading.png" preload="auto" src="materia/A.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+            <video id="videoA" width="7.5rem" class="video" poster="images/loading.png" preload="auto" src="http://p1cu43xpb.bkt.clouddn.com/weixin/A.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
             </video>
+            <audio id="one" src="http://p1cu43xpb.bkt.clouddn.com/weixin/one.mp3" preload="auto" loop="loop"></audio>  
             <div id="post">
                 <img id="face" src="images/head.gif">   
                 <div id="replay"></div>
@@ -410,11 +411,13 @@
                 <img src="images/arrow.png" class="right-arrow">
                 <img src="images/right-turn.png" class="right-turn">
             </div>
+            <audio id="game" src="http://p1cu43xpb.bkt.clouddn.com/weixin/game.mp3" preload="auto" loop="loop"></audio>  
         </div>
 
         <div id="page3">
-            <video id="videoB" width="7.5rem" class="video" preload="auto" src="materia/B.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+            <video id="videoB" width="7.5rem" class="video" preload="auto" src="http://p1cu43xpb.bkt.clouddn.com/weixin/B.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
             </video>
+            <audio id="two" src="http://p1cu43xpb.bkt.clouddn.com/weixin/two.mp3" preload="auto" loop="loop"></audio>
         </div>
 
         <div id="page4">
@@ -422,16 +425,16 @@
                 <img src="images/arrow.png" class="next">
                 <img src="images/gift-turn.png" class="turn">
             </div>
-            <video id="videoC" width="7.5rem" class="video" poster="images/gift.png" preload="auto" src="materia/C.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+            <video id="videoC" width="7.5rem" class="video" poster="images/gift.png" preload="auto" src="http://p1cu43xpb.bkt.clouddn.com/weixin/C.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
             </video>
-            <audio id="three" src="materia/three.mp3" preload="auto"></audio>  
+            <audio id="three" src="http://p1cu43xpb.bkt.clouddn.com/weixin/three.mp3" preload="auto"></audio>  
         </div>
         <div id="page5">
             <div id="gift2">
                 <img src="images/arrow.png" class="next">
                 <img src="images/open-turn.png" class="turn">
             </div>
-            <video id="videoD" width="7.5rem" poster="images/open.png" class="video" preload="auto" src="materia/D.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+            <video id="videoD" width="7.5rem" poster="images/open.png" class="video" preload="auto" src="http://p1cu43xpb.bkt.clouddn.com/weixin/D.mp4" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
             </video>
         </div>
         <div id="page6" style="height: 100%">
@@ -451,7 +454,10 @@
     </div>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script>
-        var santaBottom = 20, jump, offset, clickNum = 0, alreadyclick;
+        var santaBottom = 20, jump = 0, offset, clickNum = 0, alreadyclick, animateBinded = 0;
+        var shouldBottom = 0;
+        var step;
+        var height = $(document).height();
         var images = [
             'images/loading.png',
             'images/santa.gif',
@@ -474,23 +480,24 @@
             {
                 scope: [2.66, 4.14],
                 jump: 1,
+                click: 0,
                 bottom: 20
             },
             {
-                scope: [4.14, 10.26],
+                scope: [4.14, 11.275],
                 bottom: 20
             },
             // 203
-            {
-                scope: [10.26, 12.29],
+            /*{
+                scope: [11.275, 12.29],
                 jump: 0.5,
                 bottom: 17.3
-            },
+            },*/
 
             /* step2 */
             // 1295
             {
-                scope: [12.29, 25.24],
+                scope: [11.275, 25.24],
                 bottom: 17.3
             },
 
@@ -532,16 +539,16 @@
             },
             // triangle start
             {
-                scope: [54.81, 57.56],
+                scope: [54.81, 60.31],
                 jump: 13,
                 bottom: 26.2
             },
             // triangle end
-            {
+            /*{
                 scope: [57.56, 60.31],
                 jump: 0.1,
                 bottom: 11
-            },
+            },*/
             /* step6 */
             {
                 scope: [60.31, 72.47],
@@ -586,29 +593,86 @@
             'videoA': {
                 duration: 1,
                 id: 'videoA',
-                src: 'materia/A.mp4'
+                src: 'http://p1cu43xpb.bkt.clouddn.com/weixin/A.mp4'
             },
             'videoB': {
                 duration: 1, 
                 id: 'videoB',
-                src: 'materia/B.mp4'
+                src: 'http://p1cu43xpb.bkt.clouddn.com/weixin/B.mp4'
             },
             'videoC': {
                 duration: 1, 
                 id: 'videoC',
-                src: 'materia/C.mp4'
+                src: 'http://p1cu43xpb.bkt.clouddn.com/weixin/C.mp4'
             },
             'videoD': {
                 duration: 1, 
                 id: 'videoD',
-                src: 'materia/D.mp4'
+                src: 'http://p1cu43xpb.bkt.clouddn.com/weixin/D.mp4'
             }
         }
         var timer, progress = 0;
+        
+        function gameInit () {
+            $('#cloud').animate({
+                left: '-79.47rem'
+            }, 20000)
+
+            $('#barrier').animate({
+                left: '-91.06rem'
+            }, {
+                duration: 18000,
+                easing: 'linear',
+                step: function (now, tween) {
+                    // 2.84+2
+                    offset = 4.84 - now;
+                    //offset = 1.805 - now;
+                    //console.log('offset: ' + offset);
+                    for (var i = 0; i < gameDics.length; i++) {
+                        step = gameDics[i];
+                        jump = step.jump || 0;
+                        if (offset < step.scope[1] && offset >= step.scope[0]) {
+                            santaBottom = step.bottom;
+                            if ($('#santa').css('bottom').indexOf('px') >= 0) {
+                                var bottom = $('#santa').css('bottom').replace('px', '') * 100 / height;
+                            }
+                            else {
+                                var bottom = $('#santa').css('bottom');
+                            }
+                            /*if (step.jump && (bottom <= step.bottom)) {
+                                //console.log('bottom: ' + bottom);
+                                $('#santa').animate({
+                                    bottom: 0
+                                }, 50);
+                                $('#barrier').stop();
+                                $('#cloud').stop();
+                            }*/
+                        }
+                    }
+                },
+                complete: function () {
+                    $('#gift').show();
+                    $('#gift').on('touchstart', function () {
+                        $('#page2').fadeOut(500);
+                        $('#page3').fadeIn(500);
+                        $('#gift').hide();
+                        $('#videoB').fadeIn(500);
+                        document.getElementById('game').pause();
+                        document.getElementById('two').play();
+                        videoPlay('videoB', 'page4');
+                    })
+                }
+            })
+        }
+
         function videoPlay (videoId, nextPageId) {
             console.log('in videoPlay');
             var videoItem = document.getElementById(videoId);
+            $('#' + videoId).click(function () {
+                videoItem.play();    
+            })
             videoItem.play();
+
            /* var videoTimer = setInterval(function () {
                 console.log(videoItem.currentTime);
                 if (videoItem.currentTime >= videos[videoId].duration) {
@@ -628,7 +692,7 @@
                 $('#replay').click(function () {
                     $('#post').hide();
                     $('#' + videoId).show();
-                    $('#' + videoId).attr('src', 'materia/A.mp4');
+                    $('#' + videoId).attr('src', 'http://p1cu43xpb.bkt.clouddn.com/weixin/A.mp4');
                     videoPlay(videoId, nextPageId);
                 })
 
@@ -637,77 +701,33 @@
                     $('#' + videoId).attr('src', '');
                     $('#face').hide();
                     $('#post').hide();
-
                     $('#page2').show();
+                    document.getElementById('one').pause();
+                    document.getElementById('game').play();
+                    var outTimer = setTimeout(function () {
+                        $('#tip').fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000);
+                    }, 1000)
 
-                    //setTimeout(function () {
-                        $('#cloud').animate({
-                            left: '-79.47rem'
-                        }, 20000)
-                        $('#barrier').animate({
-                            left: '-91.06rem'
-                        }, {
-                            duration: 15000,
-                            easing: 'linear',
-                            step: function (now, tween) {
-                                // 2.84+2
-                                offset = 4.84 - now;
-                                //console.log('offset: ' + offset);
-                                for (var i = 0; i < gameDics.length; i++) {
-                                    var step = gameDics[i];
-                                    if (offset < step.scope[1] && offset >= step.scope[0]) {
-                                        santaBottom = step.bottom;
-                                        jump = step.jump || 10;
-                                        /*if (step.jump && !alreadyclick) {
-                                            $('#santa').animate({
-                                                bottom: 0
-                                            }, 10)
-                                            $('#barrier').stop();
-                                            $('#cloud').stop();
-                                            /*setTimeout(function () {
-                                                nextPage('videoA', 'page2');
-                                            }, 1000)
-                                        }*/
-                                        alreadyclick = 0;
-                                    }
-                                }
-                            },
-                            complete: function () {
-                                $('#gift').show();
-                                $('#gift').on('touchstart', function () {
-                                    $('#page2').fadeOut(500);
-                                    $('#page3').fadeIn(500);
-                                    $('#gift').hide();
-                                    $('#videoB').fadeIn(500);
-                                    videoPlay('videoB', 'page4');
-                                })
-                            }
-                        })
-                        var outTimer = setTimeout(function () {
-                            $('#tip').fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000);
-                            $('#santa').animate({
-                                bottom: (santaBottom + 20) + '%',
-                            }).animate({ 
-                                bottom: santaBottom + '%'
-                            })
-                        }, 1000)
-                        $('#page2').click(function () {
-                            alreadyclick = 1;
-                            clickNum ++;
-                            if (clickNum >= 2) {
-                                $('#tip').fadeOut(1000);
-                                clearTimeout(outTimer);
-                            }
-                            var sLeft = ($('#santa').css('left').replace('px','') - 0);
-                            var bLeft = $('#barrier').css('left').replace('px','') * 0.77 / sLeft ;
-                            $('#santa').animate({
-                                bottom: (santaBottom + 20) + '%',
-                            }).animate({ 
-                                bottom: santaBottom + '%'
-                            })
-                        })
-                    //}, 1000)
-                     
+                    $('#page2').click(function () {
+                        if (!animateBinded) {
+                            gameInit();
+                            animateBinded = 1;  
+                        }
+                        clickNum ++;
+                        if (clickNum >= 2) {
+                            $('#tip').fadeOut(1000);
+                            clearTimeout(outTimer);
+                        }
+                        //santaBottom = shouldBottom;
+                        var sLeft = ($('#santa').css('left').replace('px','') - 0);
+                        var bLeft = $('#barrier').css('left').replace('px','') * 0.77 / sLeft ;
+                        console.log('in click: ' + santaBottom);
+                        $('#santa').animate({
+                            bottom: (santaBottom + 18) + '%',
+                        }, 300).animate({ 
+                            bottom: (santaBottom-1) + '%'
+                        }, 300)
+                    })
                 })
 
             }
@@ -730,6 +750,7 @@
                     $('#gift2').hide();
                     $('#page4').hide();
                     $('#videoD').show();
+                    document.getElementById('two').pause();
                     document.getElementById('three').play();
                     videoPlay('videoD', 'page6');
                 })
@@ -757,6 +778,8 @@
 
             $('#next').on('touchstart', function (event) {
                 $('#next').hide();
+                console.log('in touchstart');
+                document.getElementById('one').play();
                 videoPlay(videoId, nextPageId);
             })
         }
@@ -921,7 +944,7 @@
             try {
                 $.ajax({
                     type : "GET",
-                    url : "/share",
+                    url : "./share",
                     data : {
                         url : url
                     },
