@@ -730,7 +730,7 @@
                                 $('#santa').animate({
                                     bottom: '8%'
                                 }, 50);
-                                $('#santa').css('transform', 'rotate(-30deg)')
+                                //$('#santa').css('transform', 'rotate(-30deg)')
                                 $('#barrier').stop();
                                 $('#cloud').stop();
                                 $('#tip').fadeOut(1000).fadeIn(1000);
@@ -750,7 +750,7 @@
                         if (isBetween((offset + 1.8), min, max)) {
                             if (step.isChimney && !isSafety && !(gameDics[i-1].click || gameDics[i].click)) {
                                 console.log('wrong: ' + i);             
-                                $('#santa').css('transform', 'rotate(-90deg)')
+                                //$('#santa').css('transform', 'rotate(-90deg)')
                                 $('#barrier').stop();
                                 $('#cloud').stop();
                                 $('#tip').fadeOut(1000).fadeIn(1000);
