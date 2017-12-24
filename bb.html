@@ -452,29 +452,6 @@
             'images/share.png'
         ];
 
-        var videos = {
-            'videoA': {
-                duration: 1,
-                id: 'videoA',
-                src: 'http://p1cu43xpb.bkt.clouddn.com/weixin/A.mp4'
-            },
-            'videoB': {
-                duration: 1, 
-                id: 'videoB',
-                src: 'http://p1cu43xpb.bkt.clouddn.com/weixin/B.mp4'
-            },
-            'videoC': {
-                duration: 1, 
-                id: 'videoC',
-                src: 'http://p1cu43xpb.bkt.clouddn.com/weixin/C.mp4'
-            },
-            'videoD': {
-                duration: 1, 
-                id: 'videoD',
-                src: 'http://p1cu43xpb.bkt.clouddn.com/weixin/D.mp4'
-            }
-        }
-
         var turnInfo = {
             beforeA: {
                 src: 'images/turn.png'
@@ -492,7 +469,15 @@
             title : "给我融资50万，圣诞帽我自己买！", // 分享标题
             desc : "生日快乐！大树金融。", // 分享描述
             link : url, // 分享链接
-            imgUrl : "http://mobi.bigtreefinance.com/wx/images/logo.png"
+            imgUrl : "http://mobi.bigtreefinance.com/wx/images/logo.png",
+            success : function() {
+                // 用户确认分享后执行的回调函数、
+                //alert("成功分享");
+            },
+            cancel : function() {
+                // 用户取消分享后执行的回调函数
+                //alert("取消");
+            }
         };
         function isAndroid () {
             var userAgent = window.navigator.userAgent;
@@ -615,24 +600,12 @@
                     bottom: 17.5
                 },
                 // triangle start
-                /*{
-                    scope: [54.88, 57.90],
-                    isHole: 1,
-                    bottom: 20
-                },*/
-                // triangle end
-                /*{
-                    scope: [57.90, 61.59],
-                    isHole: 1,
-                    jump: 0.1,
-                    bottom: 11
-                },*/
                 {
                     scope: [54.88, 56.39],
                     isHole: 1,
                     bottom: 20
                 },
-
+                // triangle end
                 {
                     scope: [56.39, 59.745],
                     bottom: 11.2
@@ -954,8 +927,8 @@
             })
         }
         function nextPage (videoId, nextPageId) {
-            $('#' + videoId).fadeOut(500);
-            //$('#' + videoId).hide();
+            //$('#' + videoId).fadeOut(500);
+            $('#' + videoId).hide();
             if (nextPageId == 'page2') {
                 $('#post').show();
                 $('#replay').click(function () {
@@ -1097,69 +1070,19 @@
             // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
             });
         }
-        wx.ready(function() {
-            // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，
-            // config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关
-            // 接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
 
+        wx.ready(function() {
             // ----------“分享给朋友”
-            wx.onMenuShareAppMessage({
-                title: shareInfo.title, // 分享标题
-                desc: shareInfo.desc, // 分享描述
-                link: shareInfo.link, // 分享链接
-                imgUrl: shareInfo.imgUrl, // 分享图标
-                success : function() {
-                    // 用户确认分享后执行的回调函数、
-                    //alert("成功分享");
-                },
-                cancel : function() {
-                    // 用户取消分享后执行的回调函数
-                    //alert("取消");
-                }
-            });
+            wx.onMenuShareAppMessage(shareInfo);
 
             // ------------"分享到朋友圈"
-            wx.onMenuShareTimeline({
-                title: shareInfo.title, // 分享标题
-                desc: shareInfo.desc, // 分享描述
-                link: shareInfo.link, // 分享链接
-                imgUrl: shareInfo.imgUrl, // 分享图标
-                type : '', // 分享类型,music、video或link，不填默认为link
-                dataUrl : '', // 如果type是music或video，则要提供数据链接，默认为空
-                success : function() { // 用户确认分享后执行的回调函数、
-                    //alert("分享成功，谢谢");
-                },
-                cancel : function() { // 用户取消分享后执行的回调函数 } });
-                    //alert("分享失败，请联系管理员");
-                }
-            });
+            wx.onMenuShareTimeline(shareInfo);
 
-            wx.onMenuShareQQ({
-                title: shareInfo.title, // 分享标题
-                desc: shareInfo.desc, // 分享描述
-                link: shareInfo.link, // 分享链接
-                imgUrl: shareInfo.imgUrl, // 分享图标
-                success: function () {
-                   // 用户确认分享后执行的回调函数
-                },
-                cancel: function () {
-                   // 用户取消分享后执行的回调函数
-                }
-            });
+            wx.onMenuShareQQ(shareInfo);
 
-            wx.onMenuShareQZone({
-                title: shareInfo.title, // 分享标题
-                desc: shareInfo.desc, // 分享描述
-                link: shareInfo.link, // 分享链接
-                imgUrl: shareInfo.imgUrl, // 分享图标
-                success: function () { 
-                   // 用户确认分享后执行的回调函数
-                },
-                cancel: function () { 
-                    // 用户取消分享后执行的回调函数
-                }
-            });
+            wx.onMenuShareQZone(shareInfo);
         });
+
         wx.error(function(res) {
             console.log(res);
         });
@@ -1203,8 +1126,8 @@
                 console.log(e);
             }
             loading(images);
-            //particalInit();
         }
+
         $(document).ready(function () {
             init(); 
         })
