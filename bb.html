@@ -223,7 +223,7 @@
             width: 2.07rem;
             position: absolute;
             left: 0.77rem;
-            bottom: 18.8%;
+            bottom: 19%;
             z-index: 1;
         }
         .right-arrow {
@@ -636,7 +636,6 @@
 
         function isAndroid () {
             var userAgent = window.navigator.userAgent;
-            alert(userAgent);
             if (userAgent.toLowerCase().indexOf('android') >= 0) {
                 return true;
             }
@@ -781,11 +780,10 @@
             })
         }
         function nextPage (videoId, nextPageId) {
-            $('#' + videoId).fadeOut(1000);
+            $('#' + videoId).fadeOut(500);
             //$('#' + videoId).hide();
             if (nextPageId == 'page2') {
-                $('#' + videoId).hide();
-                $('#post').fadeIn(1000);
+                $('#post').fadeIn(500);
                 $('#replay').click(function () {
                     $('#post').hide();
                     $('#' + videoId).show();
@@ -824,14 +822,14 @@
                             $('#santa').animate({
                                 bottom: (santaBottom + 28) + '%',
                             }, 300).animate({ 
-                                bottom: (santaBottom - 1.2) + '%'
+                                bottom: (santaBottom - 1) + '%'
                             }, 400)
                         }
                         else {
                             $('#santa').animate({
                                 bottom: (santaBottom + 18) + '%',
                             }, 250).animate({ 
-                                bottom: (santaBottom - 1.2) + '%'
+                                bottom: (santaBottom - 1) + '%'
                             }, 250)
                         }
                         
@@ -839,13 +837,9 @@
                 })
 
             }
-            else if (nextPageId === 'page3') {
-                $('#' + videoId).hide();
-            }
             else if (nextPageId === 'page4') {
                 showTurnPage('beforeC', function () {
                     $('#next').hide();
-                    $('#' + videoId).hide();
                     $('#page3').hide();
                     $('#videoC').show();
                     videoPlay('videoC', 'page5');
@@ -854,7 +848,6 @@
             else if (nextPageId === 'page5') {
                 showTurnPage('beforeD', function () {
                     $('#next').fadeOut(1000);
-                    $('#' + videoId).show();
                     $('#page4').hide();
                     $('#videoD').show();
                     document.getElementById('two').pause();
@@ -863,9 +856,11 @@
                 })
             }
             else if (nextPageId === 'page6') {
-                $('#' + videoId).hide();
+                if (isAndroid()) {
+                    $('#' + videoId).hide();
+                }
                 setTimeout(function () {
-                    $('#page5').fadeOut(1000);
+                    $('#page5').hide();
                     $('#page6').fadeIn(1000);
                 }, 500)
                 $('#goshare').click(function () {
