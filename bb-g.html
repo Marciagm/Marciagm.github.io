@@ -247,8 +247,7 @@
         }
         #page6 {
             display: none;
-            /*width: 7.5rem;*/
-            width: 100%;
+            width: 7.5rem;
             background: url(images/lastbg.png);
             background-size: 100% 100%;
         }
@@ -317,11 +316,6 @@
             top: 0; 
             left: 0
         }
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
         @keyframes moveright
         {
             from {right: 2rem;}
@@ -342,6 +336,11 @@
             from {bottom: 1.46rem;}
             to {bottom: 2.46rem;}
         } 
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 <body>
@@ -356,11 +355,11 @@
                 <div id="percent">0</div>
             </div>
         </div>
-        <video id="video" width="7.5rem" class="video" poster="images/loading.png" preload="auto" x5-video-player-type="h5"  src="http://p1cu43xpb.bkt.clouddn.com/weixin/android-notip.mp4?123" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+        <video id="video" width="7.5rem" class="video" poster="images/loading.png" preload="auto" x5-video-player-type="h5"  src="http://p1cu43xpb.bkt.clouddn.com/weixin/android-notip.mp4?1" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
         </video>
         <!-- videoA -->
         <div id="page1">
-            <video id="videoA" width="7.5rem" class="video" poster="images/loading.png" preload="auto" x5-video-player-type="h5"  src="http://p1cu43xpb.bkt.clouddn.com/weixin/A.mp4?12" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+            <video id="videoA" width="7.5rem" class="video" poster="images/loading.png" preload="auto" x5-video-player-type="h5"  src="http://p1cu43xpb.bkt.clouddn.com/weixin/A.mp4?123" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
             </video>
             <audio id="one" src="http://p1cu43xpb.bkt.clouddn.com/weixin/one.mp3?123" preload="auto" loop="loop"></audio>  
             <div id="post">
@@ -388,7 +387,7 @@
 
         <!-- videoC -->
         <div id="page4">
-            <video id="videoC" width="7.5rem" class="video" x5-video-player-type="h5" poster="images/gift.png?321" preload="auto" src="http://p1cu43xpb.bkt.clouddn.com/weixin/C.mp4?123" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+            <video id="videoC" width="7.5rem" class="video" x5-video-player-type="h5" poster="images/gift.png?3" preload="auto" src="http://p1cu43xpb.bkt.clouddn.com/weixin/C.mp4?123" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
             </video>
             <audio id="three" src="http://p1cu43xpb.bkt.clouddn.com/weixin/three.mp3?123" preload="auto"></audio>  
         </div>
@@ -400,7 +399,6 @@
         </div>
         <!-- last page -->
         <div id="page6" style="height: 100%">
-            <div id="particles-js"></div>
             <img id="bigpart" src="images/bigpart.png?123">
             <img id="qrcode" src="images/qrcode.gif?123">
             <img id="bt" src="images/bt.gif">
@@ -422,6 +420,7 @@
             <img src="images/arrow.png" class="right-arrow">
             <img src="images/turn.png" class="right-turn">
         </div>
+        <div id="particles-js"></div>
     </div>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script src="js/particles.min.js"></script>
@@ -765,121 +764,6 @@
         }
 
         /**
-         * init particla
-         */
-        function particalInit () {
-            particlesJS("particles-js",  {
-                particles: {
-                    number: {
-                        value: 20,
-                        density: {
-                            enable: !0,
-                            value_area: 1E3
-                        }
-                    },
-                    color: {
-                        value: "#e1e1e1"
-                    },
-                    shape: {
-                        type: "circle",
-                        stroke: {
-                            width: 0,
-                            color: "#000000"
-                        },
-                        polygon: {
-                            nb_sides: 5
-                        },
-                        image: {
-                            src: "img/github.svg",
-                            width: 100,
-                            height: 100
-                        }
-                    },
-                    opacity: {
-                        value: .5,
-                        random: !1,
-                        anim: {
-                            enable: !1,
-                            speed: 1,
-                            opacity_min: .1,
-                            sync: !1
-                        }
-                    },
-                    size: {
-                        value: 15,
-                        random: !0,
-                        anim: {
-                            enable: !1,
-                            speed: 180,
-                            size_min: .1,
-                            sync: !1
-                        }
-                    },
-                    line_linked: {
-                        enable: !0,
-                        distance: 650,
-                        color: "#cfcfcf",
-                        opacity: .26,
-                        width: 1
-                    },
-                    move: {
-                        enable: !0,
-                        speed: 2,
-                        direction: "none",
-                        random: !0,
-                        straight: !1,
-                        out_mode: "out",
-                        bounce: !1,
-                        attract: {
-                            enable: !1,
-                            rotateX: 600,
-                            rotateY: 1200
-                        }
-                    }
-                },
-                interactivity: {
-                    detect_on: "canvas",
-                    events: {
-                        onhover: {
-                            enable: !1,
-                            mode: "repulse"
-                        },
-                        onclick: {
-                            enable: !1,
-                            mode: "push"
-                        },
-                        resize: !0
-                    },
-                    modes: {
-                        grab: {
-                            distance: 400,
-                            line_linked: {
-                                opacity: 1
-                            }
-                        },
-                        bubble: {
-                            distance: 400,
-                            size: 40,
-                            duration: 2,
-                            opacity: 8,
-                            speed: 3
-                        },
-                        repulse: {
-                            distance: 200,
-                            duration: .4
-                        },
-                        push: {
-                            particles_nb: 4
-                        },
-                        remove: {
-                            particles_nb: 2
-                        }
-                    }
-                },
-                retina_detect: !0
-            })
-        }
-        /**
          * init animation for barrier and cloud 
          */
         function gameInit () {
@@ -1002,7 +886,7 @@
                 setTimeout(function () {
                     $('#page5').hide();
                     $('#page6').fadeIn(1000);
-                    particalInit();
+                    $('#particles-js').show();
                 }, 500)
                 $('#goshare').click(function () {
                     $('#share').show();
@@ -1165,6 +1049,122 @@
         });
 
         /**
+         * init particles
+         */
+        function initParticles () {
+            
+            particlesJS("particles-js",  {
+                particles: {
+                    number: {
+                        value: 20,
+                        density: {
+                            enable: !0,
+                            value_area: 1E3
+                        }
+                    },
+                    color: {
+                        value: "#e1e1e1"
+                    },
+                    shape: {
+                        type: "circle",
+                        stroke: {
+                            width: 0,
+                            color: "#000000"
+                        },
+                        polygon: {
+                            nb_sides: 5
+                        },
+                        image: {
+                            src: "img/github.svg",
+                            width: 100,
+                            height: 100
+                        }
+                    },
+                    opacity: {
+                        value: .5,
+                        random: !1,
+                        anim: {
+                            enable: !1,
+                            speed: 1,
+                            opacity_min: .1,
+                            sync: !1
+                        }
+                    },
+                    size: {
+                        value: 15,
+                        random: !0,
+                        anim: {
+                            enable: !1,
+                            speed: 180,
+                            size_min: .1,
+                            sync: !1
+                        }
+                    },
+                    line_linked: {
+                        enable: !0,
+                        distance: 650,
+                        color: "#cfcfcf",
+                        opacity: .26,
+                        width: 1
+                    },
+                    move: {
+                        enable: !0,
+                        speed: 2,
+                        direction: "none",
+                        random: !0,
+                        straight: !1,
+                        out_mode: "out",
+                        bounce: !1,
+                        attract: {
+                            enable: !1,
+                            rotateX: 600,
+                            rotateY: 1200
+                        }
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: {
+                            enable: !1,
+                            mode: "repulse"
+                        },
+                        onclick: {
+                            enable: !1,
+                            mode: "push"
+                        },
+                        resize: !0
+                    },
+                    modes: {
+                        grab: {
+                            distance: 400,
+                            line_linked: {
+                                opacity: 1
+                            }
+                        },
+                        bubble: {
+                            distance: 400,
+                            size: 40,
+                            duration: 2,
+                            opacity: 8,
+                            speed: 3
+                        },
+                        repulse: {
+                            distance: 200,
+                            duration: .4
+                        },
+                        push: {
+                            particles_nb: 4
+                        },
+                        remove: {
+                            particles_nb: 2
+                        }
+                    }
+                },
+                retina_detect: !0
+            })
+        }
+        /**
          * request weixin infomation
          */
         function initWx () {
@@ -1203,7 +1203,6 @@
                 console.log(e);
             }
             loading(images);
-            //particalInit();
         }
         $(document).ready(function () {
             init(); 
