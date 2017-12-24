@@ -957,7 +957,7 @@
             $('#' + videoId).fadeOut(500);
             //$('#' + videoId).hide();
             if (nextPageId == 'page2') {
-                $('#post').fadeIn(500);
+                $('#post').show();
                 $('#replay').click(function () {
                     $('#post').hide();
                     $('#' + videoId).show();
@@ -1071,7 +1071,7 @@
                 img.src = imgItem;
             }
             timer = setInterval(function () {
-                progress =progress + Math.floor(Math.random() * 15);
+                progress = progress + Math.floor(Math.random() * 25);
                 var percent = (progress / 100).toFixed(2);
                 
                 if (percent >= 1) {
