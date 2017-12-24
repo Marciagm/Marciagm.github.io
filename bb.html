@@ -704,8 +704,6 @@
 
                         if (isBetween(offset, min, max)) {
                             santaBottom = step.bottom;
-                            var bottom = $('#santa').css('bottom').replace('px', '') * 100 / height + 2.5; 
-                            
                             var start = step.shouldBottom;
                             var end = step.bottom;
                             if (step.isHole && !(gameDics[i-1].click || gameDics[i].click) ) {
@@ -718,7 +716,7 @@
                                 $('#barrier').stop();
                                 $('#cloud').stop();
                                 $('#tip').fadeOut(1000).fadeIn(1000);
-                                setTimeout(gameInit, 500);
+                                setTimeout(gameInit, 700);
                             }
                             break;
                         }
@@ -735,7 +733,7 @@
                                 $('#barrier').stop();
                                 $('#cloud').stop();
                                 $('#tip').fadeOut(1000).fadeIn(1000);
-                                setTimeout(gameInit, 500);                                  
+                                setTimeout(gameInit, 700);                                  
                             }
                         }
                     }
