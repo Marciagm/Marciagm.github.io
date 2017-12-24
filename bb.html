@@ -350,7 +350,7 @@
                 <div id="percent">0</div>
             </div>
         </div>
-        <video id="video" width="7.5rem" class="video" poster="images/loading.png" preload="auto" x5-video-player-type="h5"  src="materia/android-notip.mp4?123" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+        <video id="video" width="7.5rem" class="video" poster="images/loading.png" preload="auto" x5-video-player-type="h5"  src="http://p1cu43xpb.bkt.clouddn.com/weixin/android-notip.mp4?123" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
         </video>
         <!-- videoA -->
         <div id="page1">
@@ -696,6 +696,7 @@
                 easing: 'linear',
                 step: function (now, tween) {
                     var offset = 0.77 - $('#barrier').css('left').replace('px','') * 0.77 / sLeft ;
+                    var ratio = (1 + offset/ tween.end).toFixed(2);
                     for (var i = 0; i < gameDics.length; i++) {
                         var step = gameDics[i];
                         jump = step.jump || 0;
@@ -732,8 +733,10 @@
                                 console.log('wrong: ' + i);   
                                 $('#barrier').stop();
                                 $('#cloud').stop();
-                                $('#tip').fadeOut(1000).fadeIn(1000);
-                                setTimeout(gameInit, 700);                                  
+                                animateBinded = 0;
+                                barrierTime = barrierTime * ratio;
+                                cloudTime = cloudTime * ratio;
+                                $('#tip').fadeOut(1000).fadeIn(1000);                                  
                             }
                         }
                     }
@@ -759,6 +762,8 @@
         function gameInit () {
             console.log('in gameInit');
             animateBinded = 0;
+            barrierTime = 16000;
+            cloudTime = 20000;
             initGameDics();
             $('#barrier').animate({
                 'left': 0
@@ -791,10 +796,10 @@
                 }
                 if (isBetween(bLeft, 51, 56.39)) {
                     $('#santa').animate({
-                        bottom: (santaBottom + 28) + '%',
-                    }, 300).animate({ 
+                        bottom: (santaBottom + 32) + '%',
+                    }, 500).animate({ 
                         bottom: (santaBottom - 1) + '%'
-                    }, 400)
+                    }, 500)
                 }
                 else {
                     $('#santa').animate({
