@@ -434,11 +434,12 @@
             'images/barrier.png',
             'images/cloud.png',
             'images/finish.png',
+            'images/turn.png',
+            'images/right-turn.png'
             'images/bigpart.png',
             'images/qrcode.gif',
             'images/bt.gif',
-            'images/share.png',
-            'images/turn.png'  
+            'images/share.png'
         ];
         /* 
             start ponit
@@ -883,6 +884,7 @@
                 $('#next').hide();
                 console.log('in touchstart');
                 if (!isAndroid()) {
+                    alert(window.navigator.userAgent)
                     document.getElementById('one').play();
                 }
                 videoPlay(videoId, nextPageId);
