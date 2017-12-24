@@ -625,10 +625,12 @@
                 direction: 'right'
             },
             beforeC: {
-                src: 'images/gift-turn.png'
+                src: 'images/gift-turn.png',
+                background: 'images/gift.png'
             },
             beforeD: {
-                src: 'images/open-turn.png'
+                src: 'images/open-turn.png',
+                background: 'images/open.png'
             }
         };
 
@@ -779,7 +781,7 @@
             })
         }
         function nextPage (videoId, nextPageId) {
-            //$('#' + videoId).fadeOut(1000);
+            $('#' + videoId).fadeOut(1000);
             //$('#' + videoId).hide();
             if (nextPageId == 'page2') {
                 $('#' + videoId).hide();
@@ -864,7 +866,7 @@
                 $('#' + videoId).hide();
                 setTimeout(function () {
                     $('#page5').fadeOut(1000);
-                    $('#page6').show();
+                    $('#page6').fadeIn(1000);
                 }, 500)
                 $('#goshare').click(function () {
                     $('#share').show();
