@@ -419,7 +419,7 @@
             <img id="turn" src="images/turn.png" class="turn">
         </div>
         <div id="gift">
-            <img src="images/arrow.png" class="right-arrow">
+            <img src="images/right-arrow.png" class="right-arrow">
             <img src="images/turn.png" class="right-turn">
         </div>
     </div>
@@ -751,7 +751,7 @@
                 },
                 complete: function () {
                     $('#gift').show();
-                    $('#gift').on('click', function () {
+                    $('#gift').on('touchstart', function () {
                         $('#page2').fadeOut(500);
                         $('#page3').fadeIn(500);
                         $('#gift').hide();
