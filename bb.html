@@ -223,7 +223,7 @@
             width: 2.07rem;
             position: absolute;
             left: 0.77rem;
-            bottom: 17.5%;
+            bottom: 18.8%;
             z-index: 1;
         }
         .right-arrow {
@@ -284,6 +284,7 @@
             bottom: 0;
             height: 100%;
             width: 7.5rem;
+            background-size: 100% 100%;
         }
         .next {
             width: 0.37rem;
@@ -653,6 +654,9 @@
                 $('#arrow').attr('class', 'next');
                 $('#turn').attr('class', 'turn');    
             }
+            if (info.background) {
+                $('#next').css('background-image', 'url(' + info.background + ')')
+            }
             $('#next').show();
             $('#next').unbind('touchstart').on('touchstart', clickEvent);
         }
@@ -818,14 +822,14 @@
                             $('#santa').animate({
                                 bottom: (santaBottom + 28) + '%',
                             }, 300).animate({ 
-                                bottom: (santaBottom - 1.5) + '%'
+                                bottom: (santaBottom - 1.2) + '%'
                             }, 400)
                         }
                         else {
                             $('#santa').animate({
                                 bottom: (santaBottom + 18) + '%',
                             }, 250).animate({ 
-                                bottom: (santaBottom - 1.5) + '%'
+                                bottom: (santaBottom - 1.2) + '%'
                             }, 250)
                         }
                         
