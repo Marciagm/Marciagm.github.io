@@ -278,7 +278,7 @@
         }
 
         /*all*/
-        #next {
+        #next, #gift {
             display: none;
             position: absolute;
             bottom: 0;
@@ -382,7 +382,7 @@
 
         <!-- videoC -->
         <div id="page4">
-            <video id="videoC" width="7.5rem" class="video" x5-video-player-type="h5" poster="images/gift.png" preload="auto" src="http://p1cu43xpb.bkt.clouddn.com/weixin/C.mp4?123" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+            <video id="videoC" width="7.5rem" class="video" x5-video-player-type="h5" poster="images/gift.png?3" preload="auto" src="http://p1cu43xpb.bkt.clouddn.com/weixin/C.mp4?123" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
             </video>
             <audio id="three" src="http://p1cu43xpb.bkt.clouddn.com/weixin/three.mp3?123" preload="auto"></audio>  
         </div>
@@ -392,9 +392,11 @@
             <video id="videoD" x5-video-player-type="h5" width="7.5rem" poster="images/open.png" class="video" preload="auto" src="http://p1cu43xpb.bkt.clouddn.com/weixin/D.mp4?123" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
             </video>
         </div>
-
         <!-- last page -->
         <div id="page6" style="height: 100%">
+            <div id="large-header" class="large-header">
+                <canvas id="demo-canvas"></canvas>
+            </div>
             <img id="bigpart" src="images/bigpart.png?123">
             <img id="qrcode" src="images/qrcode.gif?123">
             <img id="bt" src="images/bt.gif">
@@ -411,6 +413,10 @@
         <div id="next">
             <img id="arrow" src="images/arrow.png" class="next">
             <img id="turn" src="images/turn.png" class="turn">
+        </div>
+        <div id="gift">
+            <img src="images/arrow.png" class="right-arrow">
+            <img src="images/turn.png" class="right-turn">
         </div>
     </div>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
@@ -468,13 +474,9 @@
             beforeA: {
                 src: 'images/turn.png'
             },
-            beforeB: {
-                src: 'images/right-turn.png',
-                direction: 'right'
-            },
             beforeC: {
                 src: 'images/gift-turn.png',
-                background: 'images/gift.png'
+                background: 'images/gift.png?e'
             },
             beforeD: {
                 src: 'images/open-turn.png',
@@ -743,10 +745,11 @@
 
                 },
                 complete: function () {
-                    showTurnPage('beforeB', function () {
+                    $('#gift').show();
+                    $('#gift').on('click', function () {
                         $('#page2').fadeOut(500);
                         $('#page3').fadeIn(500);
-                        $('#next').hide();
+                        $('#gift').hide();
                         $('#videoB').fadeIn(500);
                         document.getElementById('game').pause();
                         document.getElementById('two').play();
@@ -838,7 +841,7 @@
                 $('#replay').click(function () {
                     $('#post').hide();
                     $('#' + videoId).show();
-                    $('#' + videoId).attr('src', 'http://p1cu43xpb.bkt.clouddn.com/weixin/A.mp4?123');
+                    $('#' + videoId).attr('src', 'http://p1cu43xpb.bkt.clouddn.com/weixin/A.mp4?12');
                     videoPlay(videoId, nextPageId);
                 })
 
@@ -947,7 +950,7 @@
                 img.src = imgItem;
             }
             timer = setInterval(function () {
-                progress =progress + Math.floor(Math.random() * 28);
+                progress =progress + Math.floor(Math.random() * 15);
                 var percent = (progress / 100).toFixed(2);
                 
                 if (percent >= 1) {
@@ -1084,5 +1087,9 @@
             init(); 
         })
     </script>
+    <script src="js/TweenLite.min.js"></script>
+    <script src="js/EasePack.min.js"></script>
+    <script src="js/rAF.js"></script>
+    <script src="js/bg.js"></script>
 </body>
 </html>
