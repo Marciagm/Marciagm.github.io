@@ -285,15 +285,7 @@
             bottom: 0;
             height: 100%;
             width: 7.5rem;
-        }
-        #gift {
-            position: relative;
-            left: 0;
-            top: 0;
-            width: 7.5rem;
-            height: 100%;
-            display: none;
-            z-index: 10;
+            background-size: 100% 100%;
         }
         #gift1, #gift2 {
             position: absolute;
@@ -371,6 +363,7 @@
         <!-- loading part-->
         <div id="loading">
             <div class="loading-part">
+                <img src="images/loading.png" style="display: none;">
                 <img class="loading-santa" src="images/santa.gif">
                 <div class="loading-bar"></div>    
                 <div class="loading-run"></div>
@@ -378,10 +371,12 @@
             </div>
         </div>
 
+        <!-- videoA -->
         <div id="page1">
+
             <video id="videoA" width="7.5rem" class="video" poster="images/loading.png" preload="auto" x5-video-player-type="h5"  src="http://p1cu43xpb.bkt.clouddn.com/weixin/A.mp4?123" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
             </video>
-            <audio id="one" src="http://p1cu43xpb.bkt.clouddn.com/weixin/one.mp3" preload="auto" loop="loop"></audio>  
+            <audio id="one" src="http://p1cu43xpb.bkt.clouddn.com/weixin/one.mp3?123" preload="auto" loop="loop"></audio>  
             <div id="post">
                 <img id="face" src="images/head.gif">   
                 <div id="replay"></div>
@@ -389,64 +384,77 @@
             </div>
         </div>
 
+        <!-- game part -->
         <div id="page2">
             <img src="images/tip.png" id="tip" />
             <img src="images/cloud.png" class="cloud" id="cloud" />
             <img id="barrier" class="barrier" src="images/barrier.png"/>
             <img id="santa" class="santa" src="images/santa.gif">
-            <div id="gift">
-                <img src="images/arrow.png" class="right-arrow">
-                <img src="images/right-turn.png" class="right-turn">
-            </div>
-            <audio id="game" src="http://p1cu43xpb.bkt.clouddn.com/weixin/game.mp3" preload="auto" loop="loop"></audio>  
+            <audio id="game" src="http://p1cu43xpb.bkt.clouddn.com/weixin/game.mp3?123" preload="auto" loop="loop"></audio>  
         </div>
 
+        <!-- videoB -->
         <div id="page3">
             <video id="videoB" width="7.5rem" class="video" preload="auto" src="http://p1cu43xpb.bkt.clouddn.com/weixin/B.mp4?123" x5-video-player-type="h5" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
             </video>
             <audio id="two" src="http://p1cu43xpb.bkt.clouddn.com/weixin/two.mp3" preload="auto" loop="loop"></audio>
         </div>
 
+        <!-- videoC -->
         <div id="page4">
-            <div id="gift1">
-                <img src="images/arrow.png" class="next">
-                <img src="images/gift-turn.png" class="turn">
-            </div>
             <video id="videoC" width="7.5rem" class="video" x5-video-player-type="h5" poster="images/gift.png" preload="auto" src="http://p1cu43xpb.bkt.clouddn.com/weixin/C.mp4?123" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
             </video>
-            <audio id="three" src="http://p1cu43xpb.bkt.clouddn.com/weixin/three.mp3" preload="auto"></audio>  
+            <audio id="three" src="http://p1cu43xpb.bkt.clouddn.com/weixin/three.mp3?123" preload="auto"></audio>  
         </div>
+
+        <!-- videoD -->
         <div id="page5">
-            <div id="gift2">
-                <img src="images/arrow.png" class="next">
-                <img src="images/open-turn.png" class="turn">
-            </div>
             <video id="videoD" x5-video-player-type="h5" width="7.5rem" poster="images/open.png" class="video" preload="auto" src="http://p1cu43xpb.bkt.clouddn.com/weixin/D.mp4?123" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
             </video>
         </div>
+
+        <!-- last page -->
         <div id="page6" style="height: 100%">
             <img id="bigpart" src="images/bigpart.png?123">
             <img id="qrcode" src="images/qrcode.gif?123">
             <img id="bt" src="images/bt.gif">
             <div id="goshare"></div>
         </div>
+
+        <!-- share page -->
         <div id="share">
             <img src="images/mb.png" class="cover">
             <img src="images/share.png" style="width: 2.54rem; position: absolute; top: 0.05rem; right: 0.25rem; z-index: 2;">    
         </div>
+
+        <!-- turn page -->
         <div id="next">
+            <img id="arrow" src="images/arrow.png" class="next">
+            <img id="turn" src="images/turn.png" class="turn">
+        </div>
+        <!-- <div id="gift1">
             <img src="images/arrow.png" class="next">
-            <img src="images/turn.png" class="turn">
+            <img src="images/gift-turn.png" class="turn">
+        </div> -->
+        <div id="gift2">
+            <img src="images/arrow.png" class="next">
+            <img src="images/open-turn.png" class="turn">
         </div>
     </div>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script>
-        var santaBottom = 20, jump = 0, offset, clickNum = 0, alreadyclick, animateBinded = 0;
+        var santaBottom = 20;
+        var jump = 0;
+        var timer; 
+        var clickNum = 0;
+        var animateBinded = 0;
         var isSafety = 1;
+        var progress = 0;
+
         var sLeft = ($('#santa').css('left').replace('px','') - 0);
         var height = $(document).height();
         var url = location.href.split('#')[0];
-        var barrierTime = 17000, cloudTime = 19000;
+        var barrierTime = 16000, cloudTime = 20000;
         var images = [
             'images/loading.png',
             'images/santa.gif',
@@ -635,8 +643,44 @@
                 src: 'http://p1cu43xpb.bkt.clouddn.com/weixin/D.mp4'
             }
         }
-        var timer, progress = 0;
 
+        var turnInfo = {
+            beforeA: {
+                src: 'images/turn.png'
+            },
+            beforeB: {
+                src: 'images/right-turn.png',
+                direction: 'right'
+            },
+            beforeC: {
+                background: 'images/gift.png',
+                src: 'images/gift-turn.png'
+            },
+            beforeD: {
+                src: 'images/open-turn.png'
+            }
+        };
+
+        /**
+         * in different stage show turn page
+         */
+        function showTurnPage (tag, clickEvent) {
+            var info = turnInfo[tag];
+            $('#turn').attr('src', info.src);
+            if (info.direction === 'right') {
+                $('#arrow').attr('class', 'right-arrow');
+                $('#turn').attr('class', 'right-turn');   
+            }
+            else {
+                $('#arrow').attr('class', 'next');
+                $('#turn').attr('class', 'turn');    
+            }
+            if (info.background) {
+                $('#next').css('background-image', 'url(' + info.background + ')');
+            }
+            $('#next').show();
+            $('#next').unbind('touchstart').on('touchstart', clickEvent);
+        }
         /**
          * judge if number between v1 and v2
          *
@@ -650,6 +694,10 @@
             }
             return false;
         }
+
+        /**
+         * init animation for barrier and cloud 
+         */
         function gameInit () {
             $('#santa').css('transform', 'rotate(0)');
             isSafety = 1;
@@ -663,8 +711,7 @@
                 duration: barrierTime,
                 easing: 'linear',
                 step: function (now, tween) {
-                    var bLeft = 0 - $('#barrier').css('left').replace('px','') * 0.77 / sLeft ;
-                    offset = 0.77 + bLeft;
+                    var offset = 0.77 - $('#barrier').css('left').replace('px','') * 0.77 / sLeft ;
                     var ratio = (1 + offset/ tween.end).toFixed(2);
                     for (var i = 0; i < gameDics.length; i++) {
                         step = gameDics[i];
@@ -700,9 +747,8 @@
                         var min = step.scope[0];
                         var max = step.scope[1];
 
-                        if (isBetween((offset+2.07), min, max)) {
+                        if (isBetween((offset + 1.8), min, max)) {
                             if (step.isChimney && !isSafety && !(gameDics[i-1].click || gameDics[i].click)) {
-                                console.log(bottom, start, end, offset);
                                 console.log('wrong: ' + i);             
                                 $('#santa').css('transform', 'rotate(-90deg)')
                                 $('#barrier').stop();
@@ -717,21 +763,20 @@
 
                 },
                 complete: function () {
-                    $('#gift').show();
-                    $('#gift').on('touchstart', function () {
+                    showTurnPage('beforeB', function () {
                         $('#page2').fadeOut(500);
                         $('#page3').fadeIn(500);
-                        $('#gift').hide();
+                        $('#next').hide();
                         $('#videoB').fadeIn(500);
                         document.getElementById('game').pause();
                         document.getElementById('two').play();
                         videoPlay('videoB', 'page4');
-                    })
+                    });
                 }
             })
             setTimeout(function () {
                 isSafety = 0;
-            }, 50)
+            }, 80)
         }
 
         function videoPlay (videoId, nextPageId) {
@@ -777,9 +822,6 @@
                     document.getElementById('game').play();
 
                     $('#page2').click(function () {
-                        $('#page2').css("box-shadow","none");
-                        $('#page2').css("-webkit-box-shadow","none");
-                        
                         console.log('santaBottom: ' + santaBottom);
                         var bLeft = 0.77 - $('#barrier').css('left').replace('px','') * 0.77 / sLeft ;
                         if (!animateBinded) {
@@ -797,17 +839,17 @@
                                 santaBottom = gameDics[j+1].bottom;
                             }
                         }
-                        if (isBetween(bLeft, 53, 56.39)) {
+                        if (isBetween(bLeft, 51, 56.39)) {
                             $('#santa').animate({
                                 bottom: (santaBottom + 25) + '%',
-                            }, 500).animate({ 
+                            }, 300).animate({ 
                                 bottom: (santaBottom - 2.5) + '%'
-                            }, 600)
+                            }, 400)
                         }
                         else {
                             $('#santa').animate({
                                 bottom: (santaBottom + 18) + '%',
-                            }, 300).animate({ 
+                            }, 250).animate({ 
                                 bottom: (santaBottom - 2.5) + '%'
                             }, 250)
                         }
@@ -821,13 +863,20 @@
             }
             else if (nextPageId === 'page4') {
                 $('#' + videoId).hide();
-                $('#gift1').show();
-                $('#gift1').on('touchstart', function () {
-                    $('#gift1').hide();
+                //$('#gift1').show();
+                showTurnPage('beforeC', function () {
+                    //$('#gift1').hide();
+                    $('#next').hide();
                     $('#page3').hide();
                     $('#videoC').show();
                     videoPlay('videoC', 'page5');
                 })
+                /*$('#gift1').on('touchstart', function () {
+                    $('#gift1').hide();
+                    $('#page3').hide();
+                    $('#videoC').show();
+                    videoPlay('videoC', 'page5');
+                })*/
             }
             else if (nextPageId === 'page5') {
                 $('#gift2').show();
@@ -892,24 +941,26 @@
         }
 
         /**
-         * loading images
+         * loading images and prepare time for video and audio
          * 
+         * @param {Array} images image list
          */
-        function loading (images, videos) {
+        function loading (images) {
             var imgLength = images.length;
             var videoLength = 1;
+            for (var i = 0; i < images.length; i++) {
+                var imgItem = images.shift();
+                var img = new Image();
+                img.src = imgItem;
+            }
             timer = setInterval(function () {
-                for (var i = 0; i < images.length; i++) {
-                    var imgItem = images.shift();
-                    var img = new Image();
-                    img.src = imgItem;
-                }
                 progress =progress + Math.floor(Math.random() * 28);
                 var percent = (progress / 100).toFixed(2);
                 
                 if (percent >= 1) {
                     move(1);
                     clearInterval(timer);
+                    timer = null;
                 }
                 else {
                     move(percent);
@@ -967,7 +1018,6 @@
             });
         });
         wx.error(function(res) {
-            // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
             console.log(res);
         });
 
@@ -1001,7 +1051,7 @@
             }
             catch (e) {
             }
-            loading(images, videos);
+            loading(images);
         }
         $(document).ready(function () {
             init(); 
