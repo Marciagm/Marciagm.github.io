@@ -218,13 +218,12 @@
             bottom: 0;
             z-index: 0;
             width: 102.76rem;
-            height: 100%;
         }
         .santa {
             width: 2.07rem;
             position: absolute;
             left: 0.77rem;
-            bottom: 20%;
+            bottom: 17.5%;
             z-index: 1;
         }
         .right-arrow {
@@ -287,7 +286,7 @@
             width: 7.5rem;
             background-size: 100% 100%;
         }
-        #gift1, #gift2 {
+        #gift2 {
             position: absolute;
             left: 0;
             top: 0;
@@ -299,11 +298,6 @@
         #gift2 {
             background-size: 7.5rem;
             background: url(images/open.png);
-            background-size: 100% 100%;
-        }
-        #gift1 {
-            background-size: 7.5rem;
-            background: url(images/gift.png);
             background-size: 100% 100%;
         }
         .next {
@@ -432,10 +426,6 @@
             <img id="arrow" src="images/arrow.png" class="next">
             <img id="turn" src="images/turn.png" class="turn">
         </div>
-        <!-- <div id="gift1">
-            <img src="images/arrow.png" class="next">
-            <img src="images/gift-turn.png" class="turn">
-        </div> -->
         <div id="gift2">
             <img src="images/arrow.png" class="next">
             <img src="images/open-turn.png" class="turn">
@@ -653,7 +643,6 @@
                 direction: 'right'
             },
             beforeC: {
-                background: 'images/gift.png',
                 src: 'images/gift-turn.png'
             },
             beforeD: {
@@ -674,9 +663,6 @@
             else {
                 $('#arrow').attr('class', 'next');
                 $('#turn').attr('class', 'turn');    
-            }
-            if (info.background) {
-                $('#next').css('background-image', 'url(' + info.background + ')');
             }
             $('#next').show();
             $('#next').unbind('touchstart').on('touchstart', clickEvent);
@@ -699,7 +685,7 @@
          * init animation for barrier and cloud 
          */
         function gameInit () {
-            $('#santa').css('transform', 'rotate(0)');
+            $('#santa').show();
             isSafety = 1;
             $('#cloud').animate({
                 left: '-79.47rem'
@@ -728,9 +714,10 @@
                             if (step.isHole && !isSafety && !(gameDics[i-1].click || gameDics[i].click) ) {
                                 console.log('wrong: ' + i);
                                 $('#santa').animate({
-                                    bottom: '8%'
-                                }, 50);
-                                //$('#santa').css('transform', 'rotate(-30deg)')
+                                    bottom: '-3.07rem'
+                                }, 100, function () {
+                                    $('#santa').hide();
+                                });
                                 $('#barrier').stop();
                                 $('#cloud').stop();
                                 $('#tip').fadeOut(1000).fadeIn(1000);
@@ -799,12 +786,11 @@
             })*/
         }
         function nextPage (videoId, nextPageId) {
-            $('#' + videoId).css('width', 0);
             //$('#' + videoId).fadeOut(1000);
-            $('#' + videoId).hide();
+            //$('#' + videoId).hide();
             if (nextPageId == 'page2') {
+                $('#' + videoId).hide();
                 $('#post').fadeIn(1000);
-
                 $('#replay').click(function () {
                     $('#post').hide();
                     $('#' + videoId).show();
@@ -841,7 +827,7 @@
                         }
                         if (isBetween(bLeft, 51, 56.39)) {
                             $('#santa').animate({
-                                bottom: (santaBottom + 25) + '%',
+                                bottom: (santaBottom + 28) + '%',
                             }, 300).animate({ 
                                 bottom: (santaBottom - 2.5) + '%'
                             }, 400)
@@ -863,24 +849,18 @@
             }
             else if (nextPageId === 'page4') {
                 $('#' + videoId).hide();
-                //$('#gift1').show();
                 showTurnPage('beforeC', function () {
-                    //$('#gift1').hide();
                     $('#next').hide();
+                    $('#' + videoId).hide();
                     $('#page3').hide();
                     $('#videoC').show();
                     videoPlay('videoC', 'page5');
                 })
-                /*$('#gift1').on('touchstart', function () {
-                    $('#gift1').hide();
-                    $('#page3').hide();
-                    $('#videoC').show();
-                    videoPlay('videoC', 'page5');
-                })*/
             }
             else if (nextPageId === 'page5') {
                 $('#gift2').show();
                 $('#gift2').on('touchstart', function () {
+                    //$('#' + videoId).hide();
                     $('#gift2').hide();
                     $('#page4').hide();
                     $('#videoD').show();
