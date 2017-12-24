@@ -262,13 +262,13 @@
         #bigpart {
             width: 7.5rem;
             position: absolute;
-            top: -0.1rem;
+            top: -0.2rem;
             left: 0;
         }
         #qrcode {
             width: 7.5rem;
             position: absolute;
-            top: -0.1rem;
+            top: -0.2rem;
             left: 0;   
         }
         #goshare {
@@ -702,7 +702,7 @@
                             var start = step.shouldBottom;
                             var end = step.bottom;
                             if (step.isHole && !(gameDics[i-1].click || gameDics[i].click) ) {
-                                console.log('wrong: ' + i);
+                                //console.log('wrong: ' + i);
                                 $('#santa').animate({
                                     bottom: '-13.07rem'
                                 }, 100, function () {
@@ -724,7 +724,7 @@
 
                         if (isBetween((offset + 1.8), min, max)) {
                             if (step.isChimney && !(gameDics[i-1].click || gameDics[i].click)) {
-                                console.log('wrong: ' + i);   
+                                //console.log('wrong: ' + i);   
                                 $('#barrier').stop();
                                 $('#cloud').stop();
                                 animateBinded = 0;
@@ -754,7 +754,7 @@
          * init animation for barrier and cloud 
          */
         function gameInit () {
-            console.log('in gameInit');
+            //console.log('in gameInit');
             animateBinded = 0;
             barrierTime = 16000;
             cloudTime = 20000;
@@ -771,7 +771,7 @@
                 'display': 'block'
             }, 300);
             $('#page2').unbind('click').on('click', function () {
-                console.log('santaBottom: ' + santaBottom);
+                //console.log('santaBottom: ' + santaBottom);
                 var bLeft = 0.77 - $('#barrier').css('left').replace('px','') * 0.77 / sLeft ;
                 if (!animateBinded) {
                     go();
@@ -813,7 +813,7 @@
             videoItem.play();
 
             /*var videoTimer = setInterval(function () {
-                console.log(videoItem.currentTime);
+                //console.log(videoItem.currentTime);
                 if (videoItem.currentTime >= videos[videoId].duration) {
                     videoItem.pause();
                     clearInterval(videoTimer);
@@ -832,13 +832,13 @@
                 $('#replay').click(function () {
                     $('#post').hide();
                     $('#' + videoId).show();
-                    $('#' + videoId).attr('src', 'http://p1cu43xpb.bkt.clouddn.com/weixin/A.mp4?12');
+                    document.getElementById('videoA').play();
                     videoPlay(videoId, nextPageId);
                 })
 
                 $('#moveon').click(function () {
                     $('#' + videoId).hide();
-                    $('#' + videoId).attr('src', '');
+                    //$('#' + videoId).attr('src', '');
                     $('#face').hide();
                     $('#post').hide();
                     $('#page2').show();
@@ -895,7 +895,7 @@
 
             $('#next').on('touchstart', function (event) {
                 $('#next').hide();
-                console.log('in touchstart');
+                ////console.log('in touchstart');
                 if (!isAndroid()) {
                     document.getElementById('one').play();
                 }
@@ -986,7 +986,7 @@
             wx.onMenuShareQZone(shareInfo);
         });
         wx.error(function(res) {
-            console.log(res);
+            //console.log(res);
         });
 
         /**
