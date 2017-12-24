@@ -884,7 +884,6 @@
                 $('#next').hide();
                 console.log('in touchstart');
                 if (!isAndroid()) {
-                    alert(window.navigator.userAgent)
                     document.getElementById('one').play();
                 }
                 videoPlay(videoId, nextPageId);
@@ -909,6 +908,7 @@
                         $('#loading').hide();
                         if (isAndroid()) {
                             beforePlayVideo('video', 'page6');
+                            alert(window.navigator.userAgent)
                         }
                         else {
                             beforePlayVideo('videoA', 'page2');
