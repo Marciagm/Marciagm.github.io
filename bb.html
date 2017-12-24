@@ -284,21 +284,6 @@
             bottom: 0;
             height: 100%;
             width: 7.5rem;
-            background-size: 100% 100%;
-        }
-        #gift2 {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 7.5rem;
-            height: 100%;
-            display: none;
-            z-index: 10;
-        }
-        #gift2 {
-            background-size: 7.5rem;
-            background: url(images/open.png);
-            background-size: 100% 100%;
         }
         .next {
             width: 0.37rem;
@@ -364,10 +349,10 @@
                 <div id="percent">0</div>
             </div>
         </div>
-
+        <video id="video" width="7.5rem" class="video" poster="images/loading.png" preload="auto" x5-video-player-type="h5"  src="materia/android-notip.mp4?123" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
+        </video>
         <!-- videoA -->
         <div id="page1">
-
             <video id="videoA" width="7.5rem" class="video" poster="images/loading.png" preload="auto" x5-video-player-type="h5"  src="http://p1cu43xpb.bkt.clouddn.com/weixin/A.mp4?123" x-webkit-airplay="true" playsinline="true" webkit-playsinline="true">
             </video>
             <audio id="one" src="http://p1cu43xpb.bkt.clouddn.com/weixin/one.mp3?123" preload="auto" loop="loop"></audio>  
@@ -425,10 +410,6 @@
         <div id="next">
             <img id="arrow" src="images/arrow.png" class="next">
             <img id="turn" src="images/turn.png" class="turn">
-        </div>
-        <div id="gift2">
-            <img src="images/arrow.png" class="next">
-            <img src="images/open-turn.png" class="turn">
         </div>
     </div>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
@@ -650,6 +631,14 @@
             }
         };
 
+        function isAndroid () {
+            var userAgent = window.navigator.userAgent;
+            alert(userAgent);
+            if (userAgent.toLowerCase().indexOf('android') >= 0) {
+                return true;
+            }
+            return false;
+        }
         /**
          * in different stage show turn page
          */
@@ -773,17 +762,17 @@
             })
             videoItem.play();
 
-            var videoTimer = setInterval(function () {
+            /*var videoTimer = setInterval(function () {
                 console.log(videoItem.currentTime);
                 if (videoItem.currentTime >= videos[videoId].duration) {
                     videoItem.pause();
                     clearInterval(videoTimer);
                     nextPage(videoId, nextPageId);
                 }
-            }, 50)
-            /*videoItem.addEventListener('ended', function () {
+            }, 50)*/
+            videoItem.addEventListener('ended', function () {
                 nextPage(videoId, nextPageId);
-            })*/
+            })
         }
         function nextPage (videoId, nextPageId) {
             //$('#' + videoId).fadeOut(1000);
@@ -829,14 +818,14 @@
                             $('#santa').animate({
                                 bottom: (santaBottom + 28) + '%',
                             }, 300).animate({ 
-                                bottom: (santaBottom - 2.5) + '%'
+                                bottom: (santaBottom - 1.5) + '%'
                             }, 400)
                         }
                         else {
                             $('#santa').animate({
                                 bottom: (santaBottom + 18) + '%',
                             }, 250).animate({ 
-                                bottom: (santaBottom - 2.5) + '%'
+                                bottom: (santaBottom - 1.5) + '%'
                             }, 250)
                         }
                         
@@ -848,7 +837,6 @@
                 $('#' + videoId).hide();
             }
             else if (nextPageId === 'page4') {
-                $('#' + videoId).hide();
                 showTurnPage('beforeC', function () {
                     $('#next').hide();
                     $('#' + videoId).hide();
@@ -858,10 +846,9 @@
                 })
             }
             else if (nextPageId === 'page5') {
-                $('#gift2').show();
-                $('#gift2').on('touchstart', function () {
-                    //$('#' + videoId).hide();
-                    $('#gift2').hide();
+                showTurnPage('beforeD', function () {
+                    $('#next').fadeOut(1000);
+                    $('#' + videoId).show();
                     $('#page4').hide();
                     $('#videoD').show();
                     document.getElementById('two').pause();
@@ -870,6 +857,7 @@
                 })
             }
             else if (nextPageId === 'page6') {
+                $('#' + videoId).hide();
                 setTimeout(function () {
                     $('#page5').fadeOut(1000);
                     $('#page6').show();
@@ -893,7 +881,9 @@
             $('#next').on('touchstart', function (event) {
                 $('#next').hide();
                 console.log('in touchstart');
-                document.getElementById('one').play();
+                if (!isAndroid()) {
+                    document.getElementById('one').play();
+                }
                 videoPlay(videoId, nextPageId);
             })
         }
@@ -914,7 +904,12 @@
                     timer = null;
                     setTimeout(function () {
                         $('#loading').hide();
-                        beforePlayVideo('videoA', 'page2');
+                        if (isAndroid()) {
+                            beforePlayVideo('video', 'page6');
+                        }
+                        else {
+                            beforePlayVideo('videoA', 'page2');
+                        }
                     }, 200)
                 }    
             }) 
